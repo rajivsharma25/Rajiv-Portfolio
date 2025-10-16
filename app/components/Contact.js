@@ -144,10 +144,10 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6 sm:text-left text-center">
                 Let&apos;s Start a Conversation
               </h3>
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <p className="text-gray-600 mb-8 leading-relaxed sm:text-left text-justify">
                 I&apos;m always excited to work on new projects and collaborate with fellow developers, 
                 businesses, and individuals who are passionate about creating exceptional web experiences. 
                 Whether you have a project in mind, need consultation, or just want to say hello, 
@@ -232,8 +232,8 @@ export default function Contact() {
           {/* Contact Form - Sticky for Desktop */}
           <div className="lg:sticky lg:top-24">
             <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-fit">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                <Send size={24} className="text-violet-600" />
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center sm:justify-start justify-center gap-2 ">
+                <Send size={20} className="text-violet-600" />
                 Send me a message
               </h3>
               

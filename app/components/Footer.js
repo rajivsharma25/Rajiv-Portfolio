@@ -183,7 +183,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-700 active:scale-95 shadow-md hover:shadow-lg"
+                className="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-700 active:scale-95 shadow-md hover:shadow-lg flex-shrink-0"
               >
                 <MessageCircle size={16} />
                 Let&apos;s Connect
@@ -191,7 +191,7 @@ export default function Footer() {
               <a
                 href="/Rajiv-Sharma-Resume-2025.pdf"
                 download
-                className="inline-flex items-center gap-2 border border-violet-600 text-violet-400 px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white active:scale-95"
+                className="inline-flex items-center gap-2 border border-violet-600 text-violet-400 px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white active:scale-95 flex-shrink-0"
               >
                 <Download size={16} />
                 Download CV
