@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(124 58 237) !important;
+  border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(109 40 217) !important;
+}
+
+/* Text selection styling */
+::selection {
+  background-color: rgb(124 58 237);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: rgb(124 58 237);
+  color: white;
+}
+
+/* Custom utility classes only where needed */
+.text-gradient {
+  background: linear-gradient(135deg, rgb(139 92 246), rgb(124 58 237));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.violet-gradient {
+  background: linear-gradient(135deg, rgb(139 92 246), rgb(124 58 237), rgb(109 40 217));
+}
