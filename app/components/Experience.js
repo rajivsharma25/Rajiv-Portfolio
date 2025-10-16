@@ -60,7 +60,7 @@ export default function Experience() {
   ];
 
   const timelineItems = [
-    { year: "2025", title: "ReactJS Developer at Bodmas Education", type: "work", icon: Briefcase },
+    { year: "2025", title: "ReactJS Developer at Bodmas Education Services", type: "work", icon: Briefcase },
     { year: "2025", title: "Web Development Intern at Cognifyz Technologies", type: "internship", icon: Briefcase },
     { year: "2024", title: "AWS Cloud Training at TATA STRIVE", type: "training", icon: GraduationCap },
     { year: "2024", title: "B.Tech CSE Graduate", type: "education", icon: GraduationCap },
