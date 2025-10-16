@@ -180,7 +180,7 @@ export default function Footer() {
                 Ready to discuss your next project or explore collaboration opportunities?
               </p>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex space-x-3 sm:space-x-4">
               <a
                 href="#contact"
                 className="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-700 active:scale-95 shadow-md hover:shadow-lg flex-shrink-0"
