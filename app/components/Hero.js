@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FolderOpen, MessageCircle } from 'lucide-react';
 import { FaReact, FaJs, FaHtml5, FaCss3Alt, FaGitAlt, FaAws } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiRedux, SiTypescript } from 'react-icons/si';
+import { SiNextdotjs, SiTailwindcss, SiRedux } from 'react-icons/si';
 
 export default function Hero() {
   return (
@@ -70,9 +70,9 @@ export default function Hero() {
             <SiRedux className="text-purple-600 opacity-20 text-2xl" />
           </div>
           
-          {/* TypeScript Icon */}
+          {/* Javascript Icon */}
           <div className="absolute top-1/3 right-12 animate-bounce" style={{ animationDelay: '4s', animationDuration: '7s' }}>
-            <SiTypescript className="text-blue-700 opacity-15 text-2xl" />
+            <FaJs className="text-blue-700 opacity-15 text-2xl" />
           </div>
           
           {/* Git Icon */}
