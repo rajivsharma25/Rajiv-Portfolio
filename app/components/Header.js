@@ -69,7 +69,7 @@ export default function Header() {
               LinkedIn
             </a>
             <a
-              href="/Rajiv-Sharma-Resume-2025.pdf"
+              href="/Rajiv-Sharma.pdf"
               download
               className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-full font-medium transition-all duration-300 hover:from-purple-700 hover:to-violet-700 active:scale-95 shadow-md hover:shadow-lg"
             >
