@@ -128,7 +128,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto text-center z-10">
         {/* Profile Image First */}
         <div className="mb-6">
-          <div className="w-48 h-48 mx-auto rounded-full dark:violet-gradient p-1 relative overflow-hidden">
+          <div className="w-48 h-48 mx-auto rounded-full violet-gradient dark:violet-gradient p-1 relative overflow-hidden">
             <div className="w-full h-full rounded-full bg-white dark:bg-gray-800 flex items-center justify-center">
               <Image
                 src="/profile.jpg"
@@ -147,7 +147,7 @@ export default function Hero() {
         {/* Content Below */}
         <div>
           <h1 className="text-xl sm:text-2xl md:text-3xl text-gray-900 dark:text-gray-100 font-medium mb-4">
-            Hi, I&apos;m <span className="dark:text-gradient">Rajiv Sharma</span>
+            Hi, I&apos;m <span className="text-gradient dark:text-gradient">Rajiv Sharma</span>
           </h1>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-violet-800 via-violet-600 to-purple-500 bg-clip-text text-transparent font-bold mb-6">
