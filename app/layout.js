@@ -1,5 +1,8 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -7,27 +10,30 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "Rajiv Sharma | ReactJS Developer Portfolio",
-  description: "Welcome to Rajiv Sharma's portfolio — ReactJS Developer specializing in modern web applications, React.js, Redux, and cloud technologies. Explore my projects including Forever Ecommerce, CraveCart Food Delivery, and Prescripto Doctor Appointments platform.",
+  metadataBase: new URL("https://rajivsharma.vercel.app"),
+
+  title: "Rajiv Sharma | React Developer Portfolio",
+  description:
+    "Portfolio of Rajiv Sharma, a React Developer skilled in building modern, responsive web applications using React.js, Next.js, Redux, and Tailwind CSS.",
+
   keywords: [
     "Rajiv Sharma",
-    "ReactJS Developer",
+    "React Developer",
     "Frontend Developer",
     "React.js Portfolio",
     "JavaScript Developer",
     "Next.js Developer",
-    "AWS Cloud Practitioner",
-    "Full Stack Developer",
     "Redux",
     "Tailwind CSS",
-    "Web Development",
-    "Noida Developer"
+    "Web Developer India",
   ],
+
   authors: [{ name: "Rajiv Sharma" }],
+
   openGraph: {
-    title: "Rajiv Sharma | ReactJS Developer Portfolio",
-    description: "ReactJS Developer with expertise in modern web applications, cloud technologies, and responsive design.",
-    url: "",
+    title: "Rajiv Sharma | React Developer Portfolio",
+    description:
+      "React Developer building modern, performant, and user-friendly web applications.",
     siteName: "Rajiv Sharma Portfolio",
     type: "website",
     images: [
@@ -35,36 +41,55 @@ export const metadata = {
         url: "/profile.jpg",
         width: 1200,
         height: 630,
-        alt: "Rajiv Sharma - ReactJS Developer Portfolio",
+        alt: "Rajiv Sharma React Developer Portfolio",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Rajiv Sharma | ReactJS Developer Portfolio",
-    description: "ReactJS Developer with expertise in modern web applications, cloud technologies, and responsive design.",
+    title: "Rajiv Sharma | React Developer",
+    description:
+      "React Developer focused on building clean and scalable frontend applications.",
     images: ["/profile.jpg"],
-    creator: "@rajivsharma",
-    site: "@rajivsharma",
   },
+
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  }
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${outfit.variable} font-outfit antialiased bg-gray-50 leading-relaxed`}>
-        {children}
+      <head>
+        {/* Prevent light → dark flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  const savedTheme = localStorage.getItem('theme');
+                  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+
+      <body
+        className={`${outfit.variable} font-outfit antialiased bg-gray-50 dark:bg-gray-900 dark:text-gray-100 leading-relaxed transition-colors duration-300`}
+      >
+        <ThemeProvider>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

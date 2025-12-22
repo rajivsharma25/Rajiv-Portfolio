@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -7,6 +8,10 @@
 
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -37,6 +42,17 @@
   background-clip: text;
 }
 
+.dark .text-gradient {
+  background: linear-gradient(135deg, rgb(167 139 250), rgb(139 92 246));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .violet-gradient {
   background: linear-gradient(135deg, rgb(139 92 246), rgb(124 58 237), rgb(109 40 217));
+}
+
+.dark .violet-gradient {
+  background: linear-gradient(135deg, rgb(167 139 250), rgb(139 92 246), rgb(124 58 237));
 }

@@ -5,8 +5,8 @@ import {
   Trophy,
   BookOpen,
 } from "lucide-react";
-import Image from 'next/image';
-import { SiMysql, SiCplusplus } from 'react-icons/si';
+import Image from "next/image";
+import { SiMysql, SiCplusplus } from "react-icons/si";
 
 export default function Certifications() {
   const certifications = [
@@ -23,7 +23,8 @@ export default function Certifications() {
         "Cost Management",
       ],
       badge: "/assets/images/aws-badge.png",
-      badgeUrl: "https://www.credly.com/badges/be66bf69-1877-4ab3-88e9-aa85f0dd88e7/public_url",
+      badgeUrl:
+        "https://www.credly.com/badges/be66bf69-1877-4ab3-88e9-aa85f0dd88e7/public_url",
       badgeType: "image",
       level: "Foundation",
       status: "Active",
@@ -41,7 +42,8 @@ export default function Certifications() {
         "RDBMS Fundamentals",
       ],
       badge: SiMysql,
-      badgeUrl: "https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxODExIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvdGh1bWJfNDU5NTY0NF8xNjk3OTkwMDQ1LnBuZyIsInVzZXJuYW1lIjoiUmFqaXYgU2hhcm1hIn0%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4309%2FIntroduction-to-SQL%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1507310509089914254&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVD04Pz%2FUL9Pc2c0myrytKTUstKsrMS49PKsovL04tsnVNSU8FAOxz5Aw9AAAA",
+      badgeUrl:
+        "https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxODExIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvdGh1bWJfNDU5NTY0NF8xNjk3OTkwMDQ1LnBuZyIsInVzZXJuYW1lIjoiUmFqaXYgU2hhcm1hIn0%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4309%2FIntroduction-to-SQL%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1507310509089914254&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVD04Pz%2FUL9Pc2c0myrytKTUstKsrMS49PKsovL04tsnVNSU8FAOxz5Aw9AAAA",
       badgeType: "icon",
       level: "Foundation",
       status: "Active",
@@ -60,7 +62,8 @@ export default function Certifications() {
         "DSA",
       ],
       badge: SiCplusplus,
-      badgeUrl: "https://www.udemy.com/certificate/UC-cc91b127-a4b8-41e1-be25-d69ceff2ee19/",
+      badgeUrl:
+        "https://www.udemy.com/certificate/UC-cc91b127-a4b8-41e1-be25-d69ceff2ee19/",
       badgeType: "icon",
       level: "Foundation",
       status: "Active",
@@ -94,15 +97,15 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="py-16 px-4 sm:px-6 lg:px-8 bg-white"
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Certifications & <span className="text-gradient">Achievements</span>
           </h2>
           <div className="w-24 h-1 bg-violet-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Professional certifications and academic achievements that validate
             my expertise
           </p>
@@ -110,7 +113,7 @@ export default function Certifications() {
 
         {/* Certifications */}
         <div className="mb-16">
-          <h3 className="text-3xl font-semibold text-gray-900 mb-8 text-center">
+          <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-8 text-center">
             Professional Certifications
           </h3>
 
@@ -118,7 +121,7 @@ export default function Certifications() {
             {certifications.map((cert, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 border border-violet-100 transition-all duration-300 hover:shadow-xl"
+                className="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-6 border border-violet-100 dark:border-gray-600 transition-all duration-300 hover:shadow-xl"
               >
                 <div className="text-center mb-6">
                   {/* Badge Display with Icons */}
@@ -134,17 +137,21 @@ export default function Certifications() {
                         />
                       </div>
                     ) : cert.badgeType === "icon" ? (
-                      <div className="w-24 h-24 bg-white rounded-full p-4 border border-gray-200 flex items-center justify-center">
+                      <div className="w-24 h-24 bg-white dark:bg-gray-800 rounded-full p-4 border border-gray-200 dark:border-gray-600 flex items-center justify-center">
                         <cert.badge
                           size={48}
-                          className={cert.title.includes("SQL") ? "text-blue-600" : "text-blue-800"}
+                          className={
+                            cert.title.includes("SQL")
+                              ? "text-blue-600"
+                              : "text-blue-800"
+                          }
                         />
                       </div>
                     ) : (
                       <div className="text-4xl">{cert.badge}</div>
                     )}
                   </div>
-                  
+
                   <div className="flex justify-between items-center mb-2">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -172,44 +179,42 @@ export default function Certifications() {
                     rel="noopener noreferrer"
                     className="block"
                   >
-                    <h4 className="text-xl font-semibold text-gray-900 hover:text-violet-600 mb-2 text-center transition-colors cursor-pointer">
+                    <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100 hover:text-violet-600 dark:hover:text-violet-400 mb-2 text-center transition-colors cursor-pointer">
                       {cert.title}
                     </h4>
                   </a>
                 ) : (
-                  <h4 className="text-xl font-semibold text-gray-900 mb-2 text-center">
+                  <h4 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center">
                     {cert.title}
                   </h4>
                 )}
 
-                <div className="flex items-center justify-center text-violet-600 font-medium mb-4">
+                <div className="flex items-center justify-center text-violet-600 dark:text-violet-400 font-medium mb-4">
                   <Calendar size={16} className="mr-2" />
                   <span>
                     {cert.issuer} • {cert.date}
                   </span>
                 </div>
 
-                <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 leading-relaxed">
                   {cert.description}
                 </p>
 
                 <div className="">
-                  <h5 className="font-semibold text-gray-900 mb-2 text-sm">
+                  <h5 className="font-semibold text-gray-900 dark:text-gray-200 mb-2 text-sm">
                     Skills Covered:
                   </h5>
                   <div className="flex flex-wrap gap-2">
                     {cert.skills.map((skill, skillIndex) => (
                       <span
                         key={skillIndex}
-                        className="px-3 py-1 bg-white text-violet-700 rounded-full text-xs font-medium border border-violet-200 transition-all duration-300 hover:bg-violet-100"
+                        className="px-3 py-1 bg-white dark:bg-gray-600 text-violet-700 dark:text-violet-200 rounded-full text-xs font-medium border border-violet-200 dark:border-gray-500 transition-all duration-300 hover:bg-violet-100 dark:hover:bg-gray-500"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-
-                
               </div>
             ))}
           </div>
@@ -217,7 +222,7 @@ export default function Certifications() {
 
         {/* Academic Achievements */}
         <div>
-          <h3 className="text-3xl font-semibold text-gray-900 mb-8 text-center">
+          <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-8 text-center">
             Academic Achievements
           </h3>
 
@@ -227,21 +232,21 @@ export default function Certifications() {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center transition-all duration-300 hover:shadow-xl"
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 text-center transition-all duration-300 hover:shadow-xl"
                 >
                   <div className="mb-4">
                     <IconComponent
                       size={48}
-                      className="text-violet-600 mx-auto"
+                      className="text-violet-600 dark:text-violet-400 mx-auto"
                     />
                   </div>
-                  <h4 className="text-xl font-semibold text-violet-600 mb-2">
+                  <h4 className="text-xl font-semibold text-violet-600 dark:text-violet-400 mb-2">
                     {achievement.title}
                   </h4>
-                  <p className="text-gray-900 font-medium mb-2">
+                  <p className="text-gray-900 dark:text-gray-100 font-medium mb-2">
                     {achievement.description}
                   </p>
-                  <p className="text-gray-600 text-sm mb-1">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">
                     {achievement.institution}
                   </p>
                   <p className="text-gray-500 text-sm flex items-center justify-center gap-1">

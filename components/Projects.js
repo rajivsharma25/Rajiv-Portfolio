@@ -136,14 +136,17 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section
+      id="projects"
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Featured <span className="text-gradient">Projects</span>
           </h2>
           <div className="w-24 h-1 bg-violet-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Showcasing my expertise in building modern, scalable web
             applications
           </p>
@@ -153,10 +156,10 @@ export default function Projects() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100"
+              className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl border border-gray-100 dark:border-gray-700"
             >
               {/* Project Image */}
-              <div className="h-48 relative overflow-hidden bg-gradient-to-br from-violet-50 to-purple-50">
+              <div className="h-48 relative overflow-hidden bg-gradient-to-br from-violet-50 to-purple-50 dark:from-gray-700 dark:to-gray-800">
                 <Image
                   src={project.image}
                   alt={`${project.title} project screenshot`}
@@ -187,17 +190,17 @@ export default function Projects() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-gray-900 mb-1">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-600 mb-2 leading-relaxed text-base">
+                <p className="text-gray-600 dark:text-gray-300 mb-2 leading-relaxed text-base">
                   {project.description}
                 </p>
 
                 {/* Key Features */}
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-3">
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-200 mb-3">
                     Key Features:
                   </h4>
                   <ul className="space-y-2">
@@ -206,7 +209,7 @@ export default function Projects() {
                       .map((feature, featureIndex) => (
                         <li
                           key={featureIndex}
-                          className="text-sm text-gray-600 flex items-start"
+                          className="text-sm text-gray-600 dark:text-gray-300 flex items-start"
                         >
                           <span className="w-1.5 h-1.5 bg-violet-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                           {feature}
@@ -221,7 +224,7 @@ export default function Projects() {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-violet-100 text-violet-700 rounded-full text-xs font-medium transition-all duration-300 hover:bg-violet-200"
+                        className="px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-xs font-medium transition-all duration-300 hover:bg-violet-200 dark:hover:bg-violet-800/40"
                       >
                         {tech}
                       </span>
@@ -244,7 +247,7 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 border border-violet-600 text-violet-600 py-2.5 px-4 rounded-full text-sm font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white active:scale-95"
+                    className="flex-1 inline-flex items-center justify-center gap-2 border border-violet-600 text-violet-600 dark:text-violet-400 py-2.5 px-4 rounded-full text-sm font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white dark:hover:bg-violet-600 dark:hover:text-white active:scale-95"
                   >
                     <Github size={16} />
                     GitHub
@@ -257,11 +260,11 @@ export default function Projects() {
 
         {/* Call to Action */}
         <div className="text-center mt-6">
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-xl">
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
               Want to see more projects?
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Check out my GitHub profile for more web development projects and
               contributions.
             </p>

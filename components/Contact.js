@@ -1,50 +1,61 @@
-'use client';
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, MessageCircle, User, AtSign, MessageSquare } from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Github,
+  Linkedin,
+  MessageCircle,
+  User,
+  AtSign,
+  MessageSquare,
+} from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
   const [result, setResult] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setResult("Sending....");
-    
+
     const jsonData = {
       access_key: "a04a899a-9852-4664-8738-a9e163237473",
       name: formData.name,
       email: formData.email,
       message: formData.message,
       subject: "New Contact Form Submission from Portfolio",
-      from_name: "Portfolio Contact Form"
+      from_name: "Portfolio Contact Form",
     };
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(jsonData)
+        body: JSON.stringify(jsonData),
       });
 
       const data = await response.json();
       if (data.success) {
         setResult("Message sent successfully! I'll get back to you soon.");
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: "", email: "", message: "" });
         setTimeout(() => setResult(""), 5000);
       } else {
         console.log("Error", data);
@@ -62,36 +73,36 @@ export default function Contact() {
       title: "Email",
       value: "rajivsharma93056@gmail.com",
       link: "mailto:rajivsharma93056@gmail.com",
-      color: "text-red-600"
+      color: "text-red-600",
     },
     {
       icon: Phone,
       title: "Phone",
       value: "+91 9305635022",
       link: "tel:+919305635022",
-      color: "text-green-600"
+      color: "text-green-600",
     },
     {
       icon: FaWhatsapp,
       title: "WhatsApp",
       value: "+91 9305635022",
       link: "https://wa.me/919305635022?text=Hi%20Rajiv,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.",
-      color: "text-green-500"
+      color: "text-green-500",
     },
     {
       icon: MapPin,
       title: "Location",
       value: "Noida, India",
       link: "https://maps.app.goo.gl/h6TbMkZFqFLaYZG88",
-      color: "text-blue-600"
+      color: "text-blue-600",
     },
     {
       icon: Linkedin,
       title: "LinkedIn",
       value: "linkedin.com/in/rajivsharma25",
       link: "https://linkedin.com/in/rajivsharma25",
-      color: "text-blue-800"
-    }
+      color: "text-blue-800",
+    },
   ];
 
   const socialLinks = [
@@ -99,44 +110,48 @@ export default function Contact() {
       name: "GitHub",
       icon: Github,
       url: "https://github.com/rajivsharma25",
-      color: "hover:text-gray-900 hover:bg-gray-100"
+      color: "hover:text-gray-900 hover:bg-gray-100",
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
       url: "https://linkedin.com/in/rajivsharma25",
-      color: "hover:text-blue-600 hover:bg-blue-50"
+      color: "hover:text-blue-600 hover:bg-blue-50",
     },
     {
       name: "WhatsApp",
       icon: FaWhatsapp,
       url: "https://wa.me/919305635022?text=Hi%20Rajiv,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.",
-      color: "hover:text-green-500 hover:bg-green-50"
+      color: "hover:text-green-500 hover:bg-green-50",
     },
     {
       name: "Email",
       icon: Mail,
       url: "mailto:rajivsharma93056@gmail.com",
-      color: "hover:text-red-600 hover:bg-red-50"
+      color: "hover:text-red-600 hover:bg-red-50",
     },
     {
       name: "Phone",
       icon: Phone,
       url: "tel:+919305635022",
-      color: "hover:text-green-600 hover:bg-green-50"
-    }
+      color: "hover:text-green-600 hover:bg-green-50",
+    },
   ];
 
   return (
-    <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section
+      id="contact"
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Get In <span className="text-gradient">Touch</span>
           </h2>
           <div className="w-24 h-1 bg-violet-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Ready to bring your web development project to life? Let&apos;s discuss how I can help you build amazing digital experiences.
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Ready to bring your web development project to life? Let&apos;s
+            discuss how I can help you build amazing digital experiences.
           </p>
         </div>
 
@@ -144,16 +159,17 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6 sm:text-left text-center">
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 sm:text-left text-center">
                 Let&apos;s Start a Conversation
               </h3>
-              <p className="text-gray-600 mb-8 leading-relaxed sm:text-left text-justify">
-                I&apos;m always excited to work on new projects and collaborate with fellow developers, 
-                businesses, and individuals who are passionate about creating exceptional web experiences. 
-                Whether you have a project in mind, need consultation, or just want to say hello, 
-                I&apos;d love to hear from you!
+              <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed sm:text-left text-justify">
+                I&apos;m always excited to work on new projects and collaborate
+                with fellow developers, businesses, and individuals who are
+                passionate about creating exceptional web experiences. Whether
+                you have a project in mind, need consultation, or just want to
+                say hello, I&apos;d love to hear from you!
               </p>
-              
+
               <div className="space-y-4">
                 {contactInfo.map((info, index) => {
                   const IconComponent = info.icon;
@@ -161,18 +177,31 @@ export default function Contact() {
                     <a
                       key={index}
                       href={info.link}
-                      target={info.link.startsWith('http') ? '_blank' : undefined}
-                      rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md hover:scale-105 group"
+                      target={
+                        info.link.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        info.link.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-md hover:scale-105 group"
                     >
-                      <div className={`p-3 rounded-lg bg-gray-50 group-hover:bg-violet-50 transition-colors duration-300`}>
-                        <IconComponent size={24} className={`${info.color} group-hover:text-violet-600 transition-colors duration-300`} />
+                      <div
+                        className={`p-3 rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:bg-violet-50 dark:group-hover:bg-gray-600 transition-colors duration-300`}
+                      >
+                        <IconComponent
+                          size={24}
+                          className={`${info.color} group-hover:text-violet-600 transition-colors duration-300`}
+                        />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900 group-hover:text-violet-600 transition-colors duration-300">
+                        <h4 className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-300">
                           {info.title}
                         </h4>
-                        <p className="text-gray-600 text-sm">{info.value}</p>
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
+                          {info.value}
+                        </p>
                       </div>
                     </a>
                   );
@@ -181,8 +210,8 @@ export default function Contact() {
             </div>
 
             {/* Social Links */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-              <h4 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700">
+              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <MessageCircle size={20} className="text-violet-600" />
                 Connect with me
               </h4>
@@ -195,7 +224,7 @@ export default function Contact() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 bg-gray-50 rounded-full transition-all duration-300 hover:scale-105 ${social.color} border border-gray-200 hover:border-current`}
+                      className={`p-3 bg-gray-50 dark:bg-gray-700 rounded-full transition-all duration-300 hover:scale-105 ${social.color} border border-gray-200 dark:border-gray-600 hover:border-current`}
                       title={social.name}
                     >
                       <IconComponent size={20} />
@@ -206,9 +235,11 @@ export default function Contact() {
             </div>
 
             {/* Quick Info */}
-            <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 border border-violet-100">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Quick Info</h4>
-              <ul className="space-y-2 text-gray-600">
+            <div className="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-6 border border-violet-100 dark:border-gray-600">
+              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                Quick Info
+              </h4>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-violet-600 rounded-full mr-3 flex-shrink-0"></span>
                   Available for freelance projects
@@ -231,16 +262,19 @@ export default function Contact() {
 
           {/* Contact Form - Sticky for Desktop */}
           <div className="lg:sticky lg:top-24">
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-fit">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center sm:justify-start justify-center gap-2 ">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 h-fit">
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center sm:justify-start justify-center gap-2 ">
                 <Send size={20} className="text-violet-600" />
                 Send me a message
               </h3>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    >
                       <User size={16} />
                       Your Name *
                     </label>
@@ -251,12 +285,15 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-gray-50 focus:bg-white outline-none"
+                      className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 outline-none dark:text-white"
                       placeholder="Enter your name"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                    >
                       <AtSign size={16} />
                       Email Address *
                     </label>
@@ -267,14 +304,17 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-gray-50 focus:bg-white outline-none"
+                      className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 outline-none dark:text-white"
                       placeholder="Enter your email"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  >
                     <MessageSquare size={16} />
                     Message *
                   </label>
@@ -285,7 +325,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 resize-none bg-gray-50 focus:bg-white outline-none"
+                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-all duration-300 resize-none bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-600 outline-none dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                     placeholder="Tell me about your project or inquiry..."
                   ></textarea>
                 </div>
@@ -301,13 +341,15 @@ export default function Contact() {
 
                 {/* Status Message */}
                 {result && (
-                  <div className={`p-4 rounded-xl text-center font-medium transition-all duration-300 ${
-                    result.includes("successfully") || result.includes("sent")
-                      ? "bg-green-50 text-green-700 border border-green-200" 
-                      : result === "Sending...." 
-                      ? "bg-blue-50 text-blue-700 border border-blue-200" 
-                      : "bg-red-50 text-red-700 border border-red-200"
-                  }`}>
+                  <div
+                    className={`p-4 rounded-xl text-center font-medium transition-all duration-300 ${
+                      result.includes("successfully") || result.includes("sent")
+                        ? "bg-green-50 text-green-700 border border-green-200"
+                        : result === "Sending...."
+                        ? "bg-blue-50 text-blue-700 border border-blue-200"
+                        : "bg-red-50 text-red-700 border border-red-200"
+                    }`}
+                  >
                     {result}
                   </div>
                 )}
