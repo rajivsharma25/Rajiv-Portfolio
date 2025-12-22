@@ -13,7 +13,7 @@ import { SiNextdotjs, SiTailwindcss, SiRedux } from "react-icons/si";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center sm:pt-12 pt-16 pb-4 sm:pb-0 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Background */}
@@ -145,7 +145,10 @@ export default function Hero() {
         {/* Content Below */}
         <div>
           <h1 className="text-xl sm:text-2xl md:text-3xl text-gray-900 dark:text-gray-100 font-medium mb-4">
-            Hi, I&apos;m <span className="text-gradient dark:text-gradient">Rajiv Sharma</span>
+            Hi, I&apos;m{" "}
+            <span className="text-gradient dark:text-gradient">
+              Rajiv Sharma
+            </span>
           </h1>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-violet-800 via-violet-600 to-purple-500 bg-clip-text text-transparent font-bold mb-6">
@@ -153,10 +156,9 @@ export default function Hero() {
           </h2>
 
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            A motivated frontend developer learning and building modern,
-            responsive web applications using React.js, Next.js, and Redux. I
-            enjoy improving my skills by working on real-world projects and
-            creating clean, user-friendly interfaces.
+            A motivated frontend developer building modern, responsive web
+            applications with React.js, Next.js, and Redux, focused on creating
+            clean and user-friendly interfaces.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
