@@ -48,7 +48,8 @@ export default function Hero() {
             className="absolute top-24 left-16 animate-bounce"
             style={{ animationDelay: "0s", animationDuration: "6s" }}
           >
-            <FaReact className="text-blue-500 opacity-20 text-3xl" />
+            <FaReact className="text-blue-500 opacity-20 text-3xl animate-spin"
+            style={{ animationDelay: "0s", animationDuration: "6s" }} />
           </div>
 
           {/* JavaScript Icon */}
