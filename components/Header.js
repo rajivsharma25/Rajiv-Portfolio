@@ -92,13 +92,25 @@ export default function Header() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-gray-800 transition-colors duration-300 cursor-pointer"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Controls */}
+          <div className="md:hidden flex items-center gap-3">
+            {/* Theme Toggle for Mobile */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-gray-800 transition-all duration-300 active:scale-95 cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-violet-50 dark:hover:bg-gray-800 transition-colors duration-300 cursor-pointer"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -143,13 +155,6 @@ export default function Header() {
 
               {/* Mobile CTA Buttons */}
               <div className="flex flex-col space-y-3 mt-4">
-                <button
-                  onClick={toggleTheme}
-                  className="mb-4 inline-flex items-center gap-2 text-gray-700 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 px-2 py-1 transition-colors duration-300 cursor-pointer"
-                >
-                  {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-                  {theme === "dark" ? "Light Mode" : "Dark Mode"}
-                </button>
                 <a
                   href="https://linkedin.com/in/rajivsharma25"
                   target="_blank"
