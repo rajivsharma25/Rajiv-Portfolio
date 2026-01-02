@@ -104,12 +104,12 @@ export default function Hero() {
             <SiRedux className="text-purple-600 opacity-20 text-2xl" />
           </div>
 
-          {/* Javascript Icon */}
+          {/* React Icon */}
           <div
             className="absolute top-1/3 right-12 animate-bounce"
             style={{ animationDelay: "4s", animationDuration: "7s" }}
           >
-            <FaJs className="text-blue-700 opacity-15 text-2xl" />
+            <FaReact className="text-blue-400 opacity-15 text-2xl" />
           </div>
 
           {/* Git Icon */}
