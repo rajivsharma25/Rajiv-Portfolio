@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { FolderOpen, MessageCircle } from "lucide-react";
@@ -10,6 +11,7 @@ import {
   FaAws,
 } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiRedux } from "react-icons/si";
+import { TypeAnimation } from "react-type-animation";
 
 export default function Hero() {
   return (
@@ -48,8 +50,10 @@ export default function Hero() {
             className="absolute top-24 left-16 animate-bounce"
             style={{ animationDelay: "0s", animationDuration: "6s" }}
           >
-            <FaReact className="text-blue-500 opacity-20 text-3xl animate-spin"
-            style={{ animationDelay: "0s", animationDuration: "6s" }} />
+            <FaReact
+              className="text-blue-500 opacity-20 text-3xl animate-spin"
+              style={{ animationDelay: "0s", animationDuration: "6s" }}
+            />
           </div>
 
           {/* JavaScript Icon */}
@@ -143,7 +147,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Content Below */}
         <div>
           <h1 className="text-xl sm:text-2xl md:text-3xl text-gray-900 dark:text-gray-100 font-medium mb-4">
             Hi, I&apos;m{" "}
@@ -153,7 +156,13 @@ export default function Hero() {
           </h1>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-violet-800 via-violet-600 to-purple-500 bg-clip-text text-transparent font-bold mb-6">
-            Frontend Developer
+            <TypeAnimation
+              sequence={["Frontend", 1000, "Web", 1000, "ReactJS", 1000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
+            Developer
           </h2>
 
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
