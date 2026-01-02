@@ -31,7 +31,7 @@ export default function Header() {
               href="#about"
               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
             >
-              About Me
+              About
             </Link>
             <Link
               href="#skills"
@@ -43,7 +43,7 @@ export default function Header() {
               href="#experience"
               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
             >
-              Experience
+              Experiences
             </Link>
             <Link
               href="#projects"
@@ -55,7 +55,7 @@ export default function Header() {
               href="#contact"
               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
             >
-              Contact Me
+              Contact
             </Link>
           </div>
 
@@ -122,7 +122,7 @@ export default function Header() {
                 className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300 px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
-                About Me
+                About
               </Link>
               <Link
                 href="#skills"
@@ -136,7 +136,7 @@ export default function Header() {
                 className="text-gray-700 hover:text-violet-600 transition-colors duration-300 px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Experience
+                Experiences
               </Link>
               <Link
                 href="#projects"
@@ -150,7 +150,7 @@ export default function Header() {
                 className="text-gray-700 hover:text-violet-600 transition-colors duration-300 px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact Me
+                Contact
               </Link>
 
               {/* Mobile CTA Buttons */}
