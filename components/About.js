@@ -17,14 +17,14 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 text-center lg:text-left">
-              ReactJS Developer
+              Frontend Developer
             </h3>
 
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
-              I&apos;m a passionate ReactJS Developer currently working at
-              Bodmas Education Services, where I develop and maintain modern web
+              I&apos;m a passionate Frontend Developer currently working at
+              AKVM Solutions, where I develop and maintain modern web
               applications focusing on responsive and user-friendly interfaces.
-              With a strong foundation in React.js, Redux, and cloud
+              With a strong foundation in React.js, Next.js, Redux, and cloud
               technologies, I create scalable solutions that deliver exceptional
               user experiences.
             </p>
@@ -76,7 +76,7 @@ export default function About() {
                   <h4 className="font-semibold text-violet-600 dark:text-violet-400 mb-1">
                     Experience
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300">~ 1 Years</p>
+                  <p className="text-gray-600 dark:text-gray-300">1 Year</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -104,7 +104,7 @@ export default function About() {
               <ul className="space-y-4">
                 <li className="flex items-center text-gray-600 dark:text-gray-300">
                   <div className="w-2 h-2 bg-violet-600 rounded-full mr-4 flex-shrink-0"></div>
-                  <span>Currently working as ReactJS Developer</span>
+                  <span>Currently working as Frontend Developer</span>
                 </li>
                 <li className="flex items-center text-gray-600 dark:text-gray-300">
                   <div className="w-2 h-2 bg-violet-600 rounded-full mr-4 flex-shrink-0"></div>

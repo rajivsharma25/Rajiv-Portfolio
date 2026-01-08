@@ -3,9 +3,23 @@ import { Briefcase, Calendar, MapPin, GraduationCap } from "lucide-react";
 export default function Experience() {
   const experiences = [
     {
+      title: "Frontend Developer",
+      company: "AKVM Solutions",
+      period: "Jan 2026 - Present",
+      type: "Full-time",
+      location: "Gurugram, India",
+      description: [
+        "Developing scalable web solutions using React.js, Next.js, and JavaScript.",
+        "Ensuring high-quality code standards as part of the engineering team.",
+        "Building responsive user interfaces with Tailwind CSS.",
+        "Implementing modern frontend technologies to enhance application performance and user experience.",
+      ],
+      technologies: ["React.js", "Next.js", "JavaScript", "Tailwind CSS", "Context API", "AXIOS", "Redux", "MUI"],
+    },
+    {
       title: "ReactJS Developer",
       company: "Bodmas Education Services",
-      period: "May 2025 - Present",
+      period: "May 2025 - Dec 2025",
       type: "Full-time",
       location: "Noida, Uttar Pradesh",
       description: [
@@ -81,6 +95,12 @@ export default function Experience() {
   ];
 
   const timelineItems = [
+    {
+      year: "2026",
+      title: "Frontend Developer at AKVM Solutions",
+      type: "work",
+      icon: Briefcase,
+    },
     {
       year: "2025",
       title: "ReactJS Developer at Bodmas Education Services",
