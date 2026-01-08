@@ -131,7 +131,7 @@ export default function Projects() {
       ],
       demoUrl: "https://star-wars-character-app-three.vercel.app",
       githubUrl: "https://github.com/rajivsharma25/Star-Wars-Character-App",
-      status: "Active",
+      status: "Working",
     },
   ];
 
@@ -175,10 +175,10 @@ export default function Projects() {
                   <span
                     className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
                       project.status === "Active"
-                        ? "bg-green-100 text-green-800"
+                        ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
                         : project.status === "Completed"
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-yellow-100 text-yellow-800"
+                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                        : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
                     }`}
                   >
                     {project.status === "Active" ? (

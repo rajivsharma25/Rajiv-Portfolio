@@ -156,22 +156,21 @@ export default function Certifications() {
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         cert.level === "Foundation"
-                          ? "bg-blue-100 text-blue-800"
+                          ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
                           : cert.level === "Professional"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-purple-100 text-purple-800"
+                          ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                          : "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300"
                       }`}
                     >
                       {cert.level}
                     </span>
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 rounded-full text-xs font-semibold">
                       <CheckCircle size={10} />
                       {cert.status}
                     </span>
                   </div>
                 </div>
-
-                {/* All Titles Now Clickable with Updated Styling */}
+                
                 {cert.badgeUrl ? (
                   <a
                     href={cert.badgeUrl}

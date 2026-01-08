@@ -170,12 +170,12 @@ export default function Experience() {
                       <div
                         className={`p-2 rounded-full flex-shrink-0 ${
                           item.type === "work"
-                            ? "bg-violet-100 text-violet-600"
+                            ? "bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400"
                             : item.type === "internship"
-                            ? "bg-blue-100 text-blue-600"
+                            ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
                             : item.type === "training"
-                            ? "bg-purple-100 text-purple-600"
-                            : "bg-indigo-100 text-indigo-600"
+                            ? "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
+                            : "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400"
                         }`}
                       >
                         <IconComponent size={16} />
