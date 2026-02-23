@@ -110,29 +110,29 @@ export default function Projects() {
       githubUrl: "https://github.com/rajivsharma25/wearcraft",
       status: "Active",
     },
-    {
-      title: "Star Wars Character App",
-      description:
-        "Interactive Star Wars character explorer built with React and SWAPI API. Features character search, species-based UI themes, and detailed character modals with homeworld and film data.",
-      image: "/assets/images/starwars.jpg",
-      technologies: [
-        "React.js",
-        "Vite",
-        "Axios",
-        "Tailwind CSS",
-        "Lucide React",
-      ],
-      features: [
-        "Paginated character browser with search functionality",
-        "Species-based dynamic UI themes",
-        "Detailed character modals with homeworld information",
-        "Animated UI effects and transitions",
-        "Fully responsive design with modern UX",
-      ],
-      demoUrl: "https://star-wars-character-app-three.vercel.app",
-      githubUrl: "https://github.com/rajivsharma25/Star-Wars-Character-App",
-      status: "Working",
-    },
+    // {
+    //   title: "Star Wars Character App",
+    //   description:
+    //     "Interactive Star Wars character explorer built with React and SWAPI API. Features character search, species-based UI themes, and detailed character modals with homeworld and film data.",
+    //   image: "/assets/images/starwars.jpg",
+    //   technologies: [
+    //     "React.js",
+    //     "Vite",
+    //     "Axios",
+    //     "Tailwind CSS",
+    //     "Lucide React",
+    //   ],
+    //   features: [
+    //     "Paginated character browser with search functionality",
+    //     "Species-based dynamic UI themes",
+    //     "Detailed character modals with homeworld information",
+    //     "Animated UI effects and transitions",
+    //     "Fully responsive design with modern UX",
+    //   ],
+    //   demoUrl: "https://star-wars-character-app-three.vercel.app",
+    //   githubUrl: "https://github.com/rajivsharma25/Star-Wars-Character-App",
+    //   status: "Working",
+    // },
   ];
 
   return (

@@ -72,22 +72,19 @@ export default function Certifications() {
 
   const achievements = [
     {
-      title: "CGPA: 7.56/10",
-      description: "B.Tech in Computer Science and Engineering",
+      title: "B.Tech in Computer Science and Engineering",
       institution: "IMS Engineering College, Ghaziabad",
       year: "2020-2024",
       icon: GraduationCap,
     },
     {
-      title: "Higher Secondary: 70%",
-      description: "CBSE Board - Science Stream",
+      title: "CBSE Board - Science Stream",
       institution: "Gyan Peethika Senior Secondary School",
       year: "2019",
       icon: BookOpen,
     },
     {
-      title: "Secondary School: 9.0/10 CGPA",
-      description: "CBSE Board - Academic Excellence",
+      title: "CBSE Board - Academic Excellence",
       institution: "Gyan Kunj Senior Secondary Academy",
       year: "2017",
       icon: Trophy,

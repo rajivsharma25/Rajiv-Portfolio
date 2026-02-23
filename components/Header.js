@@ -46,6 +46,12 @@ export default function Header() {
               Experiences
             </Link>
             <Link
+              href="#freelance"
+              className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
+            >
+              Freelance
+            </Link>
+            <Link
               href="#projects"
               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
             >
@@ -137,6 +143,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Experiences
+              </Link>
+              <Link
+                href="#freelance"
+                className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300 px-2 py-1"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Freelance
               </Link>
               <Link
                 href="#projects"

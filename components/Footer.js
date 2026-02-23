@@ -19,6 +19,7 @@ export default function Footer() {
     { name: "About Me", href: "#about" },
     { name: "My Skills", href: "#skills" },
     { name: "My Experience", href: "#experience" },
+    { name: "Freelance", href: "#freelance" },
     { name: "My Projects", href: "#projects" },
     { name: "My Certifications", href: "#certifications" },
     { name: "Contact Me", href: "#contact" },
@@ -76,10 +77,8 @@ export default function Footer() {
               />
             </Link>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              ReactJS Developer passionate about creating modern, responsive web
-              applications with clean code and exceptional user experiences.
-              Currently specializing in React.js, Redux, and Web Development
-              technologies.
+              Frontend Developer focused on building modern, responsive web
+              applications with clean code and seamless user experiences.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => {
@@ -168,25 +167,10 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start space-x-3">
-                <FaWhatsapp size={20} className="text-violet-400 mt-0.5" />
-                <div>
-                  <p className="text-gray-300 text-sm">WhatsApp</p>
-                  <a
-                    href="https://wa.me/919305635022?text=Hi%20Rajiv,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-violet-300 transition-colors text-sm"
-                  >
-                    +91 9305635022
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3">
                 <MapPin size={20} className="text-violet-400 mt-0.5" />
                 <div>
                   <p className="text-gray-300 text-sm">Location</p>
-                  <p className="text-white text-sm">Noida, India</p>
+                  <p className="text-white text-sm">Gurugram, Haryana, India</p>
                 </div>
               </div>
             </div>
