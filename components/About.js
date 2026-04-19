@@ -49,7 +49,7 @@ export default function About() {
                     Location
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Noida, India
+                    Gurugram, Haryana
                   </p>
                 </div>
               </div>
