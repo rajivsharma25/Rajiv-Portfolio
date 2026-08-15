@@ -13,20 +13,19 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-violet-100 dark:border-gray-800 transition-colors duration-300">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href="/">
+          <Link href="/" className="shrink-0">
             <Image
               src="/logo.png"
               alt="Rajiv Sharma Logo"
               width={100}
               height={100}
-              className="rounded-full dark:invert-100"
+              className="rounded-full dark:invert-100 -ml-2"
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 font-medium">
+          <div className="hidden md:flex space-x-4 lg:space-x-8 font-medium">
             <Link
               href="#about"
               className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300"
@@ -83,19 +82,19 @@ export default function Header() {
               href="https://linkedin.com/in/rajivsharma25"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-violet-600 text-violet-600 px-4 py-2 rounded-full font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white active:scale-95"
+              className="hidden lg:inline-flex items-center gap-2 border border-violet-600 text-violet-600 px-4 py-2 rounded-full font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white active:scale-95"
             >
               <Linkedin size={16} />
               LinkedIn
             </a>
-            <a
+            {/* <a
               href="/Rajiv-Sharma.pdf"
               download
               className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-full font-medium transition-all duration-300 hover:from-purple-700 hover:to-violet-700 active:scale-95 shadow-md hover:shadow-lg"
             >
               <Download size={16} />
               Download CV
-            </a>
+            </a> */}
           </div>
 
           {/* Mobile Controls */}
@@ -177,14 +176,14 @@ export default function Header() {
                   <Linkedin size={16} />
                   LinkedIn
                 </a>
-                <a
+                {/* <a
                   href="/Rajiv-Sharma.pdf"
                   download
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-full font-medium transition-all duration-300 hover:from-purple-700 hover:to-violet-700 active:scale-95 shadow-md hover:shadow-lg w-fit"
                 >
                   <Download size={16} />
                   Download CV
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

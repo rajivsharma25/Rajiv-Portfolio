@@ -10,7 +10,7 @@ import {
   FaGitAlt,
   FaAws,
 } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiRedux } from "react-icons/si";
+import { SiNextdotjs, SiTailwindcss, SiRedux, SiTypescript, SiFramer } from "react-icons/si";
 import { TypeAnimation } from "react-type-animation";
 
 export default function Hero() {
@@ -127,6 +127,22 @@ export default function Hero() {
           >
             <FaAws className="text-orange-600 opacity-15 text-2xl" />
           </div>
+
+          {/* TypeScript Icon */}
+          <div
+            className="absolute bottom-1/3 left-20 animate-bounce"
+            style={{ animationDelay: "5s", animationDuration: "6.5s" }}
+          >
+            <SiTypescript className="text-blue-600 opacity-20 text-2xl" />
+          </div>
+
+          {/* Framer Motion Icon */}
+          <div
+            className="absolute bottom-24 right-32 animate-bounce"
+            style={{ animationDelay: "2.8s", animationDuration: "5.8s" }}
+          >
+            <SiFramer className="text-pink-500 opacity-20 text-2xl" />
+          </div>
         </div>
       </div>
 
@@ -157,7 +173,16 @@ export default function Hero() {
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-violet-800 via-violet-600 to-purple-500 bg-clip-text text-transparent font-bold mb-6">
             <TypeAnimation
-              sequence={["Frontend", 1000, "Web", 1000, "ReactJS", 1000]}
+              sequence={[
+                "Frontend",
+                1000,
+                "Web",
+                1000,
+                "ReactJS",
+                1000,
+                "Software",
+                1000,
+              ]}
               wrapper="span"
               speed={50}
               repeat={Infinity}
@@ -166,9 +191,10 @@ export default function Hero() {
           </h2>
 
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            A motivated frontend developer building modern, responsive web
-            applications with React.js, Next.js, and Redux, focused on creating
-            clean and user-friendly interfaces.
+            A software developer dedicated to building high-performance,
+            scalable, and responsive web applications. Specializing in React,
+            Next.js, and modern software development practices to deliver clean,
+            robust digital solutions.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">

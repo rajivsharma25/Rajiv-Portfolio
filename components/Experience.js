@@ -5,7 +5,7 @@ export default function Experience() {
     {
       title: "Frontend Developer",
       company: "AKVM Solutions",
-      period: "Jan 2026 - Present",
+      period: "Jan 2026 - Jun 2026",
       type: "Full-time",
       location: "Gurugram, India",
       description: [

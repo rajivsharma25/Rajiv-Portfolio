@@ -76,13 +76,6 @@ export default function Contact() {
       color: "text-red-600",
     },
     {
-      icon: Phone,
-      title: "Phone",
-      value: "+91 9305635022",
-      link: "tel:+919305635022",
-      color: "text-green-600",
-    },
-    {
       icon: FaWhatsapp,
       title: "WhatsApp",
       value: "+91 9305635022",
@@ -185,7 +178,7 @@ export default function Contact() {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      className="flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-md hover:scale-105 group"
+                      className="flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-md hover:scale-102 active:scale-95 group"
                     >
                       <div
                         className={`p-3 rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:bg-violet-50 dark:group-hover:bg-gray-600 transition-colors duration-300`}
@@ -224,7 +217,7 @@ export default function Contact() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 bg-gray-50 dark:bg-gray-700 rounded-full transition-all duration-300 hover:scale-105 ${social.color} border border-gray-200 dark:border-gray-600 hover:border-current`}
+                      className={`p-3 bg-gray-50 dark:bg-gray-700 rounded-full transition-all duration-300 hover:scale-105 ${social.color} border border-gray-200 dark:border-gray-600 hover:border-current dark:hover:bg-gray-700`}
                       title={social.name}
                     >
                       <IconComponent size={20} />
@@ -254,7 +247,7 @@ export default function Contact() {
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-violet-600 rounded-full mr-3 flex-shrink-0"></span>
-                  Specializing in React.js & Frontend Development
+                  Specializing in React.js, Next.js & Software Development
                 </li>
               </ul>
             </div>

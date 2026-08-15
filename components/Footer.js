@@ -54,7 +54,8 @@ export default function Footer() {
 
   const services = [
     "React.js Development",
-    "Frontend Development",
+    "Next.js Development",
+    "Software Development",
     "Responsive Web Design",
     "Redux State Management",
     "UI/UX Implementation",
@@ -73,12 +74,12 @@ export default function Footer() {
                 alt="Rajiv Sharma Logo"
                 width={100}
                 height={100}
-                className="rounded-full invert-100"
+                className="rounded-full invert-100 -ml-2"
               />
             </Link>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Frontend Developer focused on building modern, responsive web
-              applications with clean code and seamless user experiences.
+              Software Developer dedicated to building high-performance, scalable, and
+              responsive web applications with clean code and robust digital solutions.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => {
@@ -170,7 +171,7 @@ export default function Footer() {
                 <MapPin size={20} className="text-violet-400 mt-0.5" />
                 <div>
                   <p className="text-gray-300 text-sm">Location</p>
-                  <p className="text-white text-sm">Gurugram, Haryana, India</p>
+                  <p className="text-white text-sm">Noida, Uttar Pradesh, India</p>
                 </div>
               </div>
             </div>
@@ -179,7 +180,7 @@ export default function Footer() {
       </div>
 
       {/* Newsletter Section */}
-      <div className="border-t border-gray-800 dark:border-gray-900">
+      {/* <div className="border-t border-gray-800 dark:border-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-4 md:mb-0 text-center md:text-left">
@@ -210,7 +211,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Copyright */}
       <div className="border-t border-gray-800 dark:border-gray-900">
