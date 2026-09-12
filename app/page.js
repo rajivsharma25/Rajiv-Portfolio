@@ -1,23 +1,23 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
-import FreelanceProjects from "@/components/FreelanceProjects";
-import Projects from "@/components/Projects";
-import Certifications from "@/components/Certifications";
-import Contact from "@/components/Contact";
+
+const About = dynamic(() => import("@/components/About"));
+const Skills = dynamic(() => import("@/components/Skills"));
+const Experience = dynamic(() => import("@/components/Experience"));
+const Projects = dynamic(() => import("@/components/Projects"));
+const Certifications = dynamic(() => import("@/components/Certifications"));
+const Contact = dynamic(() => import("@/components/Contact"));
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-x-clip">
       <Hero />
       <About />
       <Skills />
       <Experience />
-      <FreelanceProjects />
       <Projects />
       <Certifications />
       <Contact />
-    </>
+    </div>
   );
 }

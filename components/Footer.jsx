@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -6,23 +8,36 @@ import {
   Mail,
   Phone,
   MapPin,
-  MessageCircle,
-  Download,
-  Heart,
+  Code2,
+  Globe,
+  Layers,
+  Layout,
+  Cpu,
+  Zap,
+  Sparkles,
+  Compass,
+  User,
+  Terminal,
+  Briefcase,
+  FolderGit2,
+  Award,
+  Send,
+  ArrowRight,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "About Me", href: "#about" },
-    { name: "My Skills", href: "#skills" },
-    { name: "My Experience", href: "#experience" },
-    { name: "Freelance", href: "#freelance" },
-    { name: "My Projects", href: "#projects" },
-    { name: "My Certifications", href: "#certifications" },
-    { name: "Contact Me", href: "#contact" },
+    { name: t("nav.about"), href: "#about", icon: User },
+    { name: t("nav.skills"), href: "#skills", icon: Terminal },
+    { name: t("nav.experiences"), href: "#experience", icon: Briefcase },
+    { name: t("nav.projects"), href: "#projects", icon: FolderGit2 },
+    { name: t("nav.certifications"), href: "#certifications", icon: Award },
+    { name: t("nav.contact"), href: "#contact", icon: Send },
   ];
 
   const socialLinks = [
@@ -53,35 +68,36 @@ export default function Footer() {
   ];
 
   const services = [
-    "React.js Development",
-    "Next.js Development",
-    "Software Development",
-    "Responsive Web Design",
-    "Redux State Management",
-    "UI/UX Implementation",
+    { name: "React.js Development", icon: Code2 },
+    { name: "Next.js Web Applications", icon: Globe },
+    { name: "Frontend Architecture", icon: Layers },
+    { name: "Responsive UI/UX Design", icon: Layout },
+    { name: "Redux & State Management", icon: Cpu },
+    { name: "Performance Optimization", icon: Zap },
   ];
 
   return (
-    <footer className="bg-gray-900 dark:bg-black/80 text-white transition-colors duration-300">
+    <footer className="bg-gray-900 dark:bg-neutral-900 text-white transition-colors duration-300 border-t border-gray-800 dark:border-neutral-800">
+
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-10 sm:py-14 md:py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block">
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Rajiv Sharma Logo"
-                width={100}
-                height={100}
-                className="rounded-full invert-100 -ml-2"
+                width={200}
+                height={60}
+                className="h-auto w-[90px] sm:w-[100px] invert-100 -ml-1.5 rtl:ml-0 rtl:-mr-1.5"
+                loading="lazy"
               />
             </Link>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              Software Developer dedicated to building high-performance, scalable, and
-              responsive web applications with clean code and robust digital solutions.
+            <p className="text-neutral-300 mb-5 sm:mb-6 leading-relaxed text-xs sm:text-sm">
+              {t("footer.bio")}
             </p>
-            <div className="flex space-x-4">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
                 return (
@@ -90,10 +106,10 @@ export default function Footer() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`p-2 bg-gray-800 dark:bg-gray-900 rounded-full transition-all duration-300 hover:scale-110 ${social.color} border border-gray-700 dark:border-gray-800 hover:border-current`}
+                    className={`p-2 sm:p-2.5 bg-gray-800 dark:bg-neutral-800 text-gray-300 dark:text-neutral-300 rounded-full transition-all duration-300 hover:scale-110 ${social.color} border border-gray-700 dark:border-neutral-700/60 hover:border-blue-400 hover:text-white`}
                     title={social.name}
                   >
-                    <IconComponent size={20} />
+                    <IconComponent size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </a>
                 );
               })}
@@ -102,76 +118,130 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-violet-400">
-              Quick Links
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-400 flex items-center gap-2">
+              <Compass size={18} className="text-blue-400" />
+              {t("footer.quickLinks")}
             </h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 sm:gap-2.5">
+              {quickLinks.map((link, index) => {
+                const IconComponent = link.icon;
+                return (
                   <a
+                    key={index}
                     href={link.href}
-                    className="text-gray-300 hover:text-violet-400 transition-colors duration-300 flex items-center group"
+                    className="group flex items-center justify-between p-2 sm:p-2.5 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 hover:bg-gray-800 dark:hover:bg-neutral-800 border border-gray-700/60 dark:border-neutral-700/60 hover:border-blue-500/40 transition-all duration-300"
                   >
-                    <span className="w-1 h-1 bg-violet-500 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    {link.name}
+                    <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                      <div className="p-1.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
+                        <IconComponent size={13} />
+                      </div>
+                      <span className="text-xs sm:text-sm text-gray-300 dark:text-neutral-300 group-hover:text-white transition-colors truncate font-medium">
+                        {link.name}
+                      </span>
+                    </div>
+                    <ArrowRight
+                      size={12}
+                      className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 rtl:translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1 rtl:rotate-180"
+                    />
                   </a>
-                </li>
-              ))}
-            </ul>
+                );
+              })}
+            </div>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-violet-400">
-              Services
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-400 flex items-center gap-2">
+              <Sparkles size={18} className="text-blue-400" />
+              {t("footer.services")}
             </h4>
-            <ul className="space-y-3">
-              {services.map((service, index) => (
-                <li key={index} className="text-gray-300 flex items-start">
-                  <span className="w-1.5 h-1.5 bg-violet-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  {service}
-                </li>
-              ))}
-            </ul>
+            <div className="p-3 sm:p-4 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 border border-gray-700/60 dark:border-neutral-700/60 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2.5 sm:gap-3">
+              {services.map((service, index) => {
+                const IconComponent = service.icon;
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2.5 sm:gap-3 text-gray-300 dark:text-neutral-300 group/item hover:text-white transition-colors"
+                  >
+                    <div className="p-1.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300 flex-shrink-0">
+                      <IconComponent size={13} />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium truncate">
+                      {service.name}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-violet-400">
-              Get In Touch
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-400 flex items-center gap-2">
+              <Send size={18} className="text-blue-400" />
+              {t("footer.contactInfo")}
             </h4>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <Mail size={20} className="text-violet-400 mt-0.5" />
-                <div>
-                  <p className="text-gray-300 text-sm">Email</p>
-                  <a
-                    href="mailto:rajivsharma93056@gmail.com"
-                    className="text-white hover:text-violet-300 transition-colors text-sm"
-                  >
-                    rajivsharma93056@gmail.com
-                  </a>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 sm:gap-2.5">
+              {/* Email Card */}
+              <a
+                href="mailto:rajivsharma93056@gmail.com"
+                className="group flex items-center justify-between p-2 sm:p-2.5 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 hover:bg-gray-800 dark:hover:bg-neutral-800 border border-gray-700/60 dark:border-neutral-700/60 hover:border-blue-500/40 transition-all duration-300"
+              >
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                  <div className="p-1.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
+                    <Mail size={13} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[9px] sm:text-[10px] uppercase font-semibold tracking-wider text-gray-400 dark:text-neutral-400 group-hover:text-blue-300 transition-colors">
+                      Email
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-200 dark:text-neutral-200 group-hover:text-white truncate font-medium">
+                      rajivsharma93056@gmail.com
+                    </p>
+                  </div>
                 </div>
-              </div>
+                <ArrowRight
+                  size={12}
+                  className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1"
+                />
+              </a>
 
-              <div className="flex items-start space-x-3">
-                <Phone size={20} className="text-violet-400 mt-0.5" />
-                <div>
-                  <p className="text-gray-300 text-sm">Phone</p>
-                  <a
-                    href="tel:+919305635022"
-                    className="text-white hover:text-violet-300 transition-colors text-sm"
-                  >
-                    +91 9305635022
-                  </a>
+              {/* Phone Card */}
+              <a
+                href="tel:+919305635022"
+                className="group flex items-center justify-between p-2 sm:p-2.5 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 hover:bg-gray-800 dark:hover:bg-neutral-800 border border-gray-700/60 dark:border-neutral-700/60 hover:border-blue-500/40 transition-all duration-300"
+              >
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                  <div className="p-1.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
+                    <Phone size={13} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[9px] sm:text-[10px] uppercase font-semibold tracking-wider text-gray-400 dark:text-neutral-400 group-hover:text-blue-300 transition-colors">
+                      Phone
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-200 dark:text-neutral-200 group-hover:text-white truncate font-medium">
+                      +91 9305635022
+                    </p>
+                  </div>
                 </div>
-              </div>
+                <ArrowRight
+                  size={12}
+                  className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 rtl:translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1 rtl:rotate-180"
+                />
+              </a>
 
-              <div className="flex items-start space-x-3">
-                <MapPin size={20} className="text-violet-400 mt-0.5" />
-                <div>
-                  <p className="text-gray-300 text-sm">Location</p>
-                  <p className="text-white text-sm">Noida, Uttar Pradesh, India</p>
+              {/* Location Card */}
+              <div className="group flex items-center gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 hover:bg-gray-800 dark:hover:bg-neutral-800 border border-gray-700/60 dark:border-neutral-700/60 hover:border-blue-500/40 transition-all duration-300 cursor-default">
+                <div className="p-1.5 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 flex-shrink-0">
+                  <MapPin size={13} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[10px] uppercase font-semibold tracking-wider text-gray-400 dark:text-neutral-400">
+                    Location
+                  </p>
+                  <p className="text-xs sm:text-sm text-gray-200 dark:text-neutral-200 truncate font-medium">
+                    Noida, Uttar Pradesh, India
+                  </p>
                 </div>
               </div>
             </div>
@@ -179,54 +249,13 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Newsletter Section */}
-      {/* <div className="border-t border-gray-800 dark:border-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-4 md:mb-0 text-center md:text-left">
-              <h4 className="text-lg font-semibold mb-2 text-violet-400">
-                Let&apos;s Connect & Collaborate
-              </h4>
-              <p className="text-gray-300">
-                Ready to discuss your next project or explore collaboration
-                opportunities?
-              </p>
-            </div>
-            <div className="flex space-x-3 sm:space-x-4">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-700 active:scale-95 shadow-md hover:shadow-lg flex-shrink-0"
-              >
-                <MessageCircle size={16} />
-                Let&apos;s Connect
-              </a>
-              <a
-                href="/Rajiv-Sharma-Resume-2025.pdf"
-                download
-                className="inline-flex items-center gap-2 border border-violet-600 text-violet-400 px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-violet-600 hover:text-white active:scale-95 flex-shrink-0"
-              >
-                <Download size={16} />
-                Download CV
-              </a>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       {/* Copyright */}
-      <div className="border-t border-gray-800 dark:border-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-gray-400 text-sm">
-              © {currentYear} Rajiv Sharma. All rights reserved.
+      <div className="border-t border-neutral-800/80">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex items-center justify-center">
+            <p className="text-neutral-400 text-xs sm:text-sm text-center">
+              © {currentYear} Rajiv Sharma. {t("footer.allRightsReserved")}
             </p>
-            <div className="flex items-center mt-4 md:mt-0">
-              <p className="text-gray-400 text-sm flex items-center gap-1">
-                Made with
-                <Heart size={14} className="text-red-500 fill-current" />
-                by Rajiv Sharma
-              </p>
-            </div>
           </div>
         </div>
       </div>

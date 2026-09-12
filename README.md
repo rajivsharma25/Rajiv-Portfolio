@@ -22,6 +22,7 @@ A modern, high-performance personal portfolio website built to showcase my skill
 - **Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Theme**: [next-themes](https://github.com/pacocoursey/next-themes)
 - **Linting**: ESLint
 
 ## 🚀 Getting Started
@@ -75,14 +76,13 @@ Follow these steps to set up the project locally on your machine.
 │   ├── globals.css       # Global styles & Tailwind directives
 │   ├── layout.js         # Root layout with ThemeProvider
 │   └── page.js           # Main Entry page
-├── components/           # Reusable UI components
-│   ├── Contact.js        # Contact form logic
-│   ├── Footer.js         # Site footer
-│   ├── Header.js         # Navigation & Theme toggle
-│   ├── Hero.js           # Hero section
+├── components/           # Reusable UI components (.jsx)
+│   ├── theme-provider.jsx# ThemeProvider wrapper (next-themes)
+│   ├── Contact.jsx       # Contact form logic
+│   ├── Footer.jsx        # Site footer
+│   ├── Header.jsx        # Navigation & Theme toggle
+│   ├── Hero.jsx          # Hero section
 │   └── ...
-├── context/              # React Context wrappers
-│   └── ThemeContext.js   # Theme management logic
 ├── public/               # Static assets (images, Resume PDF)
 └── package.json          # Project dependencies and scripts
 ```

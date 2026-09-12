@@ -1,0 +1,384 @@
+{
+  "nav": {
+    "about": "About",
+    "aboutDesc": "Professional background & summary",
+    "skills": "Skills",
+    "skillsDesc": "Tech stack & tools",
+    "experiences": "Experiences",
+    "experiencesDesc": "Work history & milestones",
+    "projects": "Projects",
+    "projectsDesc": "Featured apps & live demos",
+    "certifications": "Certifications",
+    "certificationsDesc": "Credentials & achievements",
+    "contact": "Contact",
+    "contactDesc": "Get in touch with me",
+    "available": "Available for Work"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Rajiv Sharma",
+    "developerSuffix": "Developer",
+    "roles": [
+      "Frontend",
+      "Web",
+      "ReactJS",
+      "Software"
+    ],
+    "description": "A software developer dedicated to building high-performance, scalable, and responsive web applications. Specializing in React, Next.js, and modern software development practices to deliver clean, robust digital solutions.",
+    "viewProjects": "View My Projects",
+    "getInTouch": "Get In Touch"
+  },
+  "about": {
+    "badge": "Developer Profile",
+    "heading": "About",
+    "headingHighlight": "Me",
+    "subheading": "Get to know my journey, engineering focus, and core technical background",
+    "roleTitle": "Software Developer",
+    "p1": "As a <strong class='text-neutral-900 dark:text-white font-semibold'>Software Developer</strong>, I specialize in building robust, performant web applications leveraging the modern capabilities of <strong class='text-neutral-900 dark:text-white font-semibold'>React.js</strong> and <strong class='text-neutral-900 dark:text-white font-semibold'>Next.js</strong>.",
+    "p2": "I focus on developing clean, scalable client-side architectures, integrating complex REST APIs, and maintaining reliable state management systems. My dedication to frontend performance optimization, accessibility standards (a11y), and modular design ensures digital products are technically sound and intuitive.",
+    "p3": "Driven by curiosity and a problem-solving mindset, I continually explore emerging web technologies and modern architectural patterns to deliver seamless user experiences.",
+    "location": "Location",
+    "locationVal": "Greater Noida, UP",
+    "education": "Education",
+    "educationVal": "B.Tech CSE (2024)",
+    "experience": "Experience",
+    "experienceVal": "1+ Years",
+    "specialization": "Specialization",
+    "specializationVal": "Software Development",
+    "keyHighlights": "Key Highlights",
+    "fact1Title": "1+ Years Experience",
+    "fact1Desc": "Developing scalable, high-performance web applications",
+    "fact2Title": "AWS Certified Cloud Practitioner",
+    "fact2Desc": "Amazon Web Services cloud architecture & core infrastructure",
+    "fact3Title": "6+ Deployed Web Projects",
+    "fact3Desc": "Production-ready apps spanning e-commerce, healthcare & booking",
+    "fact4Title": "B.Tech CSE Graduate",
+    "fact4Desc": "Computer Science & Engineering graduate (CGPA: 7.56/10)"
+  },
+  "skills": {
+    "heading": "Technical",
+    "headingHighlight": "Skills",
+    "subheading": "Comprehensive technical expertise across modern frontend and web technologies",
+    "cat1": "Languages & Web Technologies",
+    "cat2": "Frameworks & Libraries",
+    "cat3": "Tools & Platforms",
+    "coreCapabilities": "Core Capabilities",
+    "coreCapabilitiesSub": "Foundational computer science & engineering principles",
+    "core1Name": "Data Structures & Algorithms",
+    "core1Desc": "Problem Solving & Algorithmic Thinking",
+    "core2Name": "OOP",
+    "core2Desc": "Object-Oriented Programming",
+    "core3Name": "Responsive Design",
+    "core3Desc": "Mobile-First Development"
+  },
+  "experience": {
+    "heading": "Work",
+    "headingHighlight": "Experience",
+    "subheading": "A timeline of my professional roles, milestones, and technical achievements",
+    "trajectory": "Career Trajectory",
+    "trajectorySub": "Milestones & Experience",
+    "present": "Present",
+    "fullTime": "Full-time",
+    "internship": "Internship",
+    "keyAchievements": "Key Contributions & Responsibilities:",
+    "roles": {
+      "aroha": {
+        "title": "Software Developer",
+        "company": "ArohaTech IT Services",
+        "period": "Jun 2026 - Present",
+        "type": "Full-time",
+        "location": "Greater Noida, Uttar Pradesh",
+        "points": [
+          "Working as a Software Developer at Arohatech IT Services Pvt. Ltd., contributing to software development and project activities.",
+          "Developing and maintaining software solutions based on project requirements.",
+          "Working on assigned technical tasks and delivering project requirements.",
+          "Collaborating with team members to troubleshoot issues and implement solutions.",
+          "Following software development practices, company processes, and project requirements."
+        ]
+      },
+      "akvm": {
+        "title": "Frontend Developer",
+        "company": "AKVM Solutions",
+        "period": "Jan 2026 - Jun 2026",
+        "type": "Full-time",
+        "location": "Gurugram, India",
+        "points": [
+          "Developing scalable web solutions using React.js, Next.js, and JavaScript.",
+          "Ensuring high-quality code standards as part of the engineering team.",
+          "Building responsive user interfaces with Tailwind CSS.",
+          "Implementing modern frontend technologies to enhance application performance and user experience."
+        ]
+      },
+      "bodmas": {
+        "title": "ReactJS Developer",
+        "company": "Bodmas Education Services",
+        "period": "May 2025 - Dec 2025",
+        "type": "Full-time",
+        "location": "Noida, Uttar Pradesh",
+        "points": [
+          "Developing and maintaining modern web applications using React.js and Redux.",
+          "Building responsive and user-friendly interfaces with Tailwind CSS.",
+          "Collaborating with cross-functional teams to deliver high-quality solutions.",
+          "Implementing best practices for code quality and performance optimization."
+        ]
+      },
+      "cognifyz": {
+        "title": "Web Development Intern",
+        "company": "Cognifyz Technologies",
+        "period": "Feb 2025 - Mar 2025",
+        "type": "Internship",
+        "location": "Remote, India",
+        "points": [
+          "Built responsive web applications using modern frameworks.",
+          "Collaborated with cross-functional teams to deliver high-quality frontend solutions.",
+          "Focused on user interface design and user experience optimization.",
+          "Delivered projects with emphasis on clean code and modern development practices."
+        ]
+      },
+      "tatastrive": {
+        "title": "AWS Cloud Training",
+        "company": "TATA STRIVE",
+        "period": "Jan 2024 - Mar 2024",
+        "type": "Training Program",
+        "location": "Dasrathpuri, Delhi",
+        "points": [
+          "Comprehensive training on AWS cloud services and architecture",
+          "Hands-on experience with EC2, S3, Lambda, and other core AWS services",
+          "Learning cloud best practices and security implementations"
+        ]
+      },
+      "cetpa": {
+        "title": "Full Stack Development Internship",
+        "company": "CETPA Infotech Pvt Ltd.",
+        "period": "Jun 2023 - Aug 2023",
+        "type": "Internship",
+        "location": "Noida, Uttar Pradesh",
+        "points": [
+          "Intensive hands-on experience in full-stack web development",
+          "Built multiple projects using React.js and Node.js",
+          "Learned database management and API development",
+          "Gained practical experience in modern development tools and practices"
+        ]
+      }
+    },
+    "timeline": {
+      "aroha": "Software Developer at ArohaTech IT Services",
+      "akvm": "Frontend Developer at AKVM Solutions",
+      "bodmas": "ReactJS Developer at Bodmas Education Services",
+      "cognifyz": "Web Development Intern at Cognifyz Technologies",
+      "tatastrive": "AWS Cloud Training at TATA STRIVE",
+      "graduate": "B.Tech CSE Graduate",
+      "cetpa": "Full Stack Internship at CETPA",
+      "csJourney": "Started Computer Science Journey",
+      "year2026Present": "2026 - Present",
+      "year2026": "2026",
+      "year2025": "2025",
+      "year2024": "2024",
+      "year2023": "2023",
+      "year2020": "2020"
+    }
+  },
+  "projects": {
+    "heading": "Featured",
+    "headingHighlight": "Projects",
+    "subheading": "Showcasing my expertise in building modern, scalable web applications",
+    "tabAll": "All Projects",
+    "tabEcommerce": "E-Commerce",
+    "tabWebApps": "Web Applications",
+    "liveDemo": "Live Demo",
+    "code": "Code",
+    "active": "Active",
+    "githubBannerBadge": "Open Source & Codebases",
+    "githubBannerTitle": "Want to see more projects?",
+    "githubBannerDesc": "Explore my GitHub profile for full repository codebases, active experiments, and web application contributions.",
+    "visitGithub": "Visit GitHub Profile",
+    "items": {
+      "forever": {
+        "title": "Forever",
+        "category": "E-Commerce",
+        "description": "A comprehensive full-stack style e-commerce platform built with React and Redux featuring dynamic product catalog, filtering, persistent cart, and seamless checkout flow.",
+        "features": [
+          "Dynamic product catalog with instant search & category filtering",
+          "Persistent shopping cart with state management",
+          "Responsive, mobile-first clean user experience"
+        ]
+      },
+      "wearcraft": {
+        "title": "WearCraft",
+        "category": "Fashion Tech",
+        "description": "Modern minimalist fashion e-commerce platform built with React, Vite, and Shadcn UI with advanced sorting, size selection, and cart state management.",
+        "features": [
+          "Advanced product filtering, sorting, and size selectors",
+          "Complete cart management & order tracking system",
+          "High-performance clean UI with Shadcn components"
+        ]
+      },
+      "cravecart": {
+        "title": "CraveCart",
+        "category": "Food Delivery",
+        "description": "Dynamic food delivery application featuring restaurant discovery, curated menu browsing, real-time cart controls, and fluid responsive design.",
+        "features": [
+          "Restaurant & menu discovery with instant category search",
+          "Real-time order tracking & persistent cart management",
+          "Fast, fluid mobile-optimized responsive layout"
+        ]
+      },
+      "prescripto": {
+        "title": "Prescripto",
+        "category": "Healthcare",
+        "description": "Comprehensive doctor appointment booking system featuring specialist schedules, verified doctor profiles, patient history, and appointment reservation management.",
+        "features": [
+          "Doctor profiles with specialties, availability & ratings",
+          "Interactive appointment booking & schedule management",
+          "Clean, patient-friendly medical portal interface"
+        ]
+      },
+      "findmycollege": {
+        "title": "FindMyCollege",
+        "category": "EdTech",
+        "description": "Higher education discovery portal providing structured information on engineering college admissions, entrance exams (JEE, NEET, CAT), and course fee benchmarks across India.",
+        "features": [
+          "Comprehensive college search engine across multiple disciplines",
+          "Detailed entrance exam guides, cutoffs & admission criteria",
+          "Optimized responsive interface for students & parents"
+        ]
+      }
+    }
+  },
+  "certifications": {
+    "heading": "Licenses &",
+    "headingHighlight": "Certifications",
+    "subheading": "Industry-recognized credentials validating cloud architecture and core engineering skills",
+    "viewCredential": "View Credential",
+    "status": "Active",
+    "skillsCovered": "Key Skills Validated:",
+    "aws": {
+      "title": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "date": "2025",
+      "level": "Foundation",
+      "description": "Comprehensive certification covering AWS cloud architecture, security, compute & storage services, and cloud billing models.",
+      "skills": [
+        "Cloud Computing",
+        "AWS Services",
+        "Cloud Security",
+        "Cost Management"
+      ]
+    },
+    "sql": {
+      "title": "Introduction to SQL",
+      "issuer": "Simplilearn",
+      "date": "2023",
+      "level": "Foundation",
+      "description": "Foundation-level certification covering relational database design, query optimization, joins, indexing, and data retrieval.",
+      "skills": [
+        "Basic SQL Queries",
+        "Data Retrieval",
+        "Table Relationships",
+        "RDBMS Fundamentals"
+      ]
+    },
+    "cpp": {
+      "title": "Basics of C++",
+      "issuer": "Udemy",
+      "date": "2023",
+      "level": "Foundation",
+      "description": "Foundation in modern C++ programming covering memory management, control structures, functions, and object-oriented fundamentals.",
+      "skills": [
+        "C++ Syntax",
+        "Functions",
+        "Loops & Conditions",
+        "Object-Oriented Concepts"
+      ]
+    },
+    "education": {
+      "heading": "Academic Education",
+      "subheading": "Formal degree and senior secondary academic background",
+      "status": "Status",
+      "graduated": "Graduated",
+      "completed": "Completed",
+      "btech": {
+        "degree": "Bachelor of Technology",
+        "title": "B.Tech in Computer Science and Engineering",
+        "institution": "IMS Engineering College, Ghaziabad",
+        "year": "2020 - 2024",
+        "description": "4-Year undergraduate engineering program focused on software engineering, data structures, algorithms, and full-stack development."
+      },
+      "class12": {
+        "degree": "Senior Secondary (Class XII)",
+        "title": "CBSE Board - Science Stream (PCM)",
+        "institution": "Gyan Peethika Senior Secondary School",
+        "year": "2019",
+        "description": "Completed senior secondary education with specialization in Physics, Chemistry, and Mathematics."
+      },
+      "class10": {
+        "degree": "Secondary School (Class X)",
+        "title": "CBSE Board - Academic Excellence",
+        "institution": "Gyan Kunj Senior Secondary Academy",
+        "year": "2017",
+        "description": "Completed high school education with strong academic standing in Science, Mathematics, and Computer Applications."
+      }
+    }
+  },
+  "contact": {
+    "heading": "Get In",
+    "headingHighlight": "Touch",
+    "subheading": "Have a project in mind or want to collaborate? Feel free to reach out anytime.",
+    "directChannels": "Direct Channels",
+    "directChannelsSub": "Connect directly via your preferred platform",
+    "channels": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "linkedin": "LinkedIn",
+      "location": "Location",
+      "locationValue": "Noida, India"
+    },
+    "availability": {
+      "heading": "Availability & Terms",
+      "subheading": "Engagement models and working preferences",
+      "item1Title": "Available for Opportunities",
+      "item1Sub": "Open for full-time software engineering and freelance projects",
+      "item1Status": "Active",
+      "item2Title": "Swift Turnaround",
+      "item2Sub": "Prompt response guaranteed within 24 hours",
+      "item2Status": "< 24h",
+      "item3Title": "Global Collaboration",
+      "item3Sub": "Based in Noida, India • Comfortable with worldwide remote timezones",
+      "item3Status": "Remote"
+    },
+    "social": {
+      "heading": "Connect Socially",
+      "subheading": "Follow or send a direct ping on any network"
+    },
+    "sendEmail": "Send Me An Email",
+    "nameLabel": "Your Name",
+    "namePlaceholder": "Rajiv Sharma",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "rajiv@example.com",
+    "messageLabel": "Your Message",
+    "messagePlaceholder": "Tell me about your project, idea, or inquiry...",
+    "sending": "Sending Message...",
+    "sendMessage": "Send Message",
+    "quickResponse": "Typically responds within 24 business hours",
+    "successTitle": "Message sent successfully!",
+    "successDesc": "Thank you for reaching out. I'll get back to you soon.",
+    "errorTitle": "Failed to send message",
+    "errorDesc": "Something went wrong. Please try again.",
+    "networkError": "Network error",
+    "networkErrorDesc": "Please check your connection and try again."
+  },
+  "footer": {
+    "bio": "Software Developer dedicated to building high-performance, scalable, and responsive web applications with clean code and robust digital solutions.",
+    "quickLinks": "Quick Links",
+    "services": "Areas of Focus",
+    "contactInfo": "Contact Details",
+    "allRightsReserved": "All rights reserved.",
+    "madeWith": "Crafted with React, Next.js & Tailwind CSS"
+  },
+  "lang": {
+    "en": "English",
+    "hi": "हिंदी",
+    "ar": "العربية",
+    "switchTo": "Switch language"
+  }
+}

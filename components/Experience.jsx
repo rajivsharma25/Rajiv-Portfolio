@@ -1,33 +1,90 @@
+"use client";
 import { Briefcase, Calendar, MapPin, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } },
+};
+
+const cardFadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export default function Experience() {
+  const { t, language } = useLanguage();
   const experiences = [
     {
-      title: "Frontend Developer",
-      company: "AKVM Solutions",
-      period: "Jan 2026 - Jun 2026",
-      type: "Full-time",
-      location: "Gurugram, India",
-      description: [
-        "Developing scalable web solutions using React.js, Next.js, and JavaScript.",
-        "Ensuring high-quality code standards as part of the engineering team.",
-        "Building responsive user interfaces with Tailwind CSS.",
-        "Implementing modern frontend technologies to enhance application performance and user experience.",
+      key: "aroha",
+      title: t("experience.roles.aroha.title"),
+      company: t("experience.roles.aroha.company"),
+      period: t("experience.roles.aroha.period"),
+      type: t("experience.roles.aroha.type"),
+      location: t("experience.roles.aroha.location"),
+      description: Array.isArray(t("experience.roles.aroha.points"))
+        ? t("experience.roles.aroha.points")
+        : [
+            "Working as a Software Developer at Arohatech IT Services Pvt. Ltd., contributing to software development and project activities.",
+            "Developing and maintaining software solutions based on project requirements.",
+            "Working on assigned technical tasks and delivering project requirements.",
+            "Collaborating with team members to troubleshoot issues and implement solutions.",
+            "Following software development practices, company processes, and project requirements.",
+          ],
+      technologies: [
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "REST APIs",
+        "GSAP",
       ],
+    },
+    {
+      key: "akvm",
+      title: t("experience.roles.akvm.title"),
+      company: t("experience.roles.akvm.company"),
+      period: t("experience.roles.akvm.period"),
+      type: t("experience.roles.akvm.type"),
+      location: t("experience.roles.akvm.location"),
+      description: Array.isArray(t("experience.roles.akvm.points"))
+        ? t("experience.roles.akvm.points")
+        : [
+            "Developing scalable web solutions using React.js, Next.js, and JavaScript.",
+            "Ensuring high-quality code standards as part of the engineering team.",
+            "Building responsive user interfaces with Tailwind CSS.",
+            "Implementing modern frontend technologies to enhance application performance and user experience.",
+          ],
       technologies: ["React.js", "Next.js", "JavaScript", "Tailwind CSS", "Context API", "AXIOS", "Redux", "MUI"],
     },
     {
-      title: "ReactJS Developer",
-      company: "Bodmas Education Services",
-      period: "May 2025 - Dec 2025",
-      type: "Full-time",
-      location: "Noida, Uttar Pradesh",
-      description: [
-        "Developing and maintaining modern web applications using React.js and Redux",
-        "Building responsive and user-friendly interfaces with Tailwind CSS",
-        "Collaborating with cross-functional teams to deliver high-quality solutions",
-        "Implementing best practices for code quality and performance optimization",
-      ],
+      key: "bodmas",
+      title: t("experience.roles.bodmas.title"),
+      company: t("experience.roles.bodmas.company"),
+      period: t("experience.roles.bodmas.period"),
+      type: t("experience.roles.bodmas.type"),
+      location: t("experience.roles.bodmas.location"),
+      description: Array.isArray(t("experience.roles.bodmas.points"))
+        ? t("experience.roles.bodmas.points")
+        : [
+            "Developing and maintaining modern web applications using React.js and Redux",
+            "Building responsive and user-friendly interfaces with Tailwind CSS",
+            "Collaborating with cross-functional teams to deliver high-quality solutions",
+            "Implementing best practices for code quality and performance optimization",
+          ],
       technologies: [
         "React.js",
         "Redux",
@@ -38,17 +95,20 @@ export default function Experience() {
       ],
     },
     {
-      title: "Web Development Intern",
-      company: "Cognifyz Technologies",
-      period: "Feb 2025 - Mar 2025",
-      type: "Internship",
-      location: "Remote, India",
-      description: [
-        "Built responsive web applications using modern frameworks",
-        "Collaborated with cross-functional teams to deliver high-quality frontend solutions",
-        "Focused on user interface design and user experience optimization",
-        "Delivered projects with emphasis on clean code and modern development practices",
-      ],
+      key: "cognifyz",
+      title: t("experience.roles.cognifyz.title"),
+      company: t("experience.roles.cognifyz.company"),
+      period: t("experience.roles.cognifyz.period"),
+      type: t("experience.roles.cognifyz.type"),
+      location: t("experience.roles.cognifyz.location"),
+      description: Array.isArray(t("experience.roles.cognifyz.points"))
+        ? t("experience.roles.cognifyz.points")
+        : [
+            "Built responsive web applications using modern frameworks",
+            "Collaborated with cross-functional teams to deliver high-quality frontend solutions",
+            "Focused on user interface design and user experience optimization",
+            "Delivered projects with emphasis on clean code and modern development practices",
+          ],
       technologies: [
         "HTML",
         "Responsive CSS",
@@ -59,30 +119,36 @@ export default function Experience() {
       ],
     },
     {
-      title: "AWS Cloud Training",
-      company: "TATA STRIVE",
-      period: "Jan 2024 - Mar 2024",
-      type: "Training Program",
-      location: "Dasrathpuri, Delhi",
-      description: [
-        "Comprehensive training on AWS cloud services and architecture",
-        "Hands-on experience with EC2, S3, Lambda, and other core AWS services",
-        "Learning cloud best practices and security implementations",
-      ],
+      key: "tatastrive",
+      title: t("experience.roles.tatastrive.title"),
+      company: t("experience.roles.tatastrive.company"),
+      period: t("experience.roles.tatastrive.period"),
+      type: t("experience.roles.tatastrive.type"),
+      location: t("experience.roles.tatastrive.location"),
+      description: Array.isArray(t("experience.roles.tatastrive.points"))
+        ? t("experience.roles.tatastrive.points")
+        : [
+            "Comprehensive training on AWS cloud services and architecture",
+            "Hands-on experience with EC2, S3, Lambda, and other core AWS services",
+            "Learning cloud best practices and security implementations",
+          ],
       technologies: ["AWS", "Cloud Architecture", "EC2", "S3", "Lambda"],
     },
     {
-      title: "Full Stack Development Internship",
-      company: "CETPA Infotech Pvt Ltd.",
-      period: "Jun 2023 - Aug 2023",
-      type: "Internship",
-      location: "Noida, Uttar Pradesh",
-      description: [
-        "Intensive hands-on experience in full-stack web development",
-        "Built multiple projects using React.js and Node.js",
-        "Learned database management and API development",
-        "Gained practical experience in modern development tools and practices",
-      ],
+      key: "cetpa",
+      title: t("experience.roles.cetpa.title"),
+      company: t("experience.roles.cetpa.company"),
+      period: t("experience.roles.cetpa.period"),
+      type: t("experience.roles.cetpa.type"),
+      location: t("experience.roles.cetpa.location"),
+      description: Array.isArray(t("experience.roles.cetpa.points"))
+        ? t("experience.roles.cetpa.points")
+        : [
+            "Intensive hands-on experience in full-stack web development",
+            "Built multiple projects using React.js and Node.js",
+            "Learned database management and API development",
+            "Gained practical experience in modern development tools and practices",
+          ],
       technologies: [
         "React.js",
         "Node.js",
@@ -96,44 +162,50 @@ export default function Experience() {
 
   const timelineItems = [
     {
-      year: "2026",
-      title: "Frontend Developer at AKVM Solutions",
+      year: t("experience.timeline.year2026Present"),
+      title: t("experience.timeline.aroha"),
       type: "work",
       icon: Briefcase,
     },
     {
-      year: "2025",
-      title: "ReactJS Developer at Bodmas Education Services",
+      year: t("experience.timeline.year2026"),
+      title: t("experience.timeline.akvm"),
       type: "work",
       icon: Briefcase,
     },
     {
-      year: "2025",
-      title: "Web Development Intern at Cognifyz Technologies",
+      year: t("experience.timeline.year2025"),
+      title: t("experience.timeline.bodmas"),
+      type: "work",
+      icon: Briefcase,
+    },
+    {
+      year: t("experience.timeline.year2025"),
+      title: t("experience.timeline.cognifyz"),
       type: "internship",
       icon: Briefcase,
     },
     {
-      year: "2024",
-      title: "AWS Cloud Training at TATA STRIVE",
+      year: t("experience.timeline.year2024"),
+      title: t("experience.timeline.tatastrive"),
       type: "training",
       icon: GraduationCap,
     },
     {
-      year: "2024",
-      title: "B.Tech CSE Graduate",
+      year: t("experience.timeline.year2024"),
+      title: t("experience.timeline.graduate"),
       type: "education",
       icon: GraduationCap,
     },
     {
-      year: "2023",
-      title: "Full Stack Internship at CETPA",
+      year: t("experience.timeline.year2023"),
+      title: t("experience.timeline.cetpa"),
       type: "internship",
       icon: Briefcase,
     },
     {
-      year: "2020",
-      title: "Started Computer Science Journey",
+      year: t("experience.timeline.year2020"),
+      title: t("experience.timeline.csJourney"),
       type: "education",
       icon: GraduationCap,
     },
@@ -142,112 +214,182 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 transition-colors duration-300"
+      className="relative py-12 sm:py-16 md:py-20 px-3.5 sm:px-6 lg:px-8 bg-white dark:bg-neutral-900 transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Professional <span className="text-gradient">Experience</span>
-          </h2>
-          <div className="w-24 h-1 bg-violet-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            My journey in web development and cloud technologies
-          </p>
-        </div>
+      {/* Pure Soft Ambient Lighting */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 -left-24 w-80 h-80 bg-blue-500/6 dark:bg-blue-600/7 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 -right-24 w-80 h-80 bg-sky-500/6 dark:bg-indigo-600/7 rounded-full blur-3xl" />
+      </div>
 
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
-          {/* Timeline - Sticky Container with Border & Shadow */}
-          <div className="lg:col-span-1 lg:sticky lg:top-24">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl">
-              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-                Career Timeline
-              </h3>
-              <div className="space-y-6">
+      <div className="relative max-w-7xl mx-auto z-10">
+        <motion.div
+          className="text-center mb-8 sm:mb-12 md:mb-14"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2.5 sm:mb-4 leading-normal sm:leading-snug py-0.5">
+            {t("experience.heading")}{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent inline-block py-0.5">
+              {t("experience.headingHighlight")}
+            </span>
+          </h2>
+          <div className="w-16 sm:w-24 h-1 bg-blue-600 mx-auto mb-3.5 sm:mb-6 rounded-full"></div>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+            {t("experience.subheading")}
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+          {/* Timeline - Sticky Navigator & Trajectory */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24 z-10 self-start">
+            <motion.div
+              className="space-y-6"
+              variants={slideLeft}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+            >
+              <div className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-gray-200/80 dark:border-neutral-700/60 shadow-lg shadow-neutral-900/5 transition-all duration-300">
+              <div className="pb-4 sm:pb-5 mb-5 sm:mb-6 border-b border-gray-200/70 dark:border-neutral-700/60">
+                <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white leading-normal">
+                  {t("experience.trajectory")}
+                </h3>
+                <p className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 sm:mt-1">
+                  {t("experience.trajectorySub")}
+                </p>
+              </div>
+
+              {/* Connected Vertical Timeline Track */}
+              <div className="relative pl-7 rtl:pl-0 rtl:pr-7 space-y-4 sm:space-y-5 before:absolute before:left-[11px] rtl:before:left-auto rtl:before:right-[11px] before:top-3 before:bottom-3 before:w-[2px] before:bg-gradient-to-b before:from-blue-600 before:via-sky-400/50 before:to-neutral-200 dark:before:to-neutral-800">
                 {timelineItems.map((item, index) => {
                   const IconComponent = item.icon;
+                  const isCurrent = item.year.includes("Present") || item.year.includes("حتى الآن");
+                  const matchedExpIndex = experiences.findIndex((e) =>
+                    item.title.toLowerCase().includes(e.company.toLowerCase().split(" ")[0])
+                  );
+
                   return (
-                    <div key={index} className="flex items-start space-x-4">
+                    <a
+                      key={index}
+                      href={matchedExpIndex !== -1 ? `#exp-${matchedExpIndex}` : "#about"}
+                      className={`group/item block relative transition-all duration-200 ${
+                        matchedExpIndex !== -1 ? "cursor-pointer" : ""
+                      }`}
+                    >
+                      {/* Node on the vertical line */}
                       <div
-                        className={`p-2 rounded-full flex-shrink-0 ${
-                          item.type === "work"
-                            ? "bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400"
+                        className={`absolute -left-7 rtl:-left-auto rtl:-right-7 top-0.5 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-200 ${
+                          isCurrent
+                            ? "bg-blue-600 text-white ring-4 ring-blue-500/20 shadow-md shadow-blue-500/30"
+                            : item.type === "work"
+                            ? "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400 group-hover/item:bg-blue-600 group-hover/item:text-white"
                             : item.type === "internship"
-                            ? "bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+                            ? "bg-sky-100 text-sky-600 dark:bg-sky-900/40 dark:text-sky-400 group-hover/item:bg-sky-600 group-hover/item:text-white"
                             : item.type === "training"
-                            ? "bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
-                            : "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400"
+                            ? "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 group-hover/item:bg-indigo-600 group-hover/item:text-white"
+                            : "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400 group-hover/item:bg-neutral-700 group-hover/item:text-white"
                         }`}
                       >
-                        <IconComponent size={16} />
+                        <IconComponent size={12} />
                       </div>
-                      <div>
-                        <div className="text-sm font-semibold text-violet-600 dark:text-violet-400">
-                          {item.year}
+
+                      <div className="pl-1 rtl:pl-0 rtl:pr-1">
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-[11px] sm:text-xs font-bold ${
+                              isCurrent
+                                ? "text-blue-600 dark:text-blue-400"
+                                : "text-neutral-500 dark:text-neutral-400"
+                            }`}
+                          >
+                            {item.year}
+                          </span>
                         </div>
-                        <div className="text-gray-700 dark:text-gray-200 leading-snug">
+                        <div className="text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 group-hover/item:text-blue-600 dark:group-hover/item:text-blue-400 transition-colors leading-normal mt-0.5">
                           {item.title}
                         </div>
                       </div>
-                    </div>
+                    </a>
                   );
                 })}
               </div>
             </div>
-          </div>
+          </motion.div>
+        </div>
 
-          {/* Experience Details */}
-          <div className="lg:col-span-2 space-y-6">
+          {/* Experience Details - Modern Cards Stream */}
+          <motion.div
+            className="lg:col-span-8 space-y-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.05 }}
+          >
             {experiences.map((exp, index) => (
-              <div
+              <motion.div
+                id={`exp-${index}`}
                 key={index}
-                className="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-8 border border-violet-100 dark:border-gray-600 transition-all duration-300 hover:shadow-xl"
+                variants={cardFadeUp}
+                className="rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl border border-gray-200/80 dark:border-neutral-700/60 hover:border-gray-300 dark:hover:border-neutral-600 shadow-sm hover:shadow-md transition-all duration-300 scroll-mt-28"
               >
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
                   <div>
-                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                    <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white mb-1 leading-normal">
                       {exp.title}
                     </h3>
-                    <p className="text-violet-600 dark:text-violet-400 font-medium text-lg">
+                    <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm sm:text-base">
                       {exp.company}
                     </p>
                   </div>
-                  <div className="text-left md:text-right mt-2 md:mt-0">
-                    <div className="flex items-center md:justify-end text-gray-600 dark:text-gray-300 font-medium mb-1">
-                      <Calendar size={16} className="mr-2" />
-                      {exp.period}
+
+                  {/* Metadata Badges */}
+                  <div className="flex flex-wrap md:flex-col md:items-end rtl:md:items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400">
+                    <div className="inline-flex items-center gap-1.5 font-medium bg-white dark:bg-neutral-900/80 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-gray-200/70 dark:border-neutral-700/60 shadow-xs">
+                      <Calendar size={13} className="text-blue-600 dark:text-blue-400" />
+                      <span>{exp.period}</span>
                     </div>
-                    <div className="flex items-center md:justify-end text-sm text-gray-500 dark:text-gray-400">
-                      <MapPin size={14} className="mr-1" />
-                      {exp.type} • {exp.location}
+                    <div className="inline-flex items-center gap-1.5 bg-white/80 dark:bg-neutral-900/60 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-gray-200/60 dark:border-neutral-700/40">
+                      <MapPin size={12} className="text-sky-500" />
+                      <span>{exp.location}</span>
+                      <span className="text-neutral-300 dark:text-neutral-600">•</span>
+                      <span>{exp.type}</span>
                     </div>
                   </div>
                 </div>
 
-                <ul className="space-y-3 mb-6">
+                {/* Bullet points */}
+                <ul className="space-y-2.5 sm:space-y-3 mb-5 sm:mb-6">
                   {exp.description.map((desc, descIndex) => (
                     <li
                       key={descIndex}
-                      className="flex items-start text-gray-600 dark:text-gray-300"
+                      className="flex items-start gap-2.5 sm:gap-3 text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm md:text-[15px] leading-relaxed"
                     >
-                      <span className="w-2 h-2 bg-violet-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="leading-relaxed">{desc}</span>
+                      <span className="mt-1.5 sm:mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 ring-4 ring-blue-500/10 dark:ring-blue-400/20"></span>
+                      <span>{desc}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-white dark:bg-gray-600 text-violet-700 dark:text-violet-200 rounded-full text-sm font-medium border border-violet-200 dark:border-gray-500 transition-all duration-300 hover:bg-violet-100 dark:hover:bg-gray-500"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                {/* Tech stack tags */}
+                <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70 dark:border-neutral-700/60">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {exp.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-2.5 sm:px-3 py-1 bg-white dark:bg-neutral-900/80 text-neutral-700 dark:text-neutral-200 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium border border-gray-200/70 dark:border-neutral-700/60 transition-all duration-200 hover:border-blue-500/40 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 shadow-2xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
