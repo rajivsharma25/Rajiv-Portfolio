@@ -17,12 +17,15 @@ import {
   Github,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [mounted, setMounted] = useState(false);
@@ -130,17 +133,20 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-1.5 p-1.5 lg:p-2 bg-gray-100/80 dark:bg-neutral-900/80 backdrop-blur-md border border-gray-200/70 dark:border-neutral-800/80 rounded-full shadow-inner">
             {navItems.map((item, index) => {
               const IconComponent = item.icon;
-              const isActive = activeSection === item.href.replace("#", "");
+              const targetHref = isHomePage ? item.href : `/${item.href}`;
+              const isActive = isHomePage && activeSection === item.href.replace("#", "");
               return (
                 <Link
                   key={index}
-                  href={item.href}
+                  href={targetHref}
                   onClick={(e) => {
-                    setActiveSection(item.href.replace("#", ""));
-                    isScrollingRef.current = true;
-                    setTimeout(() => {
-                      isScrollingRef.current = false;
-                    }, 800); // Wait for smooth scroll to finish
+                    if (isHomePage) {
+                      setActiveSection(item.href.replace("#", ""));
+                      isScrollingRef.current = true;
+                      setTimeout(() => {
+                        isScrollingRef.current = false;
+                      }, 800);
+                    }
                   }}
                   className={`relative flex items-center gap-2 px-3.5 py-2 rounded-full text-sm transition-colors duration-200 z-10 ${isActive
                     ? "text-blue-600 dark:text-blue-400 font-semibold"
@@ -241,15 +247,19 @@ export default function Header() {
             <div className="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl rounded-2xl border border-gray-200/80 dark:border-neutral-800/80 p-3 shadow-2xl space-y-1">
               {navItems.map((item, index) => {
                 const IconComponent = item.icon;
+                const targetHref = isHomePage ? item.href : `/${item.href}`;
+                const isActive = isHomePage && activeSection === item.href.replace("#", "");
                 return (
                   <Link
                     key={index}
-                    href={item.href}
+                    href={targetHref}
                     onClick={() => {
-                      setActiveSection(item.href.replace("#", ""));
+                      if (isHomePage) {
+                        setActiveSection(item.href.replace("#", ""));
+                      }
                       setIsMenuOpen(false);
                     }}
-                    className={`group flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] ${activeSection === item.href.replace("#", "")
+                    className={`group flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] ${isActive
                       ? "bg-blue-50/90 dark:bg-neutral-800 text-blue-600 dark:text-blue-400 font-semibold"
                       : "hover:bg-blue-50/70 dark:hover:bg-neutral-800/70 text-gray-800 dark:text-neutral-200"
                       }`}

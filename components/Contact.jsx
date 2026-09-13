@@ -370,94 +370,94 @@ export default function Contact() {
               viewport={{ once: true, amount: 0.1 }}
             >
               <div className="bg-white dark:bg-neutral-900/90 rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 shadow-sm border border-gray-200/80 dark:border-neutral-800/80 transition-all duration-300">
-              {/* Form Title & Intro */}
-              <div className="pb-4 sm:pb-5 mb-5 sm:mb-6 border-b border-gray-100 dark:border-neutral-800/80">
-                <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                  <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-2 sm:gap-2.5">
-                    <Send size={18} className="text-blue-600 dark:text-blue-400" />
-                    {t("contact.sendEmail")}
-                  </h3>
+                {/* Form Title & Intro */}
+                <div className="pb-4 sm:pb-5 mb-5 sm:mb-6 border-b border-gray-100 dark:border-neutral-800/80">
+                  <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+                    <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-2 sm:gap-2.5">
+                      <Send size={18} className="text-blue-600 dark:text-blue-400" />
+                      {t("contact.sendEmail")}
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
+                    {t("contact.quickResponse")}
+                  </p>
                 </div>
-                <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
-                  {t("contact.quickResponse")}
-                </p>
-              </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-                <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
-                    >
-                      <User size={13} className="text-blue-600 dark:text-blue-400" />
-                      {t("contact.nameLabel")} <span className="text-blue-600">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                      placeholder={t("contact.namePlaceholder")}
-                    />
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
+                      >
+                        <User size={13} className="text-blue-600 dark:text-blue-400" />
+                        {t("contact.nameLabel")} <span className="text-blue-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+                        placeholder={t("contact.namePlaceholder")}
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
+                      >
+                        <AtSign size={13} className="text-blue-600 dark:text-blue-400" />
+                        {t("contact.emailLabel")} <span className="text-blue-600">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+                        placeholder={t("contact.emailPlaceholder")}
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label
-                      htmlFor="email"
+                      htmlFor="message"
                       className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
                     >
-                      <AtSign size={13} className="text-blue-600 dark:text-blue-400" />
-                      {t("contact.emailLabel")} <span className="text-blue-600">*</span>
+                      <MessageSquare size={13} className="text-blue-600 dark:text-blue-400" />
+                      {t("contact.messageLabel")} <span className="text-blue-600">*</span>
                     </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
+                    <textarea
+                      id="message"
+                      name="message"
                       required
-                      value={formData.email}
+                      value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                      placeholder={t("contact.emailPlaceholder")}
-                    />
+                      rows={5}
+                      className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 resize-none bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
+                      placeholder={t("contact.messagePlaceholder")}
+                    ></textarea>
                   </div>
-                </div>
 
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-semibold text-xs sm:text-sm md:text-base transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <MessageSquare size={13} className="text-blue-600 dark:text-blue-400" />
-                    {t("contact.messageLabel")} <span className="text-blue-600">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5}
-                    className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 resize-none bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                    placeholder={t("contact.messagePlaceholder")}
-                  ></textarea>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2.5 sm:py-3 px-4 sm:px-6 rounded-full font-semibold text-xs sm:text-sm md:text-base transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  <Send size={15} />
-                  <span>
-                    {isSubmitting ? t("contact.sending") : t("contact.sendMessage")}
-                  </span>
-                </button>
-              </form>
+                    <Send size={15} />
+                    <span>
+                      {isSubmitting ? t("contact.sending") : t("contact.sendMessage")}
+                    </span>
+                  </button>
+                </form>
               </div>
             </motion.div>
           </div>

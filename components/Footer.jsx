@@ -23,6 +23,7 @@ import {
   Award,
   Send,
   ArrowRight,
+  BookOpen,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "@/context/LanguageContext";
@@ -32,12 +33,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: t("nav.about"), href: "#about", icon: User },
-    { name: t("nav.skills"), href: "#skills", icon: Terminal },
-    { name: t("nav.experiences"), href: "#experience", icon: Briefcase },
-    { name: t("nav.projects"), href: "#projects", icon: FolderGit2 },
-    { name: t("nav.certifications"), href: "#certifications", icon: Award },
-    { name: t("nav.contact"), href: "#contact", icon: Send },
+    { name: t("nav.about"), href: "/#about", icon: User },
+    { name: t("nav.skills"), href: "/#skills", icon: Terminal },
+    { name: t("nav.experiences"), href: "/#experience", icon: Briefcase },
+    { name: t("nav.projects"), href: "/#projects", icon: FolderGit2 },
+    { name: t("nav.certifications"), href: "/#certifications", icon: Award },
+    { name: t("nav.contact"), href: "/#contact", icon: Send },
+    { name: t("nav.blogs") || "Blogs", href: "/blogs", icon: BookOpen },
   ];
 
   const socialLinks = [
@@ -126,7 +128,7 @@ export default function Footer() {
               {quickLinks.map((link, index) => {
                 const IconComponent = link.icon;
                 return (
-                  <a
+                  <Link
                     key={index}
                     href={link.href}
                     className="group flex items-center justify-between p-2 sm:p-2.5 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 hover:bg-gray-800 dark:hover:bg-neutral-800 border border-gray-700/60 dark:border-neutral-700/60 hover:border-blue-500/40 transition-all duration-300"
@@ -143,7 +145,7 @@ export default function Footer() {
                       size={12}
                       className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 rtl:translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1 rtl:rotate-180"
                     />
-                  </a>
+                  </Link>
                 );
               })}
             </div>

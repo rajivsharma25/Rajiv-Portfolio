@@ -43,10 +43,10 @@ export default function Projects() {
       features: Array.isArray(t("projects.items.forever.features"))
         ? t("projects.items.forever.features")
         : [
-            "Dynamic product catalog with instant search & category filtering",
-            "Persistent shopping cart with state management",
-            "Responsive, mobile-first clean user experience",
-          ],
+          "Dynamic product catalog with instant search & category filtering",
+          "Persistent shopping cart with state management",
+          "Responsive, mobile-first clean user experience",
+        ],
       demoUrl: "https://forever-ecommerce-website-rajiv-sharma.vercel.app/",
       githubUrl: "https://github.com/rajivsharma25/Forever-Ecommerce-Website",
       status: t("projects.active"),
@@ -68,10 +68,10 @@ export default function Projects() {
       features: Array.isArray(t("projects.items.wearcraft.features"))
         ? t("projects.items.wearcraft.features")
         : [
-            "Advanced product filtering, sorting, and size selectors",
-            "Complete cart management & order tracking system",
-            "High-performance clean UI with Shadcn components",
-          ],
+          "Advanced product filtering, sorting, and size selectors",
+          "Complete cart management & order tracking system",
+          "High-performance clean UI with Shadcn components",
+        ],
       demoUrl: "https://wearcrafts.vercel.app/",
       githubUrl: "https://github.com/rajivsharma25/wearcraft",
       status: t("projects.active"),
@@ -87,10 +87,10 @@ export default function Projects() {
       features: Array.isArray(t("projects.items.cravecart.features"))
         ? t("projects.items.cravecart.features")
         : [
-            "Restaurant & menu discovery with instant category search",
-            "Real-time order tracking & persistent cart management",
-            "Fast, fluid mobile-optimized responsive layout",
-          ],
+          "Restaurant & menu discovery with instant category search",
+          "Real-time order tracking & persistent cart management",
+          "Fast, fluid mobile-optimized responsive layout",
+        ],
       demoUrl:
         "https://cravecart-food-delivery-website-rajivsharma25s-projects.vercel.app/",
       githubUrl:
@@ -108,10 +108,10 @@ export default function Projects() {
       features: Array.isArray(t("projects.items.prescripto.features"))
         ? t("projects.items.prescripto.features")
         : [
-            "Doctor profiles with specialties, availability & ratings",
-            "Interactive appointment booking & schedule management",
-            "Clean, patient-friendly medical portal interface",
-          ],
+          "Doctor profiles with specialties, availability & ratings",
+          "Interactive appointment booking & schedule management",
+          "Clean, patient-friendly medical portal interface",
+        ],
       demoUrl:
         "https://prescripto-online-doctor-appointment-pl-rajivsharma25s-projects.vercel.app/",
       githubUrl:
@@ -135,10 +135,10 @@ export default function Projects() {
       features: Array.isArray(t("projects.items.findmycollege.features"))
         ? t("projects.items.findmycollege.features")
         : [
-            "Comprehensive college search engine across multiple disciplines",
-            "Detailed entrance exam guides, cutoffs & admission criteria",
-            "Optimized responsive interface for students & parents",
-          ],
+          "Comprehensive college search engine across multiple disciplines",
+          "Detailed entrance exam guides, cutoffs & admission criteria",
+          "Optimized responsive interface for students & parents",
+        ],
       demoUrl: "https://findmycolleges.vercel.app/",
       githubUrl: "https://github.com/rajivsharma25/FindMyCollege",
       status: t("projects.active"),
@@ -214,11 +214,10 @@ export default function Projects() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`relative px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5 sm:gap-2 cursor-pointer transition-colors duration-150 shrink-0 whitespace-nowrap ${
-                    isActive
+                  className={`relative px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5 sm:gap-2 cursor-pointer transition-colors duration-150 shrink-0 whitespace-nowrap ${isActive
                       ? "text-white"
                       : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
-                  }`}
+                    }`}
                 >
                   {/* Fluid sliding background */}
                   {isActive && (
@@ -230,11 +229,10 @@ export default function Projects() {
                   )}
                   <span className="relative z-10">{tab.label}</span>
                   <span
-                    className={`relative z-10 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold ${
-                      isActive
+                    className={`relative z-10 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold ${isActive
                         ? "bg-white/20 text-white"
                         : "bg-gray-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
-                    }`}
+                      }`}
                   >
                     {tab.count}
                   </span>
@@ -254,108 +252,108 @@ export default function Projects() {
             animate="show"
             exit="exit"
           >
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={index}
-              variants={cardFadeUp}
-              className="project-card group bg-white dark:bg-neutral-900/90 rounded-2xl sm:rounded-3xl border border-gray-200/80 dark:border-neutral-800/80 hover:border-blue-500/40 dark:hover:border-blue-500/40 shadow-sm hover:shadow-xl transition-[border-color,box-shadow] duration-200 flex flex-col overflow-hidden"
-            >
-              {/* Project Image Preview */}
-              <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} screenshot`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
-                  loading="lazy"
-                />
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={index}
+                variants={cardFadeUp}
+                className="project-card group bg-white dark:bg-neutral-900/90 rounded-2xl sm:rounded-3xl border border-gray-200/80 dark:border-neutral-800/80 hover:border-blue-500/40 dark:hover:border-blue-500/40 shadow-sm hover:shadow-xl transition-[border-color,box-shadow] duration-200 flex flex-col overflow-hidden"
+              >
+                {/* Project Image Preview */}
+                <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
 
-                {/* Bottom gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-black/20 opacity-60 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none" />
+                  {/* Bottom gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-black/20 opacity-60 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none" />
 
-                {/* Status Badge */}
-                <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 z-10">
-                  <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    {project.status}
-                  </span>
-                </div>
-
-                {/* Category Badge */}
-                <div className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 z-10">
-                  <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-xs">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Content */}
-              <div className="p-4 sm:p-6 flex flex-col flex-1">
-                {/* Title */}
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-normal">
-                  {project.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
-                  {project.description}
-                </p>
-
-                {/* Core Feature Highlights */}
-                <div className="space-y-1 sm:space-y-1.5 mb-3 sm:mb-4 p-2.5 sm:p-3 bg-gray-50/80 dark:bg-neutral-950/60 rounded-xl sm:rounded-2xl border border-gray-100 dark:border-neutral-800/60">
-                  {project.features.map((feature, fIndex) => (
-                    <div
-                      key={fIndex}
-                      className="flex items-start gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-300"
-                    >
-                      <CheckCircle2
-                        size={13}
-                        className="text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0"
-                      />
-                      <span className="line-clamp-1">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tech Stack Pills */}
-                <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6 mt-auto">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/40 rounded-full text-[11px] sm:text-xs font-medium"
-                    >
-                      {tech}
+                  {/* Status Badge */}
+                  <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 z-10">
+                    <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      {project.status}
                     </span>
-                  ))}
+                  </div>
+
+                  {/* Category Badge */}
+                  <div className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 z-10">
+                    <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-xs">
+                      {project.category}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center gap-2 sm:gap-2.5 pt-3.5 sm:pt-4 border-t border-gray-100 dark:border-neutral-800/80">
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
-                  >
-                    <ExternalLink size={14} />
-                    <span>{t("projects.liveDemo")}</span>
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-800 dark:text-neutral-200 border border-gray-200/60 dark:border-neutral-700/60 py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
-                    title="View Source Code on GitHub"
-                  >
-                    <Github size={14} />
-                    <span>{t("projects.code")}</span>
-                  </a>
+                {/* Card Content */}
+                <div className="p-4 sm:p-6 flex flex-col flex-1">
+                  {/* Title */}
+                  <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-normal">
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
+                    {project.description}
+                  </p>
+
+                  {/* Core Feature Highlights */}
+                  <div className="space-y-1 sm:space-y-1.5 mb-3 sm:mb-4 p-2.5 sm:p-3 bg-gray-50/80 dark:bg-neutral-950/60 rounded-xl sm:rounded-2xl border border-gray-100 dark:border-neutral-800/60">
+                    {project.features.map((feature, fIndex) => (
+                      <div
+                        key={fIndex}
+                        className="flex items-start gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-300"
+                      >
+                        <CheckCircle2
+                          size={13}
+                          className="text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0"
+                        />
+                        <span className="line-clamp-1">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6 mt-auto">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/40 rounded-full text-[11px] sm:text-xs font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-2 sm:gap-2.5 pt-3.5 sm:pt-4 border-t border-gray-100 dark:border-neutral-800/80">
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
+                    >
+                      <ExternalLink size={14} />
+                      <span>{t("projects.liveDemo")}</span>
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-800 dark:text-neutral-200 border border-gray-200/60 dark:border-neutral-700/60 py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
+                      title="View Source Code on GitHub"
+                    >
+                      <Github size={14} />
+                      <span>{t("projects.code")}</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
         </AnimatePresence>
 
         {/* GitHub Call to Action Bento Banner */}
