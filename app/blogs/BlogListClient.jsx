@@ -10,10 +10,7 @@ import {
   Clock,
   ArrowRight,
   Sparkles,
-  Tag,
   BookOpen,
-  Filter,
-  CheckCircle2,
   Send,
 } from "lucide-react";
 
@@ -221,7 +218,7 @@ export default function BlogListClient({ blogs, categories }) {
                 >
                   <Link
                     href={`/blogs/${blog.slug}`}
-                    className="group flex flex-col justify-between h-full rounded-3xl bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800/80 p-6 sm:p-7 shadow-xs hover:shadow-xl hover:border-blue-500/50 dark:hover:border-blue-500/40 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md cursor-pointer block"
+                    className="group flex flex-col justify-between h-full rounded-3xl bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800/80 p-6 sm:p-7 shadow-xs hover:shadow-xl hover:border-blue-500/50 dark:hover:border-blue-500/40 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md cursor-pointer"
                   >
                     <div>
                       {/* Top Metadata */}
