@@ -111,11 +111,11 @@ export default function BlogListClient({ blogs, categories }) {
 
           <Link
             href={`/blogs/${featuredBlog.slug}`}
-            className="group block relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-900/20 via-neutral-900/60 to-indigo-950/30 border border-blue-500/30 dark:border-neutral-800 p-6 sm:p-8 md:p-10 shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-blue-500/60 hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer"
+            className="group block relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-50/90 via-white/95 to-indigo-50/80 dark:from-blue-950/30 dark:via-neutral-900/70 dark:to-indigo-950/40 border border-blue-200/80 dark:border-blue-500/30 p-6 sm:p-8 md:p-10 shadow-lg shadow-blue-500/5 dark:shadow-xl backdrop-blur-xl transition-all duration-300 hover:border-blue-400 dark:hover:border-blue-500/60 hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer"
           >
-            <div className="absolute -top-24 -right-24 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-600/30 transition-all duration-500" />
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-blue-500/10 dark:bg-blue-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 dark:group-hover:bg-blue-600/30 transition-all duration-500" />
 
-            <div className="relative z-10 max-w-4xl">
+            <div className="relative z-10">
               <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mb-3">
                 <span className="px-3 py-1 rounded-full bg-blue-600 text-white font-semibold text-xs shadow-xs">
                   {featuredBlog.category}
