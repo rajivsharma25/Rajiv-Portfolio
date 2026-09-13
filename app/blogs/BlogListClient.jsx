@@ -70,7 +70,7 @@ export default function BlogListClient({ blogs, categories }) {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold px-2 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold px-2 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 cursor-pointer"
               >
                 Clear
               </button>
@@ -139,6 +139,18 @@ export default function BlogListClient({ blogs, categories }) {
                 {featuredBlog.title}
               </h3>
 
+              {featuredBlog.coverImage && (
+                <div className="relative w-full h-56 sm:h-72 md:h-80 rounded-2xl overflow-hidden mb-6 border border-neutral-200/60 dark:border-neutral-800/80 shadow-sm">
+                  <Image
+                    src={featuredBlog.coverImage}
+                    alt={featuredBlog.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    className="object-cover group-hover:scale-102 transition-transform duration-500"
+                  />
+                </div>
+              )}
+
               <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-300 mb-6 leading-relaxed line-clamp-3">
                 {featuredBlog.description}
               </p>
@@ -198,7 +210,7 @@ export default function BlogListClient({ blogs, categories }) {
                 setSearchQuery("");
                 setSelectedCategory("All");
               }}
-              className="mt-4 px-4 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition"
+              className="mt-4 px-4 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition cursor-pointer"
             >
               Reset Filters
             </button>
@@ -221,6 +233,19 @@ export default function BlogListClient({ blogs, categories }) {
                     className="group flex flex-col justify-between h-full rounded-3xl bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800/80 p-6 sm:p-7 shadow-xs hover:shadow-xl hover:border-blue-500/50 dark:hover:border-blue-500/40 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md cursor-pointer"
                   >
                     <div>
+                      {/* Optional Card Cover Thumbnail */}
+                      {blog.coverImage && (
+                        <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-4 border border-neutral-100 dark:border-neutral-800 shadow-xs">
+                          <Image
+                            src={blog.coverImage}
+                            alt={blog.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+
                       {/* Top Metadata */}
                       <div className="flex items-center justify-between gap-2 mb-4">
                         <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50">

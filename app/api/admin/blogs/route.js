@@ -34,8 +34,19 @@ function calculateReadingTime(content) {
   for (const block of content) {
     if (block.text) totalWords += block.text.split(/\s+/).length;
     if (block.code) totalWords += block.code.split(/\s+/).length;
+    if (block.caption) totalWords += block.caption.split(/\s+/).length;
     if (Array.isArray(block.items)) {
       totalWords += block.items.join(" ").split(/\s+/).length;
+    }
+    if (Array.isArray(block.headers)) {
+      totalWords += block.headers.join(" ").split(/\s+/).length;
+    }
+    if (Array.isArray(block.rows)) {
+      for (const row of block.rows) {
+        if (Array.isArray(row)) {
+          totalWords += row.join(" ").split(/\s+/).length;
+        }
+      }
     }
   }
   const minutes = Math.max(1, Math.ceil(totalWords / 180));
@@ -83,6 +94,7 @@ export async function POST(request) {
       category,
       tags,
       gradient,
+      coverImage,
       featured,
       content,
       author,
@@ -118,6 +130,21 @@ export async function POST(request) {
           id: generateSlug(block.text),
         };
       }
+      if (block.type === "image") {
+        return {
+          type: "image",
+          url: block.url ? block.url.trim() : "",
+          alt: block.alt ? block.alt.trim() : "",
+          caption: block.caption ? block.caption.trim() : "",
+        };
+      }
+      if (block.type === "table") {
+        return {
+          type: "table",
+          headers: Array.isArray(block.headers) ? block.headers : [],
+          rows: Array.isArray(block.rows) ? block.rows : [],
+        };
+      }
       return block;
     });
 
@@ -140,6 +167,7 @@ export async function POST(request) {
       publishedAt: todayStr,
       updatedAt: todayStr,
       readingTime: calculateReadingTime(formattedContent),
+      coverImage: coverImage || "",
       featured: Boolean(featured),
       gradient: gradient || "from-blue-600 via-indigo-600 to-cyan-500",
       author: author || {
@@ -213,6 +241,21 @@ export async function PUT(request) {
             ...block,
             level: block.level || 2,
             id: generateSlug(block.text),
+          };
+        }
+        if (block.type === "image") {
+          return {
+            type: "image",
+            url: block.url ? block.url.trim() : "",
+            alt: block.alt ? block.alt.trim() : "",
+            caption: block.caption ? block.caption.trim() : "",
+          };
+        }
+        if (block.type === "table") {
+          return {
+            type: "table",
+            headers: Array.isArray(block.headers) ? block.headers : [],
+            rows: Array.isArray(block.rows) ? block.rows : [],
           };
         }
         return block;

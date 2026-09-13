@@ -5,11 +5,18 @@
     "title": "Mastering Next.js 15 & React 19: Deep Dive into Server Components & Streaming",
     "description": "Explore how React 19 Server Components and Next.js 15 App Router revolutionize frontend architecture, eliminate unnecessary client-side JavaScript, and maximize Core Web Vitals.",
     "category": "Next.js",
-    "tags": ["Next.js", "React 19", "RSC", "Performance", "Web Development"],
+    "tags": [
+      "Next.js",
+      "React 19",
+      "RSC",
+      "Performance",
+      "Web Development"
+    ],
     "publishedAt": "2025-02-15",
     "updatedAt": "2025-02-18",
     "readingTime": "6 min read",
     "featured": true,
+    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
     "gradient": "from-blue-600 via-indigo-600 to-cyan-500",
     "author": {
       "name": "Rajiv Sharma",
@@ -28,11 +35,26 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/mastering-nextjs-15-react-19-server-components"
     },
     "tableOfContents": [
-      { "id": "introduction", "title": "The Paradigm Shift to Server Components" },
-      { "id": "client-vs-server", "title": "Client Components vs. Server Components: When to Use Which?" },
-      { "id": "streaming-suspense", "title": "Instant Page Loads with Streaming and Suspense" },
-      { "id": "practical-code", "title": "Building a High-Performance Data Fetcher" },
-      { "id": "key-takeaways", "title": "Key Architecture Takeaways" }
+      {
+        "id": "introduction",
+        "title": "The Paradigm Shift to Server Components"
+      },
+      {
+        "id": "client-vs-server",
+        "title": "Client Components vs. Server Components: When to Use Which?"
+      },
+      {
+        "id": "streaming-suspense",
+        "title": "Instant Page Loads with Streaming and Suspense"
+      },
+      {
+        "id": "practical-code",
+        "title": "Building a High-Performance Data Fetcher"
+      },
+      {
+        "id": "key-takeaways",
+        "title": "Key Architecture Takeaways"
+      }
     ],
     "content": [
       {
@@ -48,6 +70,12 @@
       {
         "type": "paragraph",
         "text": "In Next.js App Router, every component inside the `app` directory is a Server Component by default unless explicitly decorated with `'use client'`. This default inversion allows developers to securely access backend databases, secrets, and microservices directly within component files without writing dedicated API wrapper routes."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Modern code architecture setup",
+        "caption": "Figure 1: React 19 Server Components streamline server-client data boundaries."
       },
       {
         "type": "callout",
@@ -116,7 +144,13 @@
     "title": "Frontend Performance Optimization: Boosting Core Web Vitals from 60 to 100",
     "description": "A battle-tested guide to optimizing Largest Contentful Paint (LCP), Cumulative Layout Shift (CLS), and Interaction to Next Paint (INP) in production React and Next.js applications.",
     "category": "Performance",
-    "tags": ["Performance", "Core Web Vitals", "Lighthouse", "SEO", "Optimization"],
+    "tags": [
+      "Performance",
+      "Core Web Vitals",
+      "Lighthouse",
+      "SEO",
+      "Optimization"
+    ],
     "publishedAt": "2025-01-28",
     "updatedAt": "2025-02-05",
     "readingTime": "5 min read",
@@ -139,11 +173,26 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/frontend-performance-optimization-core-web-vitals"
     },
     "tableOfContents": [
-      { "id": "understanding-metrics", "title": "The Core Web Vitals That Dictate SEO Rank" },
-      { "id": "optimizing-lcp", "title": "Slashing Largest Contentful Paint (LCP)" },
-      { "id": "eliminating-cls", "title": "Eliminating Cumulative Layout Shift (CLS)" },
-      { "id": "inp-smoothness", "title": "Conquering Interaction to Next Paint (INP)" },
-      { "id": "checklist", "title": "Actionable Performance Audit Checklist" }
+      {
+        "id": "understanding-metrics",
+        "title": "The Core Web Vitals That Dictate SEO Rank"
+      },
+      {
+        "id": "optimizing-lcp",
+        "title": "Slashing Largest Contentful Paint (LCP)"
+      },
+      {
+        "id": "eliminating-cls",
+        "title": "Eliminating Cumulative Layout Shift (CLS)"
+      },
+      {
+        "id": "inp-smoothness",
+        "title": "Conquering Interaction to Next Paint (INP)"
+      },
+      {
+        "id": "checklist",
+        "title": "Actionable Performance Audit Checklist"
+      }
     ],
     "content": [
       {
@@ -159,6 +208,12 @@
       {
         "type": "paragraph",
         "text": "Google benchmarks page speed using three primary field metrics:"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Web performance analytics dashboard",
+        "caption": "Figure 1: Core Web Vitals optimization dramatically improves LCP and INP metrics."
       },
       {
         "type": "list",
@@ -233,7 +288,8 @@
           "Audit third-party scripts using Google Tag Manager or web worker offloading via Partytown."
         ]
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "3",
@@ -241,7 +297,13 @@
     "title": "State Management in 2025: Redux Toolkit vs. Zustand for Modern Web Apps",
     "description": "An architectural breakdown comparing Redux Toolkit and Zustand. Learn when to choose lightweight store stores over enterprise-grade predictable state containers.",
     "category": "Architecture",
-    "tags": ["React", "Redux", "Zustand", "State Management", "JavaScript"],
+    "tags": [
+      "React",
+      "Redux",
+      "Zustand",
+      "State Management",
+      "JavaScript"
+    ],
     "publishedAt": "2025-01-10",
     "updatedAt": "2025-01-15",
     "readingTime": "5 min read",
@@ -264,11 +326,26 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/state-management-2025-redux-toolkit-vs-zustand"
     },
     "tableOfContents": [
-      { "id": "state-landscape", "title": "The Modern State Landscape" },
-      { "id": "redux-toolkit", "title": "When Redux Toolkit Dominates" },
-      { "id": "zustand-power", "title": "Why Zustand Has Surged in Popularity" },
-      { "id": "feature-comparison", "title": "Side-by-Side Comparison Matrix" },
-      { "id": "recommendation", "title": "How to Choose for Your Next Project" }
+      {
+        "id": "state-landscape",
+        "title": "The Modern State Landscape"
+      },
+      {
+        "id": "redux-toolkit",
+        "title": "When Redux Toolkit Dominates"
+      },
+      {
+        "id": "zustand-power",
+        "title": "Why Zustand Has Surged in Popularity"
+      },
+      {
+        "id": "feature-comparison",
+        "title": "Side-by-Side Comparison Matrix"
+      },
+      {
+        "id": "recommendation",
+        "title": "How to Choose for Your Next Project"
+      }
     ],
     "content": [
       {
@@ -284,6 +361,12 @@
       {
         "type": "paragraph",
         "text": "Before choosing any state management library, ask a fundamental question: Is this server state or client UI state? With tools like TanStack Query and Next.js Server Components handling caching, pagination, and invalidation, the need for monolithic global client stores has decreased. However, complex multi-step workflows, shopping carts, and real-time dashboards still demand dedicated client state stores."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Application state management architecture",
+        "caption": "Figure 1: Zustand simplifies state by removing action dispatchers and reducer boilerplate."
       },
       {
         "type": "heading",
@@ -326,6 +409,41 @@
         "text": "Side-by-Side Comparison Matrix"
       },
       {
+        "type": "table",
+        "headers": [
+          "Architecture Dimension",
+          "Redux Toolkit (RTK)",
+          "Zustand"
+        ],
+        "rows": [
+          [
+            "Bundle Size (gzipped)",
+            "~12 kB (+ react-redux)",
+            "~1.5 kB (zero dependencies)"
+          ],
+          [
+            "Boilerplate & Setup",
+            "Store configureStore + Slices",
+            "Single create() call"
+          ],
+          [
+            "React Context Dependency",
+            "Yes (<Provider store={...}>)",
+            "No (Vanilla JS store hooks)"
+          ],
+          [
+            "DevTools & Time Travel",
+            "Native Redux DevTools support",
+            "Enabled via devtools middleware"
+          ],
+          [
+            "Best Suited For",
+            "Enterprise apps with audit logs",
+            "Fast MVPs, dashboards & modern apps"
+          ]
+        ]
+      },
+      {
         "type": "list",
         "items": [
           "Bundle Footprint: Zustand (~1.5kB) vs. Redux Toolkit (~12kB + React-Redux).",
@@ -344,7 +462,8 @@
         "type": "paragraph",
         "text": "For startups, e-commerce storefronts, personal portfolios, and medium-scale web applications, Zustand delivers unmatched agility with minimal overhead. For enterprise SaaS platforms with dozens of collaborating engineers and complex audit trail requirements, Redux Toolkit remains an unbeatable choice."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "4",
@@ -352,7 +471,13 @@
     "title": "Building Scalable & Accessible UI Component Systems with Tailwind CSS v4",
     "description": "How to build modular, accessible design systems that support dark mode, responsive layouts, and WCAG accessibility standards using modern CSS variables and Tailwind CSS.",
     "category": "Frontend",
-    "tags": ["Tailwind CSS", "CSS", "Design Systems", "Accessibility", "UI/UX"],
+    "tags": [
+      "Tailwind CSS",
+      "CSS",
+      "Design Systems",
+      "Accessibility",
+      "UI/UX"
+    ],
     "publishedAt": "2024-12-20",
     "updatedAt": "2025-01-05",
     "readingTime": "4 min read",
@@ -374,10 +499,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/building-scalable-accessible-ui-systems-tailwind-css"
     },
     "tableOfContents": [
-      { "id": "why-design-systems-matter", "title": "Why Modern Design Systems Matter" },
-      { "id": "tailwind-tokens", "title": "Design Tokens via Modern CSS Custom Properties" },
-      { "id": "accessibility-first", "title": "Accessibility (a11y) from Day One" },
-      { "id": "reusable-components", "title": "Crafting Resilient Component Variants" }
+      {
+        "id": "why-design-systems-matter",
+        "title": "Why Modern Design Systems Matter"
+      },
+      {
+        "id": "tailwind-tokens",
+        "title": "Design Tokens via Modern CSS Custom Properties"
+      },
+      {
+        "id": "accessibility-first",
+        "title": "Accessibility (a11y) from Day One"
+      },
+      {
+        "id": "reusable-components",
+        "title": "Crafting Resilient Component Variants"
+      }
     ],
     "content": [
       {
@@ -393,6 +530,12 @@
       {
         "type": "paragraph",
         "text": "Design systems are more than just component libraries; they are a shared vocabulary between designers and engineers. By defining strict constraints for spacing scales, color palettes, and elevation shadows, team velocity increases dramatically while visual bugs dwindle."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Modern design system component tokens",
+        "caption": "Figure 1: Tailwind CSS v4 CSS-first variables establish unified color and typography scales."
       },
       {
         "type": "heading",
@@ -438,7 +581,8 @@
         "type": "paragraph",
         "text": "Pairing utility classes with clean functional composition delivers accessible, production-grade components that look gorgeous across mobile, tablet, and ultra-wide displays."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "5",
@@ -446,7 +590,13 @@
     "title": "How to Land High-Paying Freelance Web Development Clients in 2025",
     "description": "A battle-tested blueprint for web developers to transition away from low-bidding platforms and start landing direct, high-value international client contracts.",
     "category": "Freelancing",
-    "tags": ["Freelancing", "Web Development", "Client Acquisition", "Career", "Consulting"],
+    "tags": [
+      "Freelancing",
+      "Web Development",
+      "Client Acquisition",
+      "Career",
+      "Consulting"
+    ],
     "publishedAt": "2025-02-25",
     "updatedAt": "2025-02-28",
     "readingTime": "6 min read",
@@ -468,11 +618,26 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/how-to-land-high-paying-freelance-web-development-clients"
     },
     "tableOfContents": [
-      { "id": "the-freelance-trap", "title": "Escaping the Low-Bid Marketplace Trap" },
-      { "id": "positioning-as-specialist", "title": "Position Yourself as a Solution Specialist, Not Just a Coder" },
-      { "id": "outreach-and-pipeline", "title": "Building a Reliable Inbound and Outbound Client Pipeline" },
-      { "id": "the-perfect-proposal", "title": "Writing Proposals That Close Deals at 2x Higher Rates" },
-      { "id": "retaining-clients", "title": "Turning One-Time Projects into Long-Term Retainers" }
+      {
+        "id": "the-freelance-trap",
+        "title": "Escaping the Low-Bid Marketplace Trap"
+      },
+      {
+        "id": "positioning-as-specialist",
+        "title": "Position Yourself as a Solution Specialist, Not Just a Coder"
+      },
+      {
+        "id": "outreach-and-pipeline",
+        "title": "Building a Reliable Inbound and Outbound Client Pipeline"
+      },
+      {
+        "id": "the-perfect-proposal",
+        "title": "Writing Proposals That Close Deals at 2x Higher Rates"
+      },
+      {
+        "id": "retaining-clients",
+        "title": "Turning One-Time Projects into Long-Term Retainers"
+      }
     ],
     "content": [
       {
@@ -488,6 +653,12 @@
       {
         "type": "paragraph",
         "text": "Generic job boards force comparison on hourly rates. When a prospect sees 50 proposals stating 'I will build your React website for $20/hr', price becomes the only differentiator. High-value clients, however, care far more about reliability, speed to market, conversion rates, and SEO performance than saving a few dollars per hour."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Client consultation and proposal discussion",
+        "caption": "Figure 1: Establishing consultative partnerships secures high-retainer freelance contracts."
       },
       {
         "type": "callout",
@@ -552,7 +723,8 @@
         "type": "paragraph",
         "text": "The easiest client to sell to is one who already trusts you. After launching a website, propose a monthly maintenance, optimization, and feature iteration retainer. Retainers provide recurring monthly revenue and insulate you against freelance volatility."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "6",
@@ -560,7 +732,13 @@
     "title": "The Modern Freelance Developer Tech Stack: Shipping Production Apps 3x Faster",
     "description": "How choosing Next.js, Tailwind CSS, Supabase, and Vercel allows freelance developers to build production-grade web applications in record time with minimal maintenance overhead.",
     "category": "Freelancing",
-    "tags": ["Freelancing", "Next.js", "Tech Stack", "Productivity", "Vercel"],
+    "tags": [
+      "Freelancing",
+      "Next.js",
+      "Tech Stack",
+      "Productivity",
+      "Vercel"
+    ],
     "publishedAt": "2025-02-20",
     "updatedAt": "2025-02-22",
     "readingTime": "5 min read",
@@ -582,10 +760,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/modern-freelance-developer-tech-stack-shipping-faster"
     },
     "tableOfContents": [
-      { "id": "why-speed-matters", "title": "Why Velocity Is Your Greatest Competitive Edge" },
-      { "id": "the-stack-breakdown", "title": "The Golden Quartet: Next.js, Tailwind, Supabase & Vercel" },
-      { "id": "starter-templates", "title": "Reusable Component Scaffolds" },
-      { "id": "minimizing-maintenance", "title": "Zero-DevOps Architecture That Never Crashes" }
+      {
+        "id": "why-speed-matters",
+        "title": "Why Velocity Is Your Greatest Competitive Edge"
+      },
+      {
+        "id": "the-stack-breakdown",
+        "title": "The Golden Quartet: Next.js, Tailwind, Supabase & Vercel"
+      },
+      {
+        "id": "starter-templates",
+        "title": "Reusable Component Scaffolds"
+      },
+      {
+        "id": "minimizing-maintenance",
+        "title": "Zero-DevOps Architecture That Never Crashes"
+      }
     ],
     "content": [
       {
@@ -601,6 +791,12 @@
       {
         "type": "paragraph",
         "text": "Clients value engineers who deliver early. When you quote a 3-week turnaround and launch a flawless, high-speed product in 10 days, you build immense goodwill, earn rave testimonials, and unlock immediate referrals."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Modern freelance developer workstation",
+        "caption": "Figure 1: An integrated Next.js stack delivers production-ready web apps 3x faster."
       },
       {
         "type": "heading",
@@ -643,7 +839,8 @@
         "type": "paragraph",
         "text": "Serverless architectures mean you never get emergency calls on Sunday morning about server memory leaks or SSL certificate expirations. The platform scales automatically with client traffic spikes."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "7",
@@ -651,7 +848,13 @@
     "title": "Pricing Freelance Web Projects: Why Value-Based Pricing Beats Hourly Rates",
     "description": "Stop trading hours for dollars. Learn how value-based project pricing aligns your incentives with client business goals and significantly elevates your project earnings.",
     "category": "Freelancing",
-    "tags": ["Freelancing", "Pricing Strategy", "Business", "Web Development", "Contracting"],
+    "tags": [
+      "Freelancing",
+      "Pricing Strategy",
+      "Business",
+      "Web Development",
+      "Contracting"
+    ],
     "publishedAt": "2025-02-12",
     "updatedAt": "2025-02-15",
     "readingTime": "5 min read",
@@ -673,10 +876,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/pricing-freelance-web-projects-value-based-vs-hourly"
     },
     "tableOfContents": [
-      { "id": "the-hourly-paradox", "title": "The Hourly Rate Paradox: Punished for Efficiency" },
-      { "id": "understanding-value", "title": "How to Calculate the Value of a Web Project" },
-      { "id": "anchoring-and-packaging", "title": "Price Anchoring and Tiered Packages" },
-      { "id": "handling-pushback", "title": "Handling Budget Objections Like a Professional" }
+      {
+        "id": "the-hourly-paradox",
+        "title": "The Hourly Rate Paradox: Punished for Efficiency"
+      },
+      {
+        "id": "understanding-value",
+        "title": "How to Calculate the Value of a Web Project"
+      },
+      {
+        "id": "anchoring-and-packaging",
+        "title": "Price Anchoring and Tiered Packages"
+      },
+      {
+        "id": "handling-pushback",
+        "title": "Handling Budget Objections Like a Professional"
+      }
     ],
     "content": [
       {
@@ -692,6 +907,12 @@
       {
         "type": "paragraph",
         "text": "Consider two developers tasked with building an e-commerce checkout flow. Junior Developer takes 40 hours at $30/hr ($1,200 total). Senior Developer writes clean, secure code with Redux Toolkit and Stripe webhooks in 10 hours at $60/hr ($600 total). The Senior delivered a superior product in a quarter of the time, yet earned half as much. Value-based pricing solves this dilemma."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Value-based pricing ROI calculation",
+        "caption": "Figure 1: Value-based pricing aligns developer fees directly with client revenue outcomes."
       },
       {
         "type": "heading",
@@ -737,7 +958,8 @@
         "type": "paragraph",
         "text": "When a prospect says 'That is beyond our initial budget', never simply drop your price without adjusting scope. Offer to phase the project: deliver Phase 1 core functionality within their budget, then execute Phase 2 once initial revenue is validated."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "8",
@@ -745,7 +967,13 @@
     "title": "Freelance Project Management: Avoiding Scope Creep and Delivering on Time",
     "description": "Master the art of writing clear project scopes, milestone agreements, client change orders, and asynchronous communication protocols that keep projects profitable.",
     "category": "Freelancing",
-    "tags": ["Freelancing", "Project Management", "Client Communication", "Contracts", "Agile"],
+    "tags": [
+      "Freelancing",
+      "Project Management",
+      "Client Communication",
+      "Contracts",
+      "Agile"
+    ],
     "publishedAt": "2025-01-22",
     "updatedAt": "2025-01-26",
     "readingTime": "6 min read",
@@ -767,10 +995,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/freelance-project-management-avoiding-scope-creep"
     },
     "tableOfContents": [
-      { "id": "anatomy-of-scope-creep", "title": "The Silent Profit Killer: Anatomy of Scope Creep" },
-      { "id": "writing-watertight-scope", "title": "Drafting Watertight Scope Documents" },
-      { "id": "managing-change-requests", "title": "How to Politely Say 'Yes, but for an Additional Fee'" },
-      { "id": "async-communication", "title": "Asynchronous Communication Protocols That Protect Your Focus" }
+      {
+        "id": "anatomy-of-scope-creep",
+        "title": "The Silent Profit Killer: Anatomy of Scope Creep"
+      },
+      {
+        "id": "writing-watertight-scope",
+        "title": "Drafting Watertight Scope Documents"
+      },
+      {
+        "id": "managing-change-requests",
+        "title": "How to Politely Say 'Yes, but for an Additional Fee'"
+      },
+      {
+        "id": "async-communication",
+        "title": "Asynchronous Communication Protocols That Protect Your Focus"
+      }
     ],
     "content": [
       {
@@ -786,6 +1026,12 @@
       {
         "type": "paragraph",
         "text": "Scope creep rarely happens maliciously. Most clients simply do not understand technical complexity; to a non-technical founder, adding a 'simple toggle button' might sound like 5 minutes of work, unaware that it requires database schema migrations, state sync, and API authorization checks."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Project timeline and milestone planning",
+        "caption": "Figure 1: Documented milestone sign-offs prevent scope creep and ensure timely delivery."
       },
       {
         "type": "heading",
@@ -831,7 +1077,8 @@
         "type": "paragraph",
         "text": "Avoid impromptu phone calls and chaotic WhatsApp pings at all hours. Establish a single project hub (Slack, Notion, or Trello) and deliver weekly async Loom video demonstrations summarizing progress, upcoming milestones, and questions."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "9",
@@ -839,7 +1086,13 @@
     "title": "Building a Portfolio That Actually Converts Clients into Paying Contracts",
     "description": "How to craft case studies that emphasize business impact, revenue generation, and technical problem-solving rather than displaying simple mockup screenshots.",
     "category": "Freelancing",
-    "tags": ["Freelancing", "Portfolio", "Case Studies", "Frontend", "Career Growth"],
+    "tags": [
+      "Freelancing",
+      "Portfolio",
+      "Case Studies",
+      "Frontend",
+      "Career Growth"
+    ],
     "publishedAt": "2025-01-08",
     "updatedAt": "2025-01-12",
     "readingTime": "5 min read",
@@ -861,10 +1114,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/building-portfolio-that-converts-clients-into-contracts"
     },
     "tableOfContents": [
-      { "id": "why-most-portfolios-fail", "title": "Why 90% of Developer Portfolios Fail to Win Clients" },
-      { "id": "structure-of-a-converting-case-study", "title": "The Anatomy of a High-Converting Case Study" },
-      { "id": "social-proof-and-credibility", "title": "Embedding Trust: Badges, Metrics & Testimonials" },
-      { "id": "frictionless-cta", "title": "Designing Frictionless Calls to Action (CTAs)" }
+      {
+        "id": "why-most-portfolios-fail",
+        "title": "Why 90% of Developer Portfolios Fail to Win Clients"
+      },
+      {
+        "id": "structure-of-a-converting-case-study",
+        "title": "The Anatomy of a High-Converting Case Study"
+      },
+      {
+        "id": "social-proof-and-credibility",
+        "title": "Embedding Trust: Badges, Metrics & Testimonials"
+      },
+      {
+        "id": "frictionless-cta",
+        "title": "Designing Frictionless Calls to Action (CTAs)"
+      }
     ],
     "content": [
       {
@@ -880,6 +1145,12 @@
       {
         "type": "paragraph",
         "text": "Listing technologies like 'HTML, CSS, JavaScript, React' tells a client nothing about your engineering rigor. Every junior developer lists the same skills. What sets elite developers apart is demonstrating how they used those tools to solve specific constraints (scalability, responsive design, fast page load speeds, seamless payment flows)."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=1200&q=80",
+        "alt": "High-converting portfolio case studies",
+        "caption": "Figure 1: Results-oriented case studies turn casual portfolio visitors into paying clients."
       },
       {
         "type": "heading",
@@ -926,7 +1197,8 @@
         "type": "paragraph",
         "text": "Never leave a client wondering what to do next after reading a case study. Place prominent, friendly contact buttons ('Discuss a Project', 'Book a Consultation', 'Chat on WhatsApp') at the bottom of every page."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "10",
@@ -934,7 +1206,13 @@
     "title": "A Day in the Life of a Software Developer: My Daily Routine & Productivity Habits",
     "description": "An authentic look into my daily schedule as a modern frontend software developer — from deep work coding blocks and PR reviews to continuous learning, debugging, and maintaining peak focus.",
     "category": "Career",
-    "tags": ["Daily Routine", "Productivity", "Software Engineering", "Career", "Work Life Balance"],
+    "tags": [
+      "Daily Routine",
+      "Productivity",
+      "Software Engineering",
+      "Career",
+      "Work Life Balance"
+    ],
     "publishedAt": "2025-03-01",
     "updatedAt": "2025-03-02",
     "readingTime": "5 min read",
@@ -956,12 +1234,30 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/a-day-in-the-life-of-a-software-developer-daily-routine"
     },
     "tableOfContents": [
-      { "id": "morning-kickoff", "title": "Morning Routine: Mindful Start & Daily Prioritization (7:30 AM - 9:00 AM)" },
-      { "id": "deep-work-block-1", "title": "Deep Work Block 1: Feature Architecture & Flow State (9:30 AM - 1:00 PM)" },
-      { "id": "afternoon-sync", "title": "Afternoon Collaboration: Code Reviews, PRs & Standups (2:00 PM - 3:30 PM)" },
-      { "id": "deep-work-block-2", "title": "Deep Work Block 2: Bug Fixes, Tests & Performance Tuning (3:30 PM - 6:00 PM)" },
-      { "id": "evening-growth", "title": "Evening Continuous Learning, Side Hustles & Unplugging (7:30 PM Onward)" },
-      { "id": "productivity-principles", "title": "My 4 Golden Rules for Sustained Engineering Output" }
+      {
+        "id": "morning-kickoff",
+        "title": "Morning Routine: Mindful Start & Daily Prioritization (7:30 AM - 9:00 AM)"
+      },
+      {
+        "id": "deep-work-block-1",
+        "title": "Deep Work Block 1: Feature Architecture & Flow State (9:30 AM - 1:00 PM)"
+      },
+      {
+        "id": "afternoon-sync",
+        "title": "Afternoon Collaboration: Code Reviews, PRs & Standups (2:00 PM - 3:30 PM)"
+      },
+      {
+        "id": "deep-work-block-2",
+        "title": "Deep Work Block 2: Bug Fixes, Tests & Performance Tuning (3:30 PM - 6:00 PM)"
+      },
+      {
+        "id": "evening-growth",
+        "title": "Evening Continuous Learning, Side Hustles & Unplugging (7:30 PM Onward)"
+      },
+      {
+        "id": "productivity-principles",
+        "title": "My 4 Golden Rules for Sustained Engineering Output"
+      }
     ],
     "content": [
       {
@@ -977,6 +1273,12 @@
       {
         "type": "paragraph",
         "text": "I avoid looking at Slack, emails, or pull request notifications for the first 45 minutes after waking up. Reactionary mornings trigger dopamine fatigue before the day even begins."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Focused developer workspace and daily agenda",
+        "caption": "Figure 1: Prioritizing morning deep work blocks unlocks sustainable daily engineering output."
       },
       {
         "type": "list",
@@ -1067,7 +1369,8 @@
           "4. Consistency beats all-nighters: 5 hours of razor-sharp deep work every day beats 12 hours of distracted, exhausted typing."
         ]
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "11",
@@ -1075,7 +1378,13 @@
     "title": "Integrating Large Language Models into Next.js: Streaming AI UIs with Vercel AI SDK",
     "description": "A hands-on engineering guide to building responsive, streaming AI chat interfaces and generative components in Next.js 15 using the Vercel AI SDK and modern LLM APIs.",
     "category": "AI",
-    "tags": ["AI", "Next.js", "Vercel AI SDK", "LLM", "Streaming"],
+    "tags": [
+      "AI",
+      "Next.js",
+      "Vercel AI SDK",
+      "LLM",
+      "Streaming"
+    ],
     "publishedAt": "2025-03-05",
     "updatedAt": "2025-03-06",
     "readingTime": "6 min read",
@@ -1097,11 +1406,26 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/integrating-llms-into-nextjs-streaming-ai-sdk"
     },
     "tableOfContents": [
-      { "id": "why-streaming-matters", "title": "Why Streaming Responses Are Essential for AI UX" },
-      { "id": "vercel-ai-sdk-architecture", "title": "Understanding the Vercel AI SDK Architecture" },
-      { "id": "building-chat-api", "title": "Creating the Streaming Backend Route" },
-      { "id": "frontend-ui-hook", "title": "Consuming Streams on the Frontend with useChat" },
-      { "id": "cost-and-rate-limiting", "title": "Production Safeguards: Rate Limiting & Token Budgets" }
+      {
+        "id": "why-streaming-matters",
+        "title": "Why Streaming Responses Are Essential for AI UX"
+      },
+      {
+        "id": "vercel-ai-sdk-architecture",
+        "title": "Understanding the Vercel AI SDK Architecture"
+      },
+      {
+        "id": "building-chat-api",
+        "title": "Creating the Streaming Backend Route"
+      },
+      {
+        "id": "frontend-ui-hook",
+        "title": "Consuming Streams on the Frontend with useChat"
+      },
+      {
+        "id": "cost-and-rate-limiting",
+        "title": "Production Safeguards: Rate Limiting & Token Budgets"
+      }
     ],
     "content": [
       {
@@ -1117,6 +1441,12 @@
       {
         "type": "paragraph",
         "text": "Streaming transforms a sluggish loading spinner into an immediate, organic interaction. Just like ChatGPT, streaming tokens create the psychological impression of instant intelligence, slashing perceived latency by over 80%."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Real-time AI streaming token visualization",
+        "caption": "Figure 1: Streaming token boundaries provide near-zero perceived latency for chat UIs."
       },
       {
         "type": "callout",
@@ -1176,7 +1506,8 @@
         "type": "paragraph",
         "text": "Never expose unauthenticated AI routes to the public. Implement Redis-based rate limiting (via Upstash Ratelimit) and hard token output limits (`maxTokens: 1000`) to protect your API keys from runaway billing."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "12",
@@ -1184,7 +1515,13 @@
     "title": "The Rise of AI Coding Assistants: How Developers Code 10x Faster in 2025",
     "description": "How senior engineers leverage AI pairing tools, Claude 3.7, Cursor, and prompt engineering without compromising code architecture, security, or core fundamentals.",
     "category": "AI",
-    "tags": ["AI", "Productivity", "Coding Assistants", "Cursor", "Developer Tools"],
+    "tags": [
+      "AI",
+      "Productivity",
+      "Coding Assistants",
+      "Cursor",
+      "Developer Tools"
+    ],
     "publishedAt": "2025-02-18",
     "updatedAt": "2025-02-20",
     "readingTime": "5 min read",
@@ -1206,10 +1543,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/rise-of-ai-coding-assistants-how-developers-code-faster"
     },
     "tableOfContents": [
-      { "id": "the-new-coding-paradigm", "title": "From Syntax Typist to Software Architect" },
-      { "id": "effective-prompting-rules", "title": "Prompt Engineering Rules for High-Accuracy Code" },
-      { "id": "common-pitfalls", "title": "Avoiding the Traps: Hallucinated APIs & Security Vulnerabilities" },
-      { "id": "the-hybrid-workflow", "title": "The Ideal Human + AI Engineering Workflow" }
+      {
+        "id": "the-new-coding-paradigm",
+        "title": "From Syntax Typist to Software Architect"
+      },
+      {
+        "id": "effective-prompting-rules",
+        "title": "Prompt Engineering Rules for High-Accuracy Code"
+      },
+      {
+        "id": "common-pitfalls",
+        "title": "Avoiding the Traps: Hallucinated APIs & Security Vulnerabilities"
+      },
+      {
+        "id": "the-hybrid-workflow",
+        "title": "The Ideal Human + AI Engineering Workflow"
+      }
     ],
     "content": [
       {
@@ -1225,6 +1574,12 @@
       {
         "type": "paragraph",
         "text": "Writing boilerplate forms, Regex expressions, and CSS layouts used to take hours. AI generates these in seconds. This allows developers to focus their mental energy where it counts: system modularity, security boundaries, database query optimization, and user experience."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Developer pairing with AI in code editor",
+        "caption": "Figure 1: AI coding assistants automate syntax generation, freeing cognitive bandwidth for design."
       },
       {
         "type": "heading",
@@ -1266,7 +1621,8 @@
         "type": "paragraph",
         "text": "Use AI to brainstorm architecture options, scaffold repetitive files, write unit tests, and draft documentation. Keep domain logic, authentication gates, and final quality control firmly in human hands."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "13",
@@ -1274,7 +1630,13 @@
     "title": "Building Autonomous AI Agents: From Prompts to Multi-Step Reasoning Engines",
     "description": "Understanding agentic architecture: How tool calling, function execution, persistent memory, and loop controllers allow AI systems to execute complex real-world workflows.",
     "category": "AI",
-    "tags": ["AI Agents", "Tool Calling", "Autonomous AI", "Software Architecture", "Python"],
+    "tags": [
+      "AI Agents",
+      "Tool Calling",
+      "Autonomous AI",
+      "Software Architecture",
+      "Python"
+    ],
     "publishedAt": "2025-02-10",
     "updatedAt": "2025-02-14",
     "readingTime": "6 min read",
@@ -1296,10 +1658,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/building-autonomous-ai-agents-multistep-reasoning"
     },
     "tableOfContents": [
-      { "id": "what-makes-an-agent", "title": "What Differentiates a Chatbot from an AI Agent?" },
-      { "id": "the-react-pattern", "title": "The ReAct Loop: Reasoning + Acting" },
-      { "id": "tool-and-function-calling", "title": "Empowering Models with Tools and Sandboxes" },
-      { "id": "memory-and-state", "title": "Managing Short-Term and Long-Term Agentic Memory" }
+      {
+        "id": "what-makes-an-agent",
+        "title": "What Differentiates a Chatbot from an AI Agent?"
+      },
+      {
+        "id": "the-react-pattern",
+        "title": "The ReAct Loop: Reasoning + Acting"
+      },
+      {
+        "id": "tool-and-function-calling",
+        "title": "Empowering Models with Tools and Sandboxes"
+      },
+      {
+        "id": "memory-and-state",
+        "title": "Managing Short-Term and Long-Term Agentic Memory"
+      }
     ],
     "content": [
       {
@@ -1315,6 +1689,12 @@
       {
         "type": "paragraph",
         "text": "A standard LLM call is single-shot: user sends prompt, model responds. An agent operates inside a recursive loop: given a high-level goal, it breaks the task into sub-goals, decides which tool to invoke, evaluates the tool's output, corrects errors, and iterates until the objective is accomplished."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Autonomous AI agent decision execution graph",
+        "caption": "Figure 1: ReAct reasoning cycles empower agents to plan, execute, and inspect tool outputs."
       },
       {
         "type": "heading",
@@ -1352,7 +1732,8 @@
         "type": "paragraph",
         "text": "Long-running tasks require structured state management. Short-term memory lives in the conversation history array; long-term memory is persisted in vector databases or key-value stores for retrieval across sessions."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "14",
@@ -1360,7 +1741,13 @@
     "title": "RAG Demystified: Building Retrieval-Augmented Generation for Custom Web Data",
     "description": "How to eliminate LLM hallucinations by connecting your private documentation, PDF manuals, and customer data using vector embeddings and semantic search.",
     "category": "AI",
-    "tags": ["RAG", "Vector Search", "Embeddings", "pgvector", "AI Architecture"],
+    "tags": [
+      "RAG",
+      "Vector Search",
+      "Embeddings",
+      "pgvector",
+      "AI Architecture"
+    ],
     "publishedAt": "2025-01-25",
     "updatedAt": "2025-01-30",
     "readingTime": "6 min read",
@@ -1382,10 +1769,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/rag-demystified-retrieval-augmented-generation-custom-data"
     },
     "tableOfContents": [
-      { "id": "why-fine-tuning-is-wrong", "title": "Why You Don't Need to Fine-Tune: The Power of RAG" },
-      { "id": "how-rag-works", "title": "The Three Pillars of RAG: Ingest, Embed, Retrieve" },
-      { "id": "choosing-vector-db", "title": "Choosing a Vector Store: pgvector vs. Pinecone" },
-      { "id": "chunking-strategies", "title": "Chunking Strategies That Make or Break Accuracy" }
+      {
+        "id": "why-fine-tuning-is-wrong",
+        "title": "Why You Don't Need to Fine-Tune: The Power of RAG"
+      },
+      {
+        "id": "how-rag-works",
+        "title": "The Three Pillars of RAG: Ingest, Embed, Retrieve"
+      },
+      {
+        "id": "choosing-vector-db",
+        "title": "Choosing a Vector Store: pgvector vs. Pinecone"
+      },
+      {
+        "id": "chunking-strategies",
+        "title": "Chunking Strategies That Make or Break Accuracy"
+      }
     ],
     "content": [
       {
@@ -1401,6 +1800,12 @@
       {
         "type": "paragraph",
         "text": "Fine-tuning teaches a model style, syntax, and tone; it is terribly inefficient at teaching facts. RAG works like an open-book exam: when a user asks a question, your system searches your private documents, retrieves the exact relevant excerpts, and provides them as trusted context directly in the prompt."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Vector database similarity search pipeline",
+        "caption": "Figure 1: Dense vector embeddings ground LLM answers directly in authoritative domain data."
       },
       {
         "type": "heading",
@@ -1436,7 +1841,8 @@
         "type": "paragraph",
         "text": "Poor chunking is the #1 reason RAG systems fail. If you cut sentences mid-thought, semantic meaning is lost. Use semantic chunking with 15-20% chunk overlap to maintain full conversational context."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80"
   },
   {
     "id": "15",
@@ -1444,7 +1850,13 @@
     "title": "Local LLMs on Your Machine: Running DeepSeek and Llama 3 with Ollama",
     "description": "Why private, offline local language models are changing software privacy. Step-by-step setup to run open-weight models locally with Ollama and expose local REST APIs.",
     "category": "AI",
-    "tags": ["Local LLM", "Ollama", "DeepSeek", "Llama 3", "Privacy"],
+    "tags": [
+      "Local LLM",
+      "Ollama",
+      "DeepSeek",
+      "Llama 3",
+      "Privacy"
+    ],
     "publishedAt": "2025-01-15",
     "updatedAt": "2025-01-18",
     "readingTime": "5 min read",
@@ -1466,10 +1878,22 @@
       "canonical": "https://rajivsharma.vercel.app/blogs/local-llms-running-deepseek-llama-with-ollama"
     },
     "tableOfContents": [
-      { "id": "why-run-local", "title": "The Privacy and Cost Argument for Local Models" },
-      { "id": "setting-up-ollama", "title": "Installing and Running Ollama in Under 3 Minutes" },
-      { "id": "connecting-to-web-apps", "title": "Connecting Local Models to Your React/Next.js Apps" },
-      { "id": "hardware-requirements", "title": "Hardware Guidelines: RAM, VRAM, and Quantization" }
+      {
+        "id": "why-run-local",
+        "title": "The Privacy and Cost Argument for Local Models"
+      },
+      {
+        "id": "setting-up-ollama",
+        "title": "Installing and Running Ollama in Under 3 Minutes"
+      },
+      {
+        "id": "connecting-to-web-apps",
+        "title": "Connecting Local Models to Your React/Next.js Apps"
+      },
+      {
+        "id": "hardware-requirements",
+        "title": "Hardware Guidelines: RAM, VRAM, and Quantization"
+      }
     ],
     "content": [
       {
@@ -1485,6 +1909,12 @@
       {
         "type": "paragraph",
         "text": "Running models locally provides zero token costs, zero latency from internet outages, and 100% data sovereignty. Your private code never leaves your local hardware."
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+        "alt": "Local LLM inference in terminal environment",
+        "caption": "Figure 1: Ollama makes private, high-speed local model inference accessible on developer hardware."
       },
       {
         "type": "heading",
@@ -1528,6 +1958,7 @@
         "type": "paragraph",
         "text": "With 4-bit quantized GGUF weights, 7B-8B parameter models require only 8GB of unified memory or VRAM to run at 30+ tokens per second on Apple Silicon Macs or modern NVIDIA GPUs."
       }
-    ]
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
   }
 ]

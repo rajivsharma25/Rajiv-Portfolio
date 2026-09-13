@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Lock,
   KeyRound,
@@ -16,7 +17,6 @@ import {
   Code2,
   AlertCircle,
   Lightbulb,
-  Info,
   List,
   Heading2,
   AlignLeft,
@@ -26,6 +26,8 @@ import {
   FileText,
   ChevronUp,
   ChevronDown,
+  Image as ImageIcon,
+  Table as TableIcon,
 } from "lucide-react";
 
 export default function AdminClient() {
@@ -48,6 +50,7 @@ export default function AdminClient() {
     category: "Next.js",
     tags: "",
     description: "",
+    coverImage: "",
     featured: false,
     content: [
       {
@@ -187,6 +190,24 @@ export default function AdminClient() {
           items: [""],
         };
         break;
+      case "image":
+        newBlock = {
+          type: "image",
+          url: "",
+          alt: "",
+          caption: "",
+        };
+        break;
+      case "table":
+        newBlock = {
+          type: "table",
+          headers: ["Feature / Metric", "Description", "Status / Notes"],
+          rows: [
+            ["Option A", "High performance architecture", "Recommended"],
+            ["Option B", "Standard implementation", "Alternative"],
+          ],
+        };
+        break;
       default:
         newBlock = { type: "paragraph", text: "" };
     }
@@ -231,6 +252,7 @@ export default function AdminClient() {
       category: "Next.js",
       tags: "",
       description: "",
+      coverImage: "",
       featured: false,
       content: [{ type: "paragraph", text: "" }],
     });
@@ -250,6 +272,7 @@ export default function AdminClient() {
       category: blog.category || "Next.js",
       tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : blog.tags || "",
       description: blog.description || "",
+      coverImage: blog.coverImage || "",
       featured: Boolean(blog.featured),
       content: Array.isArray(blog.content) && blog.content.length > 0 ? blog.content : [{ type: "paragraph", text: "" }],
     });
@@ -386,7 +409,7 @@ export default function AdminClient() {
                 <button
                   type="button"
                   onClick={() => setShowKey(!showKey)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 cursor-pointer"
                 >
                   {showKey ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -443,7 +466,7 @@ export default function AdminClient() {
                 setCurrentView("list");
                 resetForm();
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-700 transition"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-700 transition cursor-pointer"
             >
               <ArrowLeft size={15} />
               <span>Articles List</span>
@@ -451,7 +474,7 @@ export default function AdminClient() {
           ) : (
             <button
               onClick={openEditorForNew}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-500/20 transition active:scale-95"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer"
             >
               <Plus size={16} />
               <span>Create New Article</span>
@@ -469,7 +492,7 @@ export default function AdminClient() {
 
           <button
             onClick={handleLogout}
-            className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-red-600 transition"
+            className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-red-600 transition cursor-pointer"
             title="Logout"
           >
             <LogOut size={16} />
@@ -550,7 +573,7 @@ export default function AdminClient() {
 
                       <button
                         onClick={() => openEditorForEdit(blog)}
-                        className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-blue-600 text-xs font-medium flex items-center gap-1"
+                        className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-blue-600 text-xs font-medium flex items-center gap-1 cursor-pointer"
                         title="Edit Article"
                       >
                         <Edit3 size={14} />
@@ -558,7 +581,7 @@ export default function AdminClient() {
 
                       <button
                         onClick={() => handleDeleteBlog(blog.id, blog.title)}
-                        className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white transition text-xs font-medium flex items-center gap-1"
+                        className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white transition text-xs font-medium flex items-center gap-1 cursor-pointer"
                         title="Delete Article"
                       >
                         <Trash2 size={14} />
@@ -579,7 +602,7 @@ export default function AdminClient() {
           <div className="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-3">
             <button
               onClick={() => setCurrentView("editor")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer ${
                 currentView === "editor"
                   ? "bg-blue-600 text-white shadow-xs"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
@@ -589,7 +612,7 @@ export default function AdminClient() {
             </button>
             <button
               onClick={() => setCurrentView("preview")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition cursor-pointer ${
                 currentView === "preview"
                   ? "bg-blue-600 text-white shadow-xs"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
@@ -681,6 +704,41 @@ export default function AdminClient() {
                     />
                   </div>
 
+                  <div className="space-y-1.5 md:col-span-2">
+                    <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
+                      <span>Cover Image URL (Optional)</span>
+                      {formData.coverImage && (
+                        <button
+                          type="button"
+                          onClick={() => setFormData({ ...formData, coverImage: "" })}
+                          className="text-[11px] text-red-500 hover:underline cursor-pointer"
+                        >
+                          Remove Image
+                        </button>
+                      )}
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.coverImage || ""}
+                      onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
+                      placeholder="e.g. https://images.unsplash.com/... or /profile.webp"
+                      className="w-full px-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                    {formData.coverImage && (
+                      <div className="mt-2 relative w-full h-44 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={formData.coverImage}
+                          alt="Cover preview"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+
                   <div className="flex items-center gap-2 pt-2 md:col-span-2">
                     <input
                       type="checkbox"
@@ -711,7 +769,7 @@ export default function AdminClient() {
                     <button
                       type="button"
                       onClick={() => addBlock("paragraph")}
-                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1"
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
                     >
                       <AlignLeft size={13} />
                       <span>+ Paragraph</span>
@@ -719,7 +777,7 @@ export default function AdminClient() {
                     <button
                       type="button"
                       onClick={() => addBlock("heading")}
-                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1"
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
                     >
                       <Heading2 size={13} />
                       <span>+ Heading</span>
@@ -727,7 +785,7 @@ export default function AdminClient() {
                     <button
                       type="button"
                       onClick={() => addBlock("callout")}
-                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1"
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
                     >
                       <Lightbulb size={13} />
                       <span>+ Callout</span>
@@ -735,7 +793,7 @@ export default function AdminClient() {
                     <button
                       type="button"
                       onClick={() => addBlock("code")}
-                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1"
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
                     >
                       <Code2 size={13} />
                       <span>+ Code Block</span>
@@ -743,10 +801,26 @@ export default function AdminClient() {
                     <button
                       type="button"
                       onClick={() => addBlock("list")}
-                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1"
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
                     >
                       <List size={13} />
                       <span>+ Bullet List</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => addBlock("image")}
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
+                    >
+                      <ImageIcon size={13} />
+                      <span>+ Image</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => addBlock("table")}
+                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
+                    >
+                      <TableIcon size={13} />
+                      <span>+ Table</span>
                     </button>
                   </div>
                 </div>
@@ -770,7 +844,7 @@ export default function AdminClient() {
                             type="button"
                             disabled={idx === 0}
                             onClick={() => moveBlock(idx, "up")}
-                            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30"
+                            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
                             title="Move Up"
                           >
                             <ChevronUp size={14} />
@@ -779,7 +853,7 @@ export default function AdminClient() {
                             type="button"
                             disabled={idx === formData.content.length - 1}
                             onClick={() => moveBlock(idx, "down")}
-                            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30"
+                            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30 cursor-pointer disabled:cursor-not-allowed"
                             title="Move Down"
                           >
                             <ChevronDown size={14} />
@@ -787,7 +861,7 @@ export default function AdminClient() {
                           <button
                             type="button"
                             onClick={() => removeBlock(idx)}
-                            className="p-1 rounded text-red-500 hover:bg-red-500/10 ml-2"
+                            className="p-1 rounded text-red-500 hover:bg-red-500/10 ml-2 cursor-pointer"
                             title="Delete Block"
                           >
                             <Trash2 size={14} />
@@ -921,7 +995,7 @@ export default function AdminClient() {
                                   const nextItems = block.items.filter((_, i) => i !== itemIdx);
                                   updateBlock(idx, { items: nextItems });
                                 }}
-                                className="p-1 text-red-500 hover:bg-red-500/10 rounded"
+                                className="p-1 text-red-500 hover:bg-red-500/10 rounded cursor-pointer"
                               >
                                 <Trash2 size={13} />
                               </button>
@@ -930,10 +1004,182 @@ export default function AdminClient() {
                           <button
                             type="button"
                             onClick={() => updateBlock(idx, { items: [...(block.items || []), ""] })}
-                            className="text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline pt-1"
+                            className="text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline pt-1 cursor-pointer"
                           >
                             + Add Bullet Item
                           </button>
+                        </div>
+                      )}
+
+                      {block.type === "image" && (
+                        <div className="space-y-3">
+                          <div className="grid sm:grid-cols-2 gap-3">
+                            <div className="space-y-1">
+                              <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
+                                Image URL *
+                              </label>
+                              <input
+                                type="url"
+                                value={block.url || ""}
+                                onChange={(e) => updateBlock(idx, { url: e.target.value })}
+                                placeholder="https://images.unsplash.com/... or /profile.webp"
+                                className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
+                              />
+                            </div>
+                            <div className="space-y-1">
+                              <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
+                                Alt Text (Accessibility & SEO)
+                              </label>
+                              <input
+                                type="text"
+                                value={block.alt || ""}
+                                onChange={(e) => updateBlock(idx, { alt: e.target.value })}
+                                placeholder="Describe the image..."
+                                className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
+                              />
+                            </div>
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
+                              Caption (Optional)
+                            </label>
+                            <input
+                              type="text"
+                              value={block.caption || ""}
+                              onChange={(e) => updateBlock(idx, { caption: e.target.value })}
+                              placeholder="e.g. Figure 1. System architecture breakdown"
+                              className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
+                            />
+                          </div>
+
+                          {block.url && (
+                            <div className="relative w-full max-h-56 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={block.url}
+                                alt={block.alt || "Preview"}
+                                className="max-h-56 w-auto object-contain rounded-xl"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = "none";
+                                }}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {block.type === "table" && (
+                        <div className="space-y-3">
+                          {/* Table Controls */}
+                          <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-neutral-100 dark:border-neutral-800">
+                            <span className="text-xs font-bold text-neutral-600 dark:text-neutral-400">
+                              Table Grid ({block.headers?.length || 0} Columns × {block.rows?.length || 0} Rows)
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const currentHeaders = block.headers || ["Col 1"];
+                                  const newHeaderName = `Column ${currentHeaders.length + 1}`;
+                                  const nextHeaders = [...currentHeaders, newHeaderName];
+                                  const nextRows = (block.rows || []).map((row) => [...row, ""]);
+                                  updateBlock(idx, { headers: nextHeaders, rows: nextRows });
+                                }}
+                                className="px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-xs font-semibold text-neutral-700 dark:text-neutral-300 cursor-pointer"
+                              >
+                                + Add Column
+                              </button>
+                              {block.headers?.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const nextHeaders = block.headers.slice(0, -1);
+                                    const nextRows = (block.rows || []).map((row) => row.slice(0, -1));
+                                    updateBlock(idx, { headers: nextHeaders, rows: nextRows });
+                                  }}
+                                  className="px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 text-xs font-semibold text-neutral-500 cursor-pointer"
+                                >
+                                  - Remove Column
+                                </button>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const colCount = (block.headers || []).length || 2;
+                                  const newRow = new Array(colCount).fill("");
+                                  updateBlock(idx, { rows: [...(block.rows || []), newRow] });
+                                }}
+                                className="px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-100 text-xs font-semibold cursor-pointer"
+                              >
+                                + Add Row
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Interactive Table Matrix */}
+                          <div className="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-700">
+                            <table className="w-full text-xs">
+                              <thead className="bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-700">
+                                <tr>
+                                  <th className="p-2 w-8 text-neutral-400 font-mono text-center">#</th>
+                                  {(block.headers || []).map((header, hIdx) => (
+                                    <th key={hIdx} className="p-1.5">
+                                      <input
+                                        type="text"
+                                        value={header}
+                                        onChange={(e) => {
+                                          const nextHeaders = [...block.headers];
+                                          nextHeaders[hIdx] = e.target.value;
+                                          updateBlock(idx, { headers: nextHeaders });
+                                        }}
+                                        placeholder={`Header ${hIdx + 1}`}
+                                        className="w-full px-2 py-1 rounded bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 font-bold text-xs"
+                                      />
+                                    </th>
+                                  ))}
+                                  <th className="p-2 w-8"></th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700 bg-white dark:bg-neutral-900/50">
+                                {(block.rows || []).map((row, rIdx) => (
+                                  <tr key={rIdx}>
+                                    <td className="p-2 text-center text-neutral-400 font-mono text-[11px]">
+                                      {rIdx + 1}
+                                    </td>
+                                    {row.map((cell, cIdx) => (
+                                      <td key={cIdx} className="p-1.5">
+                                        <input
+                                          type="text"
+                                          value={cell}
+                                          onChange={(e) => {
+                                            const nextRows = block.rows.map((r, ri) =>
+                                              ri === rIdx ? r.map((c, ci) => (ci === cIdx ? e.target.value : c)) : r
+                                            );
+                                            updateBlock(idx, { rows: nextRows });
+                                          }}
+                                          placeholder={`Row ${rIdx + 1}, Col ${cIdx + 1}`}
+                                          className="w-full px-2 py-1 rounded bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
+                                        />
+                                      </td>
+                                    ))}
+                                    <td className="p-2 text-center">
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          const nextRows = block.rows.filter((_, ri) => ri !== rIdx);
+                                          updateBlock(idx, { rows: nextRows });
+                                        }}
+                                        className="p-1 text-red-500 hover:bg-red-500/10 rounded cursor-pointer"
+                                        title="Delete row"
+                                      >
+                                        <Trash2 size={13} />
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -949,7 +1195,7 @@ export default function AdminClient() {
                     setCurrentView("list");
                     resetForm();
                   }}
-                  className="px-5 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-sm font-semibold"
+                  className="px-5 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-sm font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -974,9 +1220,20 @@ export default function AdminClient() {
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white mt-4 mb-3">
                   {formData.title || "Untitled Article"}
                 </h1>
-                <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed mb-4">
                   {formData.description || "Article summary description..."}
                 </p>
+                {formData.coverImage && (
+                  <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 mb-6">
+                    <Image
+                      src={formData.coverImage}
+                      alt="Cover Preview"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 850px"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="space-y-6 pt-6 border-t border-neutral-200 dark:border-neutral-800">
@@ -993,6 +1250,50 @@ export default function AdminClient() {
                         <p key={i} className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
                           {block.text}
                         </p>
+                      );
+                    case "image":
+                      return (
+                        <figure key={i} className="space-y-2 my-4">
+                          <div className="relative w-full h-64 sm:h-80 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800">
+                            <Image
+                              src={block.url || "/profile.webp"}
+                              alt={block.alt || "Article graphic"}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 850px"
+                              className="object-cover"
+                            />
+                          </div>
+                          {block.caption && (
+                            <figcaption className="text-center text-xs text-neutral-400 italic">
+                              {block.caption}
+                            </figcaption>
+                          )}
+                        </figure>
+                      );
+                    case "table":
+                      return (
+                        <div key={i} className="my-6 overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+                          <table className="w-full text-left text-xs border-collapse">
+                            {Array.isArray(block.headers) && (
+                              <thead className="bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-800 font-bold uppercase text-[11px] text-neutral-800 dark:text-neutral-200">
+                                <tr>
+                                  {block.headers.map((h, hi) => (
+                                    <th key={hi} className="p-3">{h}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                            )}
+                            <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
+                              {(block.rows || []).map((row, ri) => (
+                                <tr key={ri} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40">
+                                  {row.map((cell, ci) => (
+                                    <td key={ci} className="p-3 text-neutral-700 dark:text-neutral-300">{cell}</td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
                       );
                     case "callout":
                       return (
@@ -1026,7 +1327,7 @@ export default function AdminClient() {
                 <button
                   type="button"
                   onClick={() => setCurrentView("editor")}
-                  className="px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold"
+                  className="px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold cursor-pointer"
                 >
                   Return to Editor
                 </button>

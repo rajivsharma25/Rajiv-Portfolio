@@ -253,6 +253,20 @@ export default function ArticleClient({ blog, relatedBlogs }) {
           </div>
         </header>
 
+        {/* Optional Cover Image Banner */}
+        {blog.coverImage && (
+          <div className="relative w-full h-64 sm:h-96 md:h-[460px] rounded-3xl overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow-xl mb-12">
+            <Image
+              src={blog.coverImage}
+              alt={blog.title}
+              fill
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className="object-cover"
+            />
+          </div>
+        )}
+
         {/* Content Layout (Main Content + Sticky Sidebar) */}
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Main Article Body */}
@@ -350,6 +364,64 @@ export default function ArticleClient({ blog, relatedBlogs }) {
                       <pre className="p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed bg-neutral-950">
                         <code>{block.code}</code>
                       </pre>
+                    </div>
+                  );
+
+                case "image":
+                  return (
+                    <figure key={idx} className="my-8 space-y-2.5">
+                      <div className="relative w-full h-64 sm:h-80 md:h-[450px] rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 shadow-lg">
+                        <Image
+                          src={block.url}
+                          alt={block.alt || blog.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 850px"
+                          className="object-cover"
+                        />
+                      </div>
+                      {block.caption && (
+                        <figcaption className="text-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 italic">
+                          {block.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  );
+
+                case "table":
+                  return (
+                    <div key={idx} className="my-8 overflow-x-auto rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm">
+                      <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                        {Array.isArray(block.headers) && block.headers.length > 0 && (
+                          <thead className="bg-neutral-100/90 dark:bg-neutral-800/90 text-neutral-800 dark:text-neutral-200 uppercase text-[11px] font-bold tracking-wider border-b border-neutral-200 dark:border-neutral-800">
+                            <tr>
+                              {block.headers.map((header, hIdx) => (
+                                <th key={hIdx} className="px-4 py-3.5 whitespace-nowrap">
+                                  {header}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                        )}
+                        <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800 bg-white dark:bg-neutral-900/40">
+                          {Array.isArray(block.rows) &&
+                            block.rows.map((row, rIdx) => (
+                              <tr
+                                key={rIdx}
+                                className="hover:bg-blue-50/40 dark:hover:bg-neutral-800/50 transition-colors"
+                              >
+                                {Array.isArray(row) &&
+                                  row.map((cell, cIdx) => (
+                                    <td
+                                      key={cIdx}
+                                      className="px-4 py-3 text-neutral-700 dark:text-neutral-300"
+                                    >
+                                      {cell}
+                                    </td>
+                                  ))}
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
                     </div>
                   );
 
