@@ -927,5 +927,607 @@
         "text": "Never leave a client wondering what to do next after reading a case study. Place prominent, friendly contact buttons ('Discuss a Project', 'Book a Consultation', 'Chat on WhatsApp') at the bottom of every page."
       }
     ]
+  },
+  {
+    "id": "10",
+    "slug": "a-day-in-the-life-of-a-software-developer-daily-routine",
+    "title": "A Day in the Life of a Software Developer: My Daily Routine & Productivity Habits",
+    "description": "An authentic look into my daily schedule as a modern frontend software developer — from deep work coding blocks and PR reviews to continuous learning, debugging, and maintaining peak focus.",
+    "category": "Career",
+    "tags": ["Daily Routine", "Productivity", "Software Engineering", "Career", "Work Life Balance"],
+    "publishedAt": "2025-03-01",
+    "updatedAt": "2025-03-02",
+    "readingTime": "5 min read",
+    "featured": false,
+    "gradient": "from-sky-600 via-blue-600 to-indigo-600",
+    "author": {
+      "name": "Rajiv Sharma",
+      "role": "Software Developer",
+      "avatar": "/profile.webp"
+    },
+    "seo": {
+      "keywords": [
+        "Software developer daily routine",
+        "Day in the life of a frontend developer",
+        "Developer productivity schedule",
+        "React developer routine",
+        "Work life balance for programmers"
+      ],
+      "canonical": "https://rajivsharma.vercel.app/blogs/a-day-in-the-life-of-a-software-developer-daily-routine"
+    },
+    "tableOfContents": [
+      { "id": "morning-kickoff", "title": "Morning Routine: Mindful Start & Daily Prioritization (7:30 AM - 9:00 AM)" },
+      { "id": "deep-work-block-1", "title": "Deep Work Block 1: Feature Architecture & Flow State (9:30 AM - 1:00 PM)" },
+      { "id": "afternoon-sync", "title": "Afternoon Collaboration: Code Reviews, PRs & Standups (2:00 PM - 3:30 PM)" },
+      { "id": "deep-work-block-2", "title": "Deep Work Block 2: Bug Fixes, Tests & Performance Tuning (3:30 PM - 6:00 PM)" },
+      { "id": "evening-growth", "title": "Evening Continuous Learning, Side Hustles & Unplugging (7:30 PM Onward)" },
+      { "id": "productivity-principles", "title": "My 4 Golden Rules for Sustained Engineering Output" }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "People often imagine software engineering as an endless blur of green matrix code typed frantically late at night fueled by energy drinks. In reality, sustained high-performance engineering requires structure, mental clarity, deliberate rest, and protected blocks of uninterrupted focus. Here is an honest, transparent breakdown of how I structure my day as a frontend developer specializing in React and Next.js."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "morning-kickoff",
+        "text": "Morning Routine: Mindful Start & Daily Prioritization (7:30 AM - 9:00 AM)"
+      },
+      {
+        "type": "paragraph",
+        "text": "I avoid looking at Slack, emails, or pull request notifications for the first 45 minutes after waking up. Reactionary mornings trigger dopamine fatigue before the day even begins."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Hydration & Movement: 500ml water and a 20-minute light workout or walk to wake up the body.",
+          "The 'Rule of 3': I open my notebook and write down the three core technical tasks that must get done today (e.g., '1. Implement checkout modal state; 2. Fix LCP shift on mobile; 3. Review payment webhook PR'). Everything else is secondary.",
+          "Desk Cleanliness: A tidy workspace equals a clear mind. Laptop plugged into dual monitors, noise-canceling headphones ready, fresh coffee brewed."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "deep-work-block-1",
+        "text": "Deep Work Block 1: Feature Architecture & Flow State (9:30 AM - 1:00 PM)"
+      },
+      {
+        "type": "paragraph",
+        "text": "This is the most sacred time of my day. Your brain has the highest cognitive capacity and problem-solving bandwidth in the morning. I close all messaging tabs, turn on 'Do Not Disturb', and dive into the hardest engineering problem on my list."
+      },
+      {
+        "type": "callout",
+        "tone": "tip",
+        "title": "Protecting Flow State",
+        "text": "Studies show it takes over 20 minutes to regain focus after an interruption. Batching all meetings away from morning hours ensures uninterrupted architectural flow."
+      },
+      {
+        "type": "paragraph",
+        "text": "During this block, I am typically writing reusable component logic, architecting state stores, integrating REST APIs, or writing performant Next.js Server Actions. I work in 50-minute focused sprints followed by 10-minute breaks away from the screen."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "afternoon-sync",
+        "text": "Afternoon Collaboration: Code Reviews, PRs & Standups (2:00 PM - 3:30 PM)"
+      },
+      {
+        "type": "paragraph",
+        "text": "After a nutritious lunch and a short mental reset, afternoon energy is naturally suited for collaborative, lower-cognitive-overhead tasks:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Code Reviews: Thoroughly reviewing teammates' pull requests on GitHub, testing preview deployments, and providing constructive, empathetic feedback.",
+          "Daily Standup / Client Syncs: 15-minute alignment on what was achieved, what is coming next, and clearing any blockers.",
+          "Triage & Documentation: Updating Jira/Linear tickets, writing clean README specs, and documenting API schemas."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "deep-work-block-2",
+        "text": "Deep Work Block 2: Bug Fixes, Tests & Performance Tuning (3:30 PM - 6:00 PM)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Late afternoons are dedicated to closing loops: squashing edge-case bugs discovered in QA, running automated test suites, optimizing Lighthouse performance scores, and pushing clean commits before wrapping up the official workday."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "evening-growth",
+        "text": "Evening Continuous Learning, Side Hustles & Unplugging (7:30 PM Onward)"
+      },
+      {
+        "type": "paragraph",
+        "text": "Tech evolves relentlessly. Staying at the cutting edge of modern frontend requires consistent curiosity. After dinner, I dedicate 45 to 60 minutes to self-improvement:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Reading engineering blogs: Digging into RFCs, Next.js release notes, or web performance case studies.",
+          "Building side projects: Experimenting with new libraries (e.g. Framer Motion variants, Tailwind v4 features, AI APIs).",
+          "Complete Unplugging: Shutting down all screens at least an hour before bed. Reading fiction or spending time with family ensures deep restorative sleep."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "productivity-principles",
+        "text": "My 4 Golden Rules for Sustained Engineering Output"
+      },
+      {
+        "type": "list",
+        "items": [
+          "1. Plan before typing code: 30 minutes with a pen and notepad planning component hierarchy saves 3 hours of debugging broken state.",
+          "2. Automate repetitive tasks: Hotkeys, custom shell aliases, and snippet extensions compound into hours saved every week.",
+          "3. Say NO to false urgency: Not every Slack notification requires an instant reply. Protect your focus.",
+          "4. Consistency beats all-nighters: 5 hours of razor-sharp deep work every day beats 12 hours of distracted, exhausted typing."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "slug": "integrating-llms-into-nextjs-streaming-ai-sdk",
+    "title": "Integrating Large Language Models into Next.js: Streaming AI UIs with Vercel AI SDK",
+    "description": "A hands-on engineering guide to building responsive, streaming AI chat interfaces and generative components in Next.js 15 using the Vercel AI SDK and modern LLM APIs.",
+    "category": "AI",
+    "tags": ["AI", "Next.js", "Vercel AI SDK", "LLM", "Streaming"],
+    "publishedAt": "2025-03-05",
+    "updatedAt": "2025-03-06",
+    "readingTime": "6 min read",
+    "featured": false,
+    "gradient": "from-purple-600 via-indigo-600 to-blue-600",
+    "author": {
+      "name": "Rajiv Sharma",
+      "role": "Software Developer",
+      "avatar": "/profile.webp"
+    },
+    "seo": {
+      "keywords": [
+        "Next.js AI integration",
+        "Vercel AI SDK tutorial",
+        "Streaming AI UI React",
+        "LLM in Next.js 15",
+        "Building AI chatbots"
+      ],
+      "canonical": "https://rajivsharma.vercel.app/blogs/integrating-llms-into-nextjs-streaming-ai-sdk"
+    },
+    "tableOfContents": [
+      { "id": "why-streaming-matters", "title": "Why Streaming Responses Are Essential for AI UX" },
+      { "id": "vercel-ai-sdk-architecture", "title": "Understanding the Vercel AI SDK Architecture" },
+      { "id": "building-chat-api", "title": "Creating the Streaming Backend Route" },
+      { "id": "frontend-ui-hook", "title": "Consuming Streams on the Frontend with useChat" },
+      { "id": "cost-and-rate-limiting", "title": "Production Safeguards: Rate Limiting & Token Budgets" }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "As Artificial Intelligence becomes a standard capability in modern web products, developers can no longer rely on traditional synchronous HTTP request-response cycles. Waiting 8 to 15 seconds for a complete model response destroys user perception of speed. Streaming tokens over HTTP via Server-Sent Events (SSE) allows users to start reading responses within 300 milliseconds."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "why-streaming-matters",
+        "text": "Why Streaming Responses Are Essential for AI UX"
+      },
+      {
+        "type": "paragraph",
+        "text": "Streaming transforms a sluggish loading spinner into an immediate, organic interaction. Just like ChatGPT, streaming tokens create the psychological impression of instant intelligence, slashing perceived latency by over 80%."
+      },
+      {
+        "type": "callout",
+        "tone": "tip",
+        "title": "Use Edge Runtime for Minimal Cold Starts",
+        "text": "Configuring your Next.js AI API routes with `export const runtime = 'edge'` allows token streaming to begin from edge servers closest to the user with near-zero cold start overhead."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "vercel-ai-sdk-architecture",
+        "text": "Understanding the Vercel AI SDK Architecture"
+      },
+      {
+        "type": "paragraph",
+        "text": "The Vercel AI SDK (`ai` and `@ai-sdk/openai`) provides a unified, vendor-agnostic abstraction layer. Whether you switch between OpenAI GPT-4o, Anthropic Claude 3.7, or Google Gemini, your client UI code remains identical."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "building-chat-api",
+        "text": "Creating the Streaming Backend Route"
+      },
+      {
+        "type": "paragraph",
+        "text": "Here is how to implement a streaming route handler in Next.js App Router:"
+      },
+      {
+        "type": "code",
+        "language": "javascript",
+        "filename": "app/api/chat/route.js",
+        "code": "import { streamText } from 'ai';\nimport { openai } from '@ai-sdk/openai';\n\nexport const runtime = 'edge';\n\nexport async function POST(req) {\n  const { messages } = await req.json();\n\n  const result = streamText({\n    model: openai('gpt-4o'),\n    system: 'You are an expert full-stack developer assistant.',\n    messages,\n  });\n\n  return result.toDataStreamResponse();\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "frontend-ui-hook",
+        "text": "Consuming Streams on the Frontend with useChat"
+      },
+      {
+        "type": "paragraph",
+        "text": "On the client side, the SDK provides the `useChat` hook, handling optimistic UI updates, auto-scrolling, aborting generations, and error management out of the box."
+      },
+      {
+        "type": "code",
+        "language": "jsx",
+        "filename": "components/ChatInterface.jsx",
+        "code": "'use client';\nimport { useChat } from 'ai/react';\n\nexport default function ChatInterface() {\n  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();\n\n  return (\n    <div className=\"max-w-2xl mx-auto p-4 flex flex-col h-[500px]\">\n      <div className=\"flex-1 overflow-y-auto space-y-4 mb-4\">\n        {messages.map((m) => (\n          <div key={m.id} className={m.role === 'user' ? 'text-right' : 'text-left'}>\n            <span className={`inline-block p-3 rounded-2xl ${m.role === 'user' ? 'bg-blue-600 text-white' : 'bg-neutral-800 text-neutral-200'}`}>\n              {m.content}\n            </span>\n          </div>\n        ))}\n      </div>\n      <form onSubmit={handleSubmit} className=\"flex gap-2\">\n        <input value={input} onChange={handleInputChange} placeholder=\"Ask anything...\" className=\"flex-1 p-3 rounded-xl bg-neutral-900 border border-neutral-800 text-white\" />\n        <button type=\"submit\" disabled={isLoading} className=\"px-5 py-3 bg-blue-600 rounded-xl text-white font-bold\">Send</button>\n      </form>\n    </div>\n  );\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "cost-and-rate-limiting",
+        "text": "Production Safeguards: Rate Limiting & Token Budgets"
+      },
+      {
+        "type": "paragraph",
+        "text": "Never expose unauthenticated AI routes to the public. Implement Redis-based rate limiting (via Upstash Ratelimit) and hard token output limits (`maxTokens: 1000`) to protect your API keys from runaway billing."
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "slug": "rise-of-ai-coding-assistants-how-developers-code-faster",
+    "title": "The Rise of AI Coding Assistants: How Developers Code 10x Faster in 2025",
+    "description": "How senior engineers leverage AI pairing tools, Claude 3.7, Cursor, and prompt engineering without compromising code architecture, security, or core fundamentals.",
+    "category": "AI",
+    "tags": ["AI", "Productivity", "Coding Assistants", "Cursor", "Developer Tools"],
+    "publishedAt": "2025-02-18",
+    "updatedAt": "2025-02-20",
+    "readingTime": "5 min read",
+    "featured": false,
+    "gradient": "from-emerald-600 via-teal-600 to-blue-600",
+    "author": {
+      "name": "Rajiv Sharma",
+      "role": "Software Developer",
+      "avatar": "/profile.webp"
+    },
+    "seo": {
+      "keywords": [
+        "AI coding tools",
+        "Cursor IDE workflow",
+        "Claude 3.7 coding",
+        "Developer productivity AI",
+        "Prompt engineering for developers"
+      ],
+      "canonical": "https://rajivsharma.vercel.app/blogs/rise-of-ai-coding-assistants-how-developers-code-faster"
+    },
+    "tableOfContents": [
+      { "id": "the-new-coding-paradigm", "title": "From Syntax Typist to Software Architect" },
+      { "id": "effective-prompting-rules", "title": "Prompt Engineering Rules for High-Accuracy Code" },
+      { "id": "common-pitfalls", "title": "Avoiding the Traps: Hallucinated APIs & Security Vulnerabilities" },
+      { "id": "the-hybrid-workflow", "title": "The Ideal Human + AI Engineering Workflow" }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "The narrative that 'AI will replace software engineers' misses the point. AI does not replace developers; developers who master AI replace those who do not. In 2025, tools like Cursor, Claude, and specialized agentic environments have shifted the primary role of an engineer from typing boilerplate syntax to system architecture, verification, and strategic problem definition."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "the-new-coding-paradigm",
+        "text": "From Syntax Typist to Software Architect"
+      },
+      {
+        "type": "paragraph",
+        "text": "Writing boilerplate forms, Regex expressions, and CSS layouts used to take hours. AI generates these in seconds. This allows developers to focus their mental energy where it counts: system modularity, security boundaries, database query optimization, and user experience."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "effective-prompting-rules",
+        "text": "Prompt Engineering Rules for High-Accuracy Code"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Provide Context First: Always specify the framework version ('Next.js 15 App Router with Tailwind CSS v4') and existing state management patterns before asking for components.",
+          "Request Incremental Steps: Ask the AI to draft an interface or TypeScript signature before generating full implementations.",
+          "Give Strict Constraints: 'Use semantic HTML, avoid external dependencies, ensure keyboard a11y compliance'."
+        ]
+      },
+      {
+        "type": "callout",
+        "tone": "important",
+        "title": "Never Blindly Trust Generated Code",
+        "text": "Always review generated code line by line. AI models can invent npm packages that do not exist or insert subtle edge-case bugs that slip past quick glances."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "common-pitfalls",
+        "text": "Avoiding the Traps: Hallucinated APIs & Security Vulnerabilities"
+      },
+      {
+        "type": "paragraph",
+        "text": "Security vulnerabilities often creep into AI-generated database queries (SQL injection risks) or improper client-side credential exposure. Maintain rigorous ESLint rules, automated testing suites, and strict code review standards."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "the-hybrid-workflow",
+        "text": "The Ideal Human + AI Engineering Workflow"
+      },
+      {
+        "type": "paragraph",
+        "text": "Use AI to brainstorm architecture options, scaffold repetitive files, write unit tests, and draft documentation. Keep domain logic, authentication gates, and final quality control firmly in human hands."
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "slug": "building-autonomous-ai-agents-multistep-reasoning",
+    "title": "Building Autonomous AI Agents: From Prompts to Multi-Step Reasoning Engines",
+    "description": "Understanding agentic architecture: How tool calling, function execution, persistent memory, and loop controllers allow AI systems to execute complex real-world workflows.",
+    "category": "AI",
+    "tags": ["AI Agents", "Tool Calling", "Autonomous AI", "Software Architecture", "Python"],
+    "publishedAt": "2025-02-10",
+    "updatedAt": "2025-02-14",
+    "readingTime": "6 min read",
+    "featured": false,
+    "gradient": "from-fuchsia-600 via-pink-600 to-rose-600",
+    "author": {
+      "name": "Rajiv Sharma",
+      "role": "Software Developer",
+      "avatar": "/profile.webp"
+    },
+    "seo": {
+      "keywords": [
+        "AI Agents architecture",
+        "Tool calling LLM",
+        "Autonomous agents Python",
+        "ReAct pattern AI",
+        "Agentic software engineering"
+      ],
+      "canonical": "https://rajivsharma.vercel.app/blogs/building-autonomous-ai-agents-multistep-reasoning"
+    },
+    "tableOfContents": [
+      { "id": "what-makes-an-agent", "title": "What Differentiates a Chatbot from an AI Agent?" },
+      { "id": "the-react-pattern", "title": "The ReAct Loop: Reasoning + Acting" },
+      { "id": "tool-and-function-calling", "title": "Empowering Models with Tools and Sandboxes" },
+      { "id": "memory-and-state", "title": "Managing Short-Term and Long-Term Agentic Memory" }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "The era of passive chat interfaces is giving way to active, goal-driven AI agents. Unlike standard chatbots that simply answer queries in text, an autonomous AI agent has perception, planning, tool usage, and execution loops that allow it to take actions in the real world: querying databases, triggering webhooks, reading files, and executing code."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "what-makes-an-agent",
+        "text": "What Differentiates a Chatbot from an AI Agent?"
+      },
+      {
+        "type": "paragraph",
+        "text": "A standard LLM call is single-shot: user sends prompt, model responds. An agent operates inside a recursive loop: given a high-level goal, it breaks the task into sub-goals, decides which tool to invoke, evaluates the tool's output, corrects errors, and iterates until the objective is accomplished."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "the-react-pattern",
+        "text": "The ReAct Loop: Reasoning + Acting"
+      },
+      {
+        "type": "paragraph",
+        "text": "The foundational architecture of modern agents is the ReAct (Reasoning + Acting) paradigm. The model alternates between generating internal reasoning thoughts ('I need to check the inventory database first') and concrete action calls (`query_db({ item: 'laptop' })`)."
+      },
+      {
+        "type": "callout",
+        "tone": "tip",
+        "title": "Guardrails Prevent Infinite Loops",
+        "text": "Always implement strict `maxIterations` limits and timeout barriers in agent execution loops to avoid infinite recursive tool execution."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "tool-and-function-calling",
+        "text": "Empowering Models with Tools and Sandboxes"
+      },
+      {
+        "type": "paragraph",
+        "text": "Modern LLMs speak JSON schema. When you provide a function schema (such as `search_web`, `read_file`, or `execute_sql`), the model outputs structured arguments that your backend securely executes before returning results back into the model's context window."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "memory-and-state",
+        "text": "Managing Short-Term and Long-Term Agentic Memory"
+      },
+      {
+        "type": "paragraph",
+        "text": "Long-running tasks require structured state management. Short-term memory lives in the conversation history array; long-term memory is persisted in vector databases or key-value stores for retrieval across sessions."
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "slug": "rag-demystified-retrieval-augmented-generation-custom-data",
+    "title": "RAG Demystified: Building Retrieval-Augmented Generation for Custom Web Data",
+    "description": "How to eliminate LLM hallucinations by connecting your private documentation, PDF manuals, and customer data using vector embeddings and semantic search.",
+    "category": "AI",
+    "tags": ["RAG", "Vector Search", "Embeddings", "pgvector", "AI Architecture"],
+    "publishedAt": "2025-01-25",
+    "updatedAt": "2025-01-30",
+    "readingTime": "6 min read",
+    "featured": false,
+    "gradient": "from-amber-600 via-rose-600 to-pink-600",
+    "author": {
+      "name": "Rajiv Sharma",
+      "role": "Software Developer",
+      "avatar": "/profile.webp"
+    },
+    "seo": {
+      "keywords": [
+        "RAG architecture tutorial",
+        "Retrieval Augmented Generation Next.js",
+        "Vector search pgvector",
+        "Eliminate LLM hallucinations",
+        "Custom knowledge base AI"
+      ],
+      "canonical": "https://rajivsharma.vercel.app/blogs/rag-demystified-retrieval-augmented-generation-custom-data"
+    },
+    "tableOfContents": [
+      { "id": "why-fine-tuning-is-wrong", "title": "Why You Don't Need to Fine-Tune: The Power of RAG" },
+      { "id": "how-rag-works", "title": "The Three Pillars of RAG: Ingest, Embed, Retrieve" },
+      { "id": "choosing-vector-db", "title": "Choosing a Vector Store: pgvector vs. Pinecone" },
+      { "id": "chunking-strategies", "title": "Chunking Strategies That Make or Break Accuracy" }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "A standard Large Language Model is frozen in time at its training cutoff date and knows nothing about your company's proprietary documentation, private tickets, or internal customer database. Fine-tuning a model is expensive, complex, and still prone to hallucinations. Retrieval-Augmented Generation (RAG) is the gold standard solution."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "why-fine-tuning-is-wrong",
+        "text": "Why You Don't Need to Fine-Tune: The Power of RAG"
+      },
+      {
+        "type": "paragraph",
+        "text": "Fine-tuning teaches a model style, syntax, and tone; it is terribly inefficient at teaching facts. RAG works like an open-book exam: when a user asks a question, your system searches your private documents, retrieves the exact relevant excerpts, and provides them as trusted context directly in the prompt."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "how-rag-works",
+        "text": "The Three Pillars of RAG: Ingest, Embed, Retrieve"
+      },
+      {
+        "type": "list",
+        "items": [
+          "1. Ingestion: Breaking long PDFs or markdown documents into overlapping text chunks (typically 500-1000 tokens).",
+          "2. Embedding: Passing each chunk through an embedding model (e.g. `text-embedding-3-small`) to convert words into high-dimensional mathematical vectors.",
+          "3. Vector Search: When a user query arrives, calculating cosine similarity to pull the top 3-5 most relevant chunks to feed into the LLM."
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "choosing-vector-db",
+        "text": "Choosing a Vector Store: pgvector vs. Pinecone"
+      },
+      {
+        "type": "paragraph",
+        "text": "If you already use PostgreSQL (via Supabase or Neon), enabling the `pgvector` extension gives you vector search right inside your existing relational database without paying for or configuring a separate third-party vendor."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "chunking-strategies",
+        "text": "Chunking Strategies That Make or Break Accuracy"
+      },
+      {
+        "type": "paragraph",
+        "text": "Poor chunking is the #1 reason RAG systems fail. If you cut sentences mid-thought, semantic meaning is lost. Use semantic chunking with 15-20% chunk overlap to maintain full conversational context."
+      }
+    ]
+  },
+  {
+    "id": "15",
+    "slug": "local-llms-running-deepseek-llama-with-ollama",
+    "title": "Local LLMs on Your Machine: Running DeepSeek and Llama 3 with Ollama",
+    "description": "Why private, offline local language models are changing software privacy. Step-by-step setup to run open-weight models locally with Ollama and expose local REST APIs.",
+    "category": "AI",
+    "tags": ["Local LLM", "Ollama", "DeepSeek", "Llama 3", "Privacy"],
+    "publishedAt": "2025-01-15",
+    "updatedAt": "2025-01-18",
+    "readingTime": "5 min read",
+    "featured": false,
+    "gradient": "from-teal-600 via-cyan-600 to-blue-600",
+    "author": {
+      "name": "Rajiv Sharma",
+      "role": "Software Developer",
+      "avatar": "/profile.webp"
+    },
+    "seo": {
+      "keywords": [
+        "Run local LLM Ollama",
+        "DeepSeek R1 local setup",
+        "Llama 3 local development",
+        "Private offline AI",
+        "Ollama REST API"
+      ],
+      "canonical": "https://rajivsharma.vercel.app/blogs/local-llms-running-deepseek-llama-with-ollama"
+    },
+    "tableOfContents": [
+      { "id": "why-run-local", "title": "The Privacy and Cost Argument for Local Models" },
+      { "id": "setting-up-ollama", "title": "Installing and Running Ollama in Under 3 Minutes" },
+      { "id": "connecting-to-web-apps", "title": "Connecting Local Models to Your React/Next.js Apps" },
+      { "id": "hardware-requirements", "title": "Hardware Guidelines: RAM, VRAM, and Quantization" }
+    ],
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "For enterprise applications dealing with sensitive medical data, proprietary client code, or strict GDPR compliance, sending proprietary tokens to cloud APIs is a non-starter. Open-weight models such as DeepSeek-R1 and Meta Llama 3 have narrowed the performance gap with proprietary models, making on-device local execution viable for everyday developers."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "why-run-local",
+        "text": "The Privacy and Cost Argument for Local Models"
+      },
+      {
+        "type": "paragraph",
+        "text": "Running models locally provides zero token costs, zero latency from internet outages, and 100% data sovereignty. Your private code never leaves your local hardware."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "setting-up-ollama",
+        "text": "Installing and Running Ollama in Under 3 Minutes"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ollama packages model weights, GPU acceleration, and inference serving into a single lightweight binary. Run one command in your terminal:"
+      },
+      {
+        "type": "code",
+        "language": "bash",
+        "filename": "terminal",
+        "code": "# Pull and run DeepSeek R1 8B locally\nollama run deepseek-r1:8b\n\n# Or run Llama 3.2 for fast lightweight completion\nollama run llama3.2:3b"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "connecting-to-web-apps",
+        "text": "Connecting Local Models to Your React/Next.js Apps"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ollama runs an OpenAI-compatible REST server locally on `http://localhost:11434`. You can connect your Next.js application using standard fetch requests or the Vercel AI SDK without changing a single line of client UI code."
+      },
+      {
+        "type": "code",
+        "language": "javascript",
+        "filename": "app/api/local-ai/route.js",
+        "code": "export async function POST(req) {\n  const { prompt } = await req.json();\n\n  const response = await fetch('http://localhost:11434/api/generate', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({\n      model: 'deepseek-r1:8b',\n      prompt,\n      stream: false\n    })\n  });\n\n  const data = await response.json();\n  return Response.json({ response: data.response });\n}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "id": "hardware-requirements",
+        "text": "Hardware Guidelines: RAM, VRAM, and Quantization"
+      },
+      {
+        "type": "paragraph",
+        "text": "With 4-bit quantized GGUF weights, 7B-8B parameter models require only 8GB of unified memory or VRAM to run at 30+ tokens per second on Apple Silicon Macs or modern NVIDIA GPUs."
+      }
+    ]
   }
 ]
