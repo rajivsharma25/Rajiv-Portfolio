@@ -71,21 +71,84 @@ export default function AdminClient() {
   const [uploadingCover, setUploadingCover] = useState(false);
   const [uploadingBlockIdx, setUploadingBlockIdx] = useState(null);
 
-  const uploadFile = async (file) => {
-    const data = new FormData();
-    data.append("file", file);
-    const res = await fetch("/api/admin/upload", {
-      method: "POST",
-      headers: {
-        "x-admin-key": adminKey,
-      },
-      body: data,
+  const compressImageFile = (file, maxWidth = 1200, quality = 0.8) => {
+    return new Promise((resolve) => {
+      if (!file || file.type === "image/svg+xml" || file.type === "image/gif") {
+        return resolve(file);
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.src = e.target?.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) {
+                resolve(file);
+              } else {
+                const cleanName = (file.name || "image").replace(/\.[^/.]+$/, ".webp");
+                const compressedFile = new File([blob], cleanName, {
+                  type: "image/webp",
+                  lastModified: Date.now(),
+                });
+                resolve(compressedFile);
+              }
+            },
+            "image/webp",
+            quality
+          );
+        };
+        img.onerror = () => resolve(file);
+      };
+      reader.onerror = () => resolve(file);
     });
-    const json = await res.json();
-    if (!res.ok || !json.success) {
-      throw new Error(json.error || "Failed to upload image");
+  };
+
+  const uploadFile = async (file) => {
+    let compressedFile = file;
+    try {
+      compressedFile = await compressImageFile(file);
+    } catch {
+      compressedFile = file;
     }
-    return json.url;
+
+    try {
+      const data = new FormData();
+      data.append("file", compressedFile);
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        headers: {
+          "x-admin-key": adminKey,
+        },
+        body: data,
+      });
+      const json = await res.json();
+      if (res.ok && json.success && json.url) {
+        return json.url;
+      }
+      throw new Error(json.error || "Server upload failed");
+    } catch (apiError) {
+      console.warn("API upload failed, using direct client-side fallback:", apiError);
+      // Fallback: Convert compressed file directly to base64 Data URL
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(compressedFile);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (e) => reject(new Error("Failed to process image file"));
+      });
+    }
   };
 
   const handleCoverUpload = async (e) => {
@@ -1408,6 +1471,7 @@ export default function AdminClient() {
                       alt="Cover Preview"
                       fill
                       sizes="(max-width: 768px) 100vw, 850px"
+                      unoptimized={Boolean(formData.coverImage?.startsWith("data:"))}
                       className="object-cover"
                     />
                   </div>
@@ -1438,6 +1502,7 @@ export default function AdminClient() {
                               alt={block.alt || "Article graphic"}
                               fill
                               sizes="(max-width: 768px) 100vw, 850px"
+                              unoptimized={Boolean(block.url?.startsWith("data:"))}
                               className="object-cover"
                             />
                           </div>

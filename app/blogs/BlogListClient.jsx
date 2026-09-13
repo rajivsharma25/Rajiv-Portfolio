@@ -174,6 +174,7 @@ export default function BlogListClient({ blogs, categories }) {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 550px"
                     priority
+                    unoptimized={Boolean(featuredBlog.coverImage?.startsWith("data:"))}
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -332,6 +333,7 @@ export default function BlogListClient({ blogs, categories }) {
                               alt={blog.title}
                               fill
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              unoptimized={Boolean(blog.coverImage?.startsWith("data:"))}
                               className="object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           </div>

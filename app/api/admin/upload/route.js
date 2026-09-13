@@ -47,10 +47,6 @@ export async function POST(request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Ensure uploads directory exists
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    await fs.mkdir(uploadsDir, { recursive: true });
-
     // Generate clean unique filename
     const originalExt = path.extname(file.name || "") || ".png";
     const rawName = path.basename(file.name || "blog-image", originalExt);
@@ -60,12 +56,24 @@ export async function POST(request) {
       .replace(/-+/g, "-")
       .slice(0, 40);
     const fileName = `${cleanName || "image"}-${Date.now()}${originalExt.toLowerCase()}`;
-    const targetFilePath = path.join(uploadsDir, fileName);
 
-    // Save file to disk
-    await fs.writeFile(targetFilePath, buffer);
-
-    const publicUrl = `/uploads/${fileName}`;
+    let publicUrl;
+    try {
+      // Try writing to local filesystem (works in local dev & standard servers)
+      const uploadsDir = path.join(process.cwd(), "public", "uploads");
+      await fs.mkdir(uploadsDir, { recursive: true });
+      const targetFilePath = path.join(uploadsDir, fileName);
+      await fs.writeFile(targetFilePath, buffer);
+      publicUrl = `/uploads/${fileName}`;
+    } catch (fsErr) {
+      console.warn(
+        "Filesystem not writable (Vercel serverless lambda environment). Falling back to Base64 data URL:",
+        fsErr.message
+      );
+      // Fallback: Convert to Base64 Data URL so upload works seamlessly on Vercel
+      const mime = file.type || "image/jpeg";
+      publicUrl = `data:${mime};base64,${buffer.toString("base64")}`;
+    }
 
     return NextResponse.json({
       success: true,

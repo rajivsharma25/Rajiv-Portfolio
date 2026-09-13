@@ -262,6 +262,7 @@ export default function ArticleClient({ blog, relatedBlogs }) {
               fill
               priority
               sizes="(max-width: 1200px) 100vw, 1200px"
+              unoptimized={Boolean(blog.coverImage?.startsWith("data:"))}
               className="object-cover"
             />
           </div>
@@ -376,6 +377,7 @@ export default function ArticleClient({ blog, relatedBlogs }) {
                           alt={block.alt || blog.title}
                           fill
                           sizes="(max-width: 768px) 100vw, 850px"
+                          unoptimized={Boolean(block.url?.startsWith("data:"))}
                           className="object-cover"
                         />
                       </div>
