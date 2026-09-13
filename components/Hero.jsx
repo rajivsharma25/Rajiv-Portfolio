@@ -159,7 +159,7 @@ export default function Hero() {
           </motion.h2>
 
           <motion.p
-            className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-400 mb-6 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed px-1 sm:px-0"
+            className="mt-4 sm:mt-6 md:mt-7 text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-200 mb-6 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed px-1 sm:px-0"
             {...fadeUp(0.3)}
           >
             {t("hero.description")}
