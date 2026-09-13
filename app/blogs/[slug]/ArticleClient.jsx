@@ -161,7 +161,7 @@ export default function ArticleClient({ blog, relatedBlogs }) {
         </div>
 
         {/* Article Header Hero */}
-        <header className="mb-12 max-w-4xl">
+        <header className="mb-12">
           <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mb-4">
             <span className="px-3.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-800/60">
               {blog.category}

@@ -28,6 +28,8 @@ import {
   ChevronDown,
   Image as ImageIcon,
   Table as TableIcon,
+  Upload,
+  Loader2,
 } from "lucide-react";
 
 export default function AdminClient() {
@@ -47,7 +49,7 @@ export default function AdminClient() {
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
-    category: "Next.js",
+    category: "",
     tags: "",
     description: "",
     coverImage: "",
@@ -60,16 +62,58 @@ export default function AdminClient() {
     ],
   });
 
-  const categories = [
-    "Next.js",
-    "React",
-    "Performance",
-    "Architecture",
-    "Freelancing",
-    "AI",
-    "Career",
-    "Frontend",
-  ];
+  const existingCategories = useMemo(() => {
+    const list = blogs.map((b) => b.category).filter(Boolean);
+    return Array.from(new Set(list));
+  }, [blogs]);
+
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingBlockIdx, setUploadingBlockIdx] = useState(null);
+
+  const uploadFile = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    const res = await fetch("/api/admin/upload", {
+      method: "POST",
+      headers: {
+        "x-admin-key": adminKey,
+      },
+      body: data,
+    });
+    const json = await res.json();
+    if (!res.ok || !json.success) {
+      throw new Error(json.error || "Failed to upload image");
+    }
+    return json.url;
+  };
+
+  const handleCoverUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingCover(true);
+    try {
+      const url = await uploadFile(file);
+      setFormData((prev) => ({ ...prev, coverImage: url }));
+    } catch (err) {
+      alert("Error uploading image: " + err.message);
+    } finally {
+      setUploadingCover(false);
+      e.target.value = "";
+    }
+  };
+
+  const handleBlockImageUpload = async (file, blockIdx) => {
+    if (!file) return;
+    setUploadingBlockIdx(blockIdx);
+    try {
+      const url = await uploadFile(file);
+      updateBlock(blockIdx, { url });
+    } catch (err) {
+      alert("Error uploading image: " + err.message);
+    } finally {
+      setUploadingBlockIdx(null);
+    }
+  };
 
   // Check sessionStorage on mount
   useEffect(() => {
@@ -249,7 +293,7 @@ export default function AdminClient() {
     setFormData({
       title: "",
       slug: "",
-      category: "Next.js",
+      category: "",
       tags: "",
       description: "",
       coverImage: "",
@@ -269,7 +313,7 @@ export default function AdminClient() {
     setFormData({
       title: blog.title || "",
       slug: blog.slug || "",
-      category: blog.category || "Next.js",
+      category: blog.category || "",
       tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : blog.tags || "",
       description: blog.description || "",
       coverImage: blog.coverImage || "",
@@ -664,17 +708,20 @@ export default function AdminClient() {
                     <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300">
                       Category *
                     </label>
-                    <select
+                    <input
+                      type="text"
+                      required
+                      list="category-suggestions"
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      placeholder="e.g. Technology, Career, Lifestyle, Travel..."
                       className="w-full px-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-sm focus:ring-2 focus:ring-blue-500"
-                    >
-                      {categories.map((c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
+                    />
+                    <datalist id="category-suggestions">
+                      {existingCategories.map((c) => (
+                        <option key={c} value={c} />
                       ))}
-                    </select>
+                    </datalist>
                   </div>
 
                   <div className="space-y-1.5 md:col-span-2">
@@ -704,9 +751,9 @@ export default function AdminClient() {
                     />
                   </div>
 
-                  <div className="space-y-1.5 md:col-span-2">
+                  <div className="space-y-2 md:col-span-2">
                     <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
-                      <span>Cover Image URL (Optional)</span>
+                      <span>Cover Image (Upload from Computer or URL)</span>
                       {formData.coverImage && (
                         <button
                           type="button"
@@ -717,13 +764,41 @@ export default function AdminClient() {
                         </button>
                       )}
                     </label>
-                    <input
-                      type="url"
-                      value={formData.coverImage || ""}
-                      onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-                      placeholder="e.g. https://images.unsplash.com/... or /profile.webp"
-                      className="w-full px-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-sm focus:ring-2 focus:ring-blue-500"
-                    />
+
+                    {/* Upload button & URL input */}
+                    <div className="grid sm:grid-cols-2 gap-3 items-center">
+                      <label className="flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-500 bg-neutral-50 dark:bg-neutral-800/60 cursor-pointer transition group">
+                        {uploadingCover ? (
+                          <>
+                            <Loader2 size={16} className="animate-spin text-blue-600" />
+                            <span className="text-xs font-semibold text-blue-600">Uploading cover...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Upload size={16} className="text-neutral-500 group-hover:text-blue-500 transition-colors" />
+                            <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                              Upload Image File
+                            </span>
+                          </>
+                        )}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          disabled={uploadingCover}
+                          onChange={handleCoverUpload}
+                        />
+                      </label>
+
+                      <input
+                        type="url"
+                        value={formData.coverImage || ""}
+                        onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
+                        placeholder="Or paste image URL (e.g. /profile.webp)..."
+                        className="w-full px-3 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
                     {formData.coverImage && (
                       <div className="mt-2 relative w-full h-44 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1013,31 +1088,60 @@ export default function AdminClient() {
 
                       {block.type === "image" && (
                         <div className="space-y-3">
-                          <div className="grid sm:grid-cols-2 gap-3">
-                            <div className="space-y-1">
-                              <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
-                                Image URL *
+                          {/* Upload File or URL */}
+                          <div className="space-y-1.5">
+                            <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
+                              Image File (Upload from Computer or URL) *
+                            </label>
+                            <div className="grid sm:grid-cols-2 gap-3 items-center">
+                              <label className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-blue-500 bg-neutral-50 dark:bg-neutral-800/60 cursor-pointer transition group">
+                                {uploadingBlockIdx === idx ? (
+                                  <>
+                                    <Loader2 size={14} className="animate-spin text-blue-600" />
+                                    <span className="text-xs font-semibold text-blue-600">Uploading...</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Upload size={14} className="text-neutral-500 group-hover:text-blue-500" />
+                                    <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600">
+                                      Upload Image File
+                                    </span>
+                                  </>
+                                )}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={uploadingBlockIdx === idx}
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) handleBlockImageUpload(file, idx);
+                                    e.target.value = "";
+                                  }}
+                                />
                               </label>
+
                               <input
                                 type="url"
                                 value={block.url || ""}
                                 onChange={(e) => updateBlock(idx, { url: e.target.value })}
-                                placeholder="https://images.unsplash.com/... or /profile.webp"
-                                className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
+                                placeholder="Or paste image URL here..."
+                                className="w-full px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
                               />
                             </div>
-                            <div className="space-y-1">
-                              <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
-                                Alt Text (Accessibility & SEO)
-                              </label>
-                              <input
-                                type="text"
-                                value={block.alt || ""}
-                                onChange={(e) => updateBlock(idx, { alt: e.target.value })}
-                                placeholder="Describe the image..."
-                                className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
-                              />
-                            </div>
+                          </div>
+
+                          <div className="space-y-1">
+                            <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
+                              Alt Text (Accessibility & SEO)
+                            </label>
+                            <input
+                              type="text"
+                              value={block.alt || ""}
+                              onChange={(e) => updateBlock(idx, { alt: e.target.value })}
+                              placeholder="Describe the image..."
+                              className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
+                            />
                           </div>
                           <div className="space-y-1">
                             <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">

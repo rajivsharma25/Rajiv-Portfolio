@@ -2,25 +2,25 @@ import { getAllBlogs, getAllCategories } from "@/lib/blogs";
 import BlogListClient from "./BlogListClient";
 
 export const metadata = {
-  title: "Blogs & Engineering Insights | Rajiv Sharma",
+  title: "Blogs & Insights | Rajiv Sharma",
   description:
-    "Explore in-depth technical writeups on React 19, Next.js 15, frontend architecture, Core Web Vitals optimization, and state management by Rajiv Sharma.",
+    "Explore articles, tutorials, engineering deep dives, and stories on web development, software engineering, and technology by Rajiv Sharma.",
   alternates: {
     canonical: "https://rajivsharma.vercel.app/blogs",
   },
   keywords: [
     "Rajiv Sharma Blog",
-    "Frontend Engineering Blog",
-    "Next.js 15 Tutorials",
-    "React 19 Server Components",
-    "Web Performance Optimization",
-    "Core Web Vitals",
-    "Software Developer India",
+    "Web Development Articles",
+    "Software Engineering Insights",
+    "Frontend Tutorials",
+    "Next.js and React",
+    "Freelance Developer Blog",
+    "Tech Insights India",
   ],
   openGraph: {
-    title: "Blogs & Technical Insights | Rajiv Sharma",
+    title: "Blogs & Insights | Rajiv Sharma",
     description:
-      "Articles and deep dives on React 19, Next.js 15, Core Web Vitals, and scalable frontend architectures by Rajiv Sharma.",
+      "Articles, tutorials, engineering deep dives, and stories on web development, technology, and software development by Rajiv Sharma.",
     url: "https://rajivsharma.vercel.app/blogs",
     siteName: "Rajiv Sharma Portfolio",
     type: "website",
@@ -29,15 +29,15 @@ export const metadata = {
         url: "/profile.webp",
         width: 1200,
         height: 630,
-        alt: "Rajiv Sharma Engineering Blogs",
+        alt: "Rajiv Sharma Blogs",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blogs & Technical Insights | Rajiv Sharma",
+    title: "Blogs & Insights | Rajiv Sharma",
     description:
-      "Articles and deep dives on React 19, Next.js 15, Core Web Vitals, and scalable frontend architectures by Rajiv Sharma.",
+      "Articles, tutorials, engineering deep dives, and stories on web development, technology, and software development by Rajiv Sharma.",
     images: ["/profile.webp"],
   },
 };
