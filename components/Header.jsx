@@ -28,8 +28,7 @@ export default function Header() {
   const isHomePage = pathname === "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const { t } = useLanguage();
   const isScrollingRef = useRef(false);
 
@@ -43,8 +42,6 @@ export default function Header() {
   ];
 
   useEffect(() => {
-    setMounted(true);
-
     const sections = [
       "about",
       "skills",
@@ -182,18 +179,19 @@ export default function Header() {
             {/* Theme Toggle */}
             <div className="relative group">
               <button
-                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                onClick={() => {
+                  const isDark = typeof document !== "undefined" && document.documentElement.classList.contains("dark");
+                  setTheme(isDark ? "light" : "dark");
+                }}
                 className="p-2.5 rounded-full text-gray-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md hover:bg-white dark:hover:bg-neutral-800 border border-gray-200/70 dark:border-neutral-800/80 transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center w-10 h-10 shadow-xs"
                 aria-label="Toggle Theme"
               >
-                {mounted ? (
-                  resolvedTheme === "dark" ? <Sun size={19} /> : <Moon size={19} />
-                ) : (
-                  <span className="w-4 h-4 block" />
-                )}
+                <Sun size={19} className="hidden dark:block text-amber-400 dark:text-yellow-300 transition-transform duration-200 group-hover:rotate-45" />
+                <Moon size={19} className="block dark:hidden text-gray-700 transition-transform duration-200 group-hover:-rotate-12" />
               </button>
               <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-gray-800 dark:bg-neutral-800 text-white text-[10px] font-medium rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 shadow-sm">
-                {mounted ? (resolvedTheme === "dark" ? "Light Mode" : "Dark Mode") : "Theme"}
+                <span className="hidden dark:inline">Light Mode</span>
+                <span className="inline dark:hidden">Dark Mode</span>
               </span>
             </div>
 
@@ -216,15 +214,15 @@ export default function Header() {
 
             {/* Theme Toggle for Mobile */}
             <button
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              onClick={() => {
+                const isDark = typeof document !== "undefined" && document.documentElement.classList.contains("dark");
+                setTheme(isDark ? "light" : "dark");
+              }}
               className="p-2 rounded-full text-gray-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-gray-200/70 dark:border-neutral-800/80 hover:bg-white dark:hover:bg-neutral-800 transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center w-9 h-9 shadow-xs"
               aria-label="Toggle Theme"
             >
-              {mounted ? (
-                resolvedTheme === "dark" ? <Sun size={20} /> : <Moon size={20} />
-              ) : (
-                <span className="w-5 h-5 block" />
-              )}
+              <Sun size={18} className="hidden dark:block text-amber-400 dark:text-yellow-300" />
+              <Moon size={18} className="block dark:hidden text-gray-700" />
             </button>
 
             {/* Mobile Menu Button */}

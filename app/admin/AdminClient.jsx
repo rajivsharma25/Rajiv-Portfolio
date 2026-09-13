@@ -34,6 +34,7 @@ import {
 
 export default function AdminClient() {
   const [adminKey, setAdminKey] = useState("");
+  const [checkingAuth, setCheckingAuth] = useState(true);
   const [keyInput, setKeyInput] = useState("");
   const [showKey, setShowKey] = useState(false);
   const [authError, setAuthError] = useState("");
@@ -117,10 +118,16 @@ export default function AdminClient() {
 
   // Check sessionStorage on mount
   useEffect(() => {
-    const savedKey = sessionStorage.getItem("portfolio_admin_key");
-    if (savedKey) {
-      setAdminKey(savedKey);
-      fetchBlogs(savedKey);
+    try {
+      const savedKey = sessionStorage.getItem("portfolio_admin_key");
+      if (savedKey) {
+        setAdminKey(savedKey);
+        fetchBlogs(savedKey);
+      }
+    } catch (e) {
+      console.error("Failed to read session storage:", e);
+    } finally {
+      setCheckingAuth(false);
     }
   }, []);
 
@@ -412,6 +419,52 @@ export default function AdminClient() {
     );
   }, [blogs, searchQuery]);
 
+  // SKELETON LOADER SCREEN WHILE INITIALIZING / CHECKING AUTH
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-neutral-50/50 dark:bg-neutral-950 py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-8 animate-pulse">
+          {/* Top Bar Skeleton */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+            <div className="space-y-2">
+              <div className="h-7 w-48 bg-neutral-200 dark:bg-neutral-800 rounded-xl" />
+              <div className="h-4 w-72 bg-neutral-100 dark:bg-neutral-800/60 rounded-lg" />
+            </div>
+            <div className="flex items-center gap-2.5">
+              <div className="h-10 w-36 bg-neutral-200 dark:bg-neutral-800 rounded-xl" />
+              <div className="h-10 w-10 bg-neutral-200 dark:bg-neutral-800 rounded-xl" />
+              <div className="h-10 w-10 bg-neutral-200 dark:bg-neutral-800 rounded-xl" />
+            </div>
+          </div>
+
+          {/* Search Box Skeleton */}
+          <div className="h-11 w-full max-w-md bg-neutral-200 dark:bg-neutral-800 rounded-xl" />
+
+          {/* Article List Skeleton Rows */}
+          <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs divide-y divide-neutral-200 dark:divide-neutral-800">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="min-w-0 flex-1 space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <div className="h-5 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
+                    <div className="h-4 w-28 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+                  </div>
+                  <div className="h-5 w-3/4 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
+                  <div className="h-3.5 w-1/2 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                  <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                  <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // LOGIN SCREEN
   if (!adminKey) {
     return (
@@ -574,7 +627,28 @@ export default function AdminClient() {
           </div>
 
           {loading ? (
-            <div className="text-center py-16 text-neutral-400 text-sm">Loading articles...</div>
+            <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs divide-y divide-neutral-200 dark:divide-neutral-800 animate-pulse">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div
+                  key={i}
+                  className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="min-w-0 flex-1 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <div className="h-5 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
+                      <div className="h-4 w-28 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+                    </div>
+                    <div className="h-5 w-3/4 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
+                    <div className="h-3.5 w-1/2 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                    <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                    <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs">
               <div className="divide-y divide-neutral-200 dark:divide-neutral-800">

@@ -41,16 +41,6 @@ export default function LanguageToggle({ className = "" }) {
     };
   }, [isOpen]);
 
-  if (!mounted) {
-    return (
-      <div
-        className={`w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-white/70 dark:bg-neutral-900/70 border border-gray-200/70 dark:border-neutral-800/80 flex items-center justify-center ${className}`}
-      >
-        <span className="w-4 h-4 block" />
-      </div>
-    );
-  }
-
   const activeLangObj = languages.find((l) => l.code === language) || languages[0];
 
   return (
@@ -69,8 +59,11 @@ export default function LanguageToggle({ className = "" }) {
         <Languages size={19} className="w-[18px] h-[18px] lg:w-[19px] lg:h-[19px] transition-transform duration-200 group-hover:scale-105" />
 
         {/* Small Active Lang Badge */}
-        <span className="absolute -bottom-0.5 -right-0.5 rtl:right-auto rtl:-left-0.5 inline-flex items-center justify-center whitespace-nowrap px-1 py-[0.5px] rounded-full text-[8px] font-extrabold uppercase bg-blue-600 text-white leading-none shadow-xs pointer-events-none">
-          {activeLangObj.short}
+        <span
+          suppressHydrationWarning
+          className="absolute -bottom-0.5 -right-0.5 rtl:right-auto rtl:-left-0.5 inline-flex items-center justify-center whitespace-nowrap px-1 py-[0.5px] rounded-full text-[8px] font-extrabold uppercase bg-blue-600 text-white leading-none shadow-xs pointer-events-none"
+        >
+          {mounted ? activeLangObj.short : "EN"}
         </span>
       </button>
 
