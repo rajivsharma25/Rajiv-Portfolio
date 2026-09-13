@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
-const blogsFilePath = path.join(process.cwd(), "data", "blogs.json");
+const localBlogsFilePath = path.join(process.cwd(), "data", "blogs.json");
+const tmpBlogsFilePath = path.join("/tmp", "blogs.json");
 
 function verifyAdmin(request) {
   const adminKey = request.headers.get("x-admin-key");
@@ -11,12 +12,41 @@ function verifyAdmin(request) {
 }
 
 async function readBlogsFile() {
-  const rawData = await fs.readFile(blogsFilePath, "utf-8");
+  // Check /tmp/blogs.json first (for serverless environments like Vercel)
+  try {
+    const tmpData = await fs.readFile(tmpBlogsFilePath, "utf-8");
+    return JSON.parse(tmpData);
+  } catch {
+    // Not in /tmp, read from repository file
+  }
+
+  const rawData = await fs.readFile(localBlogsFilePath, "utf-8");
   return JSON.parse(rawData);
 }
 
 async function writeBlogsFile(blogs) {
-  await fs.writeFile(blogsFilePath, JSON.stringify(blogs, null, 2), "utf-8");
+  const content = JSON.stringify(blogs, null, 2);
+  let written = false;
+
+  // Try writing to repo path first (works in local dev)
+  try {
+    await fs.writeFile(localBlogsFilePath, content, "utf-8");
+    written = true;
+  } catch (err) {
+    console.warn("Could not write to local data directory (serverless read-only filesystem):", err.message);
+  }
+
+  // Always write or fallback to /tmp so serverless lambda instances have the latest data
+  try {
+    await fs.writeFile(tmpBlogsFilePath, content, "utf-8");
+    written = true;
+  } catch (tmpErr) {
+    console.warn("Could not write to /tmp directory:", tmpErr.message);
+  }
+
+  if (!written) {
+    throw new Error("Unable to save blog changes: serverless filesystem is not writable.");
+  }
 }
 
 function generateSlug(title) {

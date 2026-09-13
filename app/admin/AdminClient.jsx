@@ -30,7 +30,9 @@ import {
   Table as TableIcon,
   Upload,
   Loader2,
+  Download,
 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function AdminClient() {
   const [adminKey, setAdminKey] = useState("");
@@ -158,8 +160,9 @@ export default function AdminClient() {
     try {
       const url = await uploadFile(file);
       setFormData((prev) => ({ ...prev, coverImage: url }));
+      toast.success("Cover image uploaded successfully!");
     } catch (err) {
-      alert("Error uploading image: " + err.message);
+      toast.error("Error uploading image: " + err.message);
     } finally {
       setUploadingCover(false);
       e.target.value = "";
@@ -172,8 +175,9 @@ export default function AdminClient() {
     try {
       const url = await uploadFile(file);
       updateBlock(blockIdx, { url });
+      toast.success("In-article image uploaded successfully!");
     } catch (err) {
-      alert("Error uploading image: " + err.message);
+      toast.error("Error uploading image: " + err.message);
     } finally {
       setUploadingBlockIdx(null);
     }
@@ -208,7 +212,9 @@ export default function AdminClient() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        setAuthError(data.error || "Authentication failed. Incorrect key.");
+        const msg = data.error || "Authentication failed. Incorrect key.";
+        setAuthError(msg);
+        toast.error(msg);
         setLoading(false);
         return;
       }
@@ -216,8 +222,10 @@ export default function AdminClient() {
       sessionStorage.setItem("portfolio_admin_key", keyInput);
       setAdminKey(keyInput);
       fetchBlogs(keyInput);
-    } catch (err) {
+      toast.success("Welcome back Rajiv! Dashboard unlocked.");
+    } catch {
       setAuthError("Failed to connect to authentication server.");
+      toast.error("Failed to connect to authentication server.");
     } finally {
       setLoading(false);
     }
@@ -228,6 +236,22 @@ export default function AdminClient() {
     setAdminKey("");
     setKeyInput("");
     setBlogs([]);
+    toast.info("Logged out of Admin Console.");
+  };
+
+  const handleExportBlogs = () => {
+    try {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(blogs, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "blogs.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      toast.success("Downloaded blogs.json successfully!");
+    } catch {
+      toast.error("Failed to export blogs.");
+    }
   };
 
   const fetchBlogs = async (key) => {
@@ -396,12 +420,13 @@ export default function AdminClient() {
   const handleSaveBlog = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.description) {
-      alert("Please enter a title and description.");
+      toast.error("Please enter both an article title and summary description.");
       return;
     }
 
     setSaving(true);
     setStatusMessage(null);
+    const toastId = toast.loading(editingBlogId ? "Updating article..." : "Publishing article...");
 
     try {
       const url = "/api/admin/blogs";
@@ -411,7 +436,7 @@ export default function AdminClient() {
         id: editingBlogId || undefined,
         tags: formData.tags
           ? formData.tags.split(",").map((t) => t.trim()).filter(Boolean)
-          : [formData.category],
+          : [formData.category || "General"],
       };
 
       const res = await fetch(url, {
@@ -429,10 +454,14 @@ export default function AdminClient() {
         throw new Error(result.error || "Failed to save blog.");
       }
 
+      const successMsg = editingBlogId
+        ? "Article updated successfully!"
+        : "New article published successfully!";
       setStatusMessage({
         type: "success",
-        text: editingBlogId ? "Blog updated successfully!" : "New blog published successfully!",
+        text: successMsg,
       });
+      toast.success(successMsg, { id: toastId });
 
       await fetchBlogs(adminKey);
       setCurrentView("list");
@@ -440,7 +469,9 @@ export default function AdminClient() {
 
       setTimeout(() => setStatusMessage(null), 4000);
     } catch (err) {
-      setStatusMessage({ type: "error", text: err.message });
+      const errorMsg = err.message || "Failed to save article.";
+      setStatusMessage({ type: "error", text: errorMsg });
+      toast.error(errorMsg, { id: toastId });
     } finally {
       setSaving(false);
     }
@@ -451,6 +482,7 @@ export default function AdminClient() {
       return;
     }
 
+    const toastId = toast.loading(`Deleting "${title}"...`);
     try {
       const res = await fetch(`/api/admin/blogs?id=${id}`, {
         method: "DELETE",
@@ -459,15 +491,15 @@ export default function AdminClient() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Failed to delete blog.");
-        return;
+        throw new Error(data.error || "Failed to delete blog.");
       }
 
+      toast.success(`Deleted "${title}" successfully.`, { id: toastId });
       setStatusMessage({ type: "success", text: `Deleted "${title}" successfully.` });
       setBlogs((prev) => prev.filter((b) => b.id !== id));
       setTimeout(() => setStatusMessage(null), 3000);
     } catch (err) {
-      alert("Error deleting blog: " + err.message);
+      toast.error(err.message || "Error deleting blog.", { id: toastId });
     }
   };
 
@@ -649,6 +681,14 @@ export default function AdminClient() {
           >
             <ExternalLink size={16} />
           </Link>
+
+          <button
+            onClick={handleExportBlogs}
+            className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition cursor-pointer"
+            title="Export / Download blogs.json (for Git backup)"
+          >
+            <Download size={16} />
+          </button>
 
           <button
             onClick={handleLogout}
