@@ -12,6 +12,7 @@ import {
   Send,
   ChevronRight,
   Github,
+  FileText,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -22,6 +23,7 @@ export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hasResume, setHasResume] = useState(false);
   const { setTheme } = useTheme();
 
   useEffect(() => {
@@ -31,6 +33,24 @@ export default function Header() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkResume = async () => {
+      try {
+        const res = await fetch("/api/resume/status");
+        if (res.ok) {
+          const data = await res.json();
+          setHasResume(!!data.hasResume);
+        }
+      } catch (e) {
+        // Silently maintain default
+      }
+    };
+
+    checkResume();
+    window.addEventListener("resumeUpdated", checkResume);
+    return () => window.removeEventListener("resumeUpdated", checkResume);
   }, []);
 
   const navItems = [
@@ -148,16 +168,28 @@ export default function Header() {
               </span>
             </div>
 
-            {/* LinkedIn Pill Button */}
-            <Link
-              href="https://linkedin.com/in/rajivsharma25"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-blue-600/80 dark:border-blue-500/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
-            >
-              <Linkedin size={16} />
-              <span>LinkedIn</span>
-            </Link>
+            {/* Desktop CTA: Resume (if uploaded) or LinkedIn */}
+            {hasResume ? (
+              <a
+                href="/api/resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 active:scale-95 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30 cursor-pointer"
+              >
+                <FileText size={16} />
+                <span>Resume</span>
+              </a>
+            ) : (
+              <Link
+                href="https://linkedin.com/in/rajivsharma25"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-blue-600/80 dark:border-blue-500/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+              >
+                <Linkedin size={16} />
+                <span>LinkedIn</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Controls */}
@@ -232,17 +264,31 @@ export default function Header() {
                 );
               })}
 
-              {/* Quick Actions */}
+              {/* Quick Actions: Resume or LinkedIn, and GitHub */}
               <div className="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100 dark:border-neutral-800/80">
-                <Link
-                  href="https://linkedin.com/in/rajivsharma25"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white py-3 px-3 rounded-full text-xs font-semibold shadow-sm transition-all duration-200 active:scale-95"
-                >
-                  <Linkedin size={14} />
-                  LinkedIn
-                </Link>
+                {hasResume ? (
+                  <a
+                    href="/api/resume"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white py-3 px-3 rounded-full text-xs font-semibold shadow-sm transition-all duration-200 active:scale-95"
+                  >
+                    <FileText size={14} />
+                    Resume
+                  </a>
+                ) : (
+                  <Link
+                    href="https://linkedin.com/in/rajivsharma25"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="inline-flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white py-3 px-3 rounded-full text-xs font-semibold shadow-sm transition-all duration-200 active:scale-95"
+                  >
+                    <Linkedin size={14} />
+                    LinkedIn
+                  </Link>
+                )}
                 <Link
                   href="https://github.com/rajivsharma25"
                   target="_blank"

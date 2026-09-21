@@ -27,11 +27,15 @@ import {
   ChevronDown,
   Table as TableIcon,
   Loader2,
+  Upload,
+  BookOpen,
+  Download,
 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminClient() {
   const [adminKey, setAdminKey] = useState("");
+  const [activeTab, setActiveTab] = useState("blogs"); // 'blogs' | 'resume'
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [keyInput, setKeyInput] = useState("");
   const [showKey, setShowKey] = useState(false);
@@ -44,6 +48,11 @@ export default function AdminClient() {
   const [currentView, setCurrentView] = useState("list"); // 'list' | 'editor'
   const [editingBlogId, setEditingBlogId] = useState(null);
   const [statusMessage, setStatusMessage] = useState(null);
+
+  // Resume Management States
+  const [resumeInfo, setResumeInfo] = useState(null);
+  const [resumeLoading, setResumeLoading] = useState(false);
+  const [resumeUploading, setResumeUploading] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -66,6 +75,93 @@ export default function AdminClient() {
     return Array.from(new Set(list));
   }, [blogs]);
 
+  const fetchResumeInfo = async (key) => {
+    const k = key || adminKey;
+    if (!k) return;
+    setResumeLoading(true);
+    try {
+      const res = await fetch("/api/admin/resume", {
+        headers: { "x-admin-key": k },
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setResumeInfo(data.resume);
+      }
+    } catch (e) {
+      console.error("Failed to fetch resume info:", e);
+    } finally {
+      setResumeLoading(false);
+    }
+  };
+
+  const handleResumeFileSelect = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+      toast.error("Only PDF files (.pdf) are supported.");
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("File size exceeds 10MB limit.");
+      return;
+    }
+
+    setResumeUploading(true);
+    const toastId = toast.loading("Uploading resume PDF...");
+
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+
+      const res = await fetch("/api/admin/resume", {
+        method: "POST",
+        headers: { "x-admin-key": adminKey },
+        body: fd,
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to upload resume.");
+      }
+
+      toast.success(data.message || "Resume uploaded successfully!", { id: toastId });
+      setResumeInfo(data.resume);
+      window.dispatchEvent(new Event("resumeUpdated"));
+    } catch (err) {
+      toast.error(err.message || "Error uploading resume.", { id: toastId });
+    } finally {
+      setResumeUploading(false);
+      e.target.value = "";
+    }
+  };
+
+  const handleResumeDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete the active resume? The website header button will revert back to LinkedIn.")) {
+      return;
+    }
+
+    const toastId = toast.loading("Deleting resume...");
+    try {
+      const res = await fetch("/api/admin/resume", {
+        method: "DELETE",
+        headers: { "x-admin-key": adminKey },
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to delete resume.");
+      }
+
+      toast.success("Resume deleted successfully.", { id: toastId });
+      setResumeInfo(null);
+      window.dispatchEvent(new Event("resumeUpdated"));
+    } catch (err) {
+      toast.error(err.message || "Error deleting resume.", { id: toastId });
+    }
+  };
+
   // Check sessionStorage on mount
   useEffect(() => {
     try {
@@ -73,6 +169,7 @@ export default function AdminClient() {
       if (savedKey) {
         setAdminKey(savedKey);
         fetchBlogs(savedKey);
+        fetchResumeInfo(savedKey);
       }
     } catch (e) {
       console.error("Failed to read session storage:", e);
@@ -105,6 +202,7 @@ export default function AdminClient() {
       sessionStorage.setItem("portfolio_admin_key", keyInput);
       setAdminKey(keyInput);
       fetchBlogs(keyInput);
+      fetchResumeInfo(keyInput);
       toast.success("Welcome back Rajiv! Dashboard unlocked.");
     } catch {
       setAuthError("Failed to connect to authentication server.");
@@ -119,6 +217,7 @@ export default function AdminClient() {
     setAdminKey("");
     setKeyInput("");
     setBlogs([]);
+    setResumeInfo(null);
     toast.info("Logged out of Admin Console.");
   };
 
@@ -499,37 +598,49 @@ export default function AdminClient() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white">
-              Blog Admin Console
+              Portfolio Admin Console
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-bold">
-              {blogs.length} Articles
-            </span>
+            {activeTab === "blogs" ? (
+              <span className="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-bold">
+                {blogs.length} Articles
+              </span>
+            ) : (
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-xs font-bold">
+                {resumeInfo ? "Resume Active" : "No Resume"}
+              </span>
+            )}
           </div>
           <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-            Create, edit, and organize articles published on your portfolio.
+            {activeTab === "blogs"
+              ? "Create, edit, and organize articles published on your portfolio."
+              : "Manage your official resume PDF document displayed across your portfolio."}
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
-          {currentView !== "list" ? (
-            <button
-              onClick={() => {
-                setCurrentView("list");
-                resetForm();
-              }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-700 transition cursor-pointer"
-            >
-              <ArrowLeft size={15} />
-              <span>Articles List</span>
-            </button>
-          ) : (
-            <button
-              onClick={openEditorForNew}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer"
-            >
-              <Plus size={16} />
-              <span>Create New Article</span>
-            </button>
+          {activeTab === "blogs" && (
+            <>
+              {currentView !== "list" ? (
+                <button
+                  onClick={() => {
+                    setCurrentView("list");
+                    resetForm();
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-700 transition cursor-pointer"
+                >
+                  <ArrowLeft size={15} />
+                  <span>Articles List</span>
+                </button>
+              ) : (
+                <button
+                  onClick={openEditorForNew}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer"
+                >
+                  <Plus size={16} />
+                  <span>Create New Article</span>
+                </button>
+              )}
+            </>
           )}
 
           <Link
@@ -541,7 +652,6 @@ export default function AdminClient() {
             <ExternalLink size={16} />
           </Link>
 
-
           <button
             onClick={handleLogout}
             className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-red-600 transition cursor-pointer"
@@ -550,6 +660,46 @@ export default function AdminClient() {
             <LogOut size={16} />
           </button>
         </div>
+      </div>
+
+      {/* Top Navigation Tabs: Blogs vs Resume */}
+      <div className="flex items-center gap-2 mb-8 p-1.5 rounded-2xl bg-gray-100 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 w-fit">
+        <button
+          type="button"
+          onClick={() => {
+            setActiveTab("blogs");
+            if (currentView !== "list" && currentView !== "editor" && currentView !== "preview") {
+              setCurrentView("list");
+            }
+          }}
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+            activeTab === "blogs"
+              ? "bg-white dark:bg-neutral-800 text-blue-600 dark:text-blue-400 shadow-xs"
+              : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+          }`}
+        >
+          <BookOpen size={16} />
+          <span>Articles & Blogs</span>
+          <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-bold">
+            {blogs.length}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("resume")}
+          className={`flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+            activeTab === "resume"
+              ? "bg-white dark:bg-neutral-800 text-blue-600 dark:text-blue-400 shadow-xs"
+              : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+          }`}
+        >
+          <FileText size={16} />
+          <span>Resume PDF</span>
+          {resumeInfo && (
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          )}
+        </button>
       </div>
 
       {/* Toast / Status Alert */}
@@ -566,107 +716,111 @@ export default function AdminClient() {
         </div>
       )}
 
-      {/* VIEW: ARTICLES LIST */}
-      {currentView === "list" && (
-        <div className="space-y-6">
-          {/* Search Box */}
-          <div className="relative max-w-md">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search articles by title or category..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+      {/* TAB 1: ARTICLES & BLOGS */}
+      {activeTab === "blogs" && (
+        <>
+          {/* VIEW: ARTICLES LIST */}
+          {currentView === "list" && (
+            <div className="space-y-6">
+              {/* Search Box */}
+              <div className="relative max-w-md">
+                <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search articles by title or category..."
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
 
-          {loading ? (
-            <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs divide-y divide-neutral-200 dark:divide-neutral-800 animate-pulse">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="min-w-0 flex-1 space-y-2.5">
-                    <div className="flex items-center gap-2">
-                      <div className="h-5 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
-                      <div className="h-4 w-28 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+              {loading ? (
+                <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs divide-y divide-neutral-200 dark:divide-neutral-800 animate-pulse">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div
+                      key={i}
+                      className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    >
+                      <div className="min-w-0 flex-1 space-y-2.5">
+                        <div className="flex items-center gap-2">
+                          <div className="h-5 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
+                          <div className="h-4 w-28 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+                        </div>
+                        <div className="h-5 w-3/4 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
+                        <div className="h-3.5 w-1/2 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                        <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                        <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                      </div>
                     </div>
-                    <div className="h-5 w-3/4 bg-neutral-200 dark:bg-neutral-800 rounded-md" />
-                    <div className="h-3.5 w-1/2 bg-neutral-100 dark:bg-neutral-800/60 rounded-md" />
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
-                    <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
-                    <div className="w-8 h-8 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs">
+                  <div className="divide-y divide-neutral-200 dark:divide-neutral-800">
+                    {filteredBlogs.map((blog) => (
+                      <div
+                        key={blog.id}
+                        className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-neutral-50/50 dark:hover:bg-neutral-800/40 transition"
+                      >
+                        <div className="min-w-0 flex-1 space-y-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40">
+                              {blog.category}
+                            </span>
+                            {blog.featured && (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                                Featured
+                              </span>
+                            )}
+                            <span className="text-xs text-neutral-400">
+                              {blog.publishedAt} • {blog.readingTime}
+                            </span>
+                          </div>
+                          <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white truncate">
+                            {blog.title}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
+                            {blog.description}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-2 shrink-0">
+                          <Link
+                            href={`/blogs/${blog.slug}`}
+                            target="_blank"
+                            className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-blue-600 text-xs font-medium flex items-center gap-1"
+                            title="View Live"
+                          >
+                            <ExternalLink size={14} />
+                          </Link>
+
+                          <button
+                            onClick={() => openEditorForEdit(blog)}
+                            className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-blue-600 text-xs font-medium flex items-center gap-1 cursor-pointer"
+                            title="Edit Article"
+                          >
+                            <Edit3 size={14} />
+                          </button>
+
+                          <button
+                            onClick={() => handleDeleteBlog(blog.id, blog.title)}
+                            className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white transition text-xs font-medium flex items-center gap-1 cursor-pointer"
+                            title="Delete Article"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-xs">
-              <div className="divide-y divide-neutral-200 dark:divide-neutral-800">
-                {filteredBlogs.map((blog) => (
-                  <div
-                    key={blog.id}
-                    className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-neutral-50/50 dark:hover:bg-neutral-800/40 transition"
-                  >
-                    <div className="min-w-0 flex-1 space-y-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/40">
-                          {blog.category}
-                        </span>
-                        {blog.featured && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-                            Featured
-                          </span>
-                        )}
-                        <span className="text-xs text-neutral-400">
-                          {blog.publishedAt} • {blog.readingTime}
-                        </span>
-                      </div>
-                      <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white truncate">
-                        {blog.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
-                        {blog.description}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-2 shrink-0">
-                      <Link
-                        href={`/blogs/${blog.slug}`}
-                        target="_blank"
-                        className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-blue-600 text-xs font-medium flex items-center gap-1"
-                        title="View Live"
-                      >
-                        <ExternalLink size={14} />
-                      </Link>
-
-                      <button
-                        onClick={() => openEditorForEdit(blog)}
-                        className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-blue-600 text-xs font-medium flex items-center gap-1 cursor-pointer"
-                        title="Edit Article"
-                      >
-                        <Edit3 size={14} />
-                      </button>
-
-                      <button
-                        onClick={() => handleDeleteBlog(blog.id, blog.title)}
-                        className="p-2 rounded-lg bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white transition text-xs font-medium flex items-center gap-1 cursor-pointer"
-                        title="Delete Article"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              )}
             </div>
           )}
-        </div>
-      )}
+
 
       {/* VIEW: EDITOR & PREVIEW */}
       {currentView !== "list" && (
@@ -1285,6 +1439,208 @@ export default function AdminClient() {
           )}
         </div>
       )}
+    </>
+  )}
+
+  {/* TAB 2: RESUME PDF */}
+  {activeTab === "resume" && (
+    <div className="space-y-6">
+      {/* Header Card */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2.5 mb-1.5">
+              <div className="p-2 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                <FileText size={20} />
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
+                Curriculum Vitae / Resume
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+              Manage your official resume PDF document displayed across your portfolio.
+            </p>
+          </div>
+
+          {/* Status Pill */}
+          <div className="flex items-center gap-2">
+            {resumeInfo ? (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Active Document</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs font-semibold">
+                <span className="w-2 h-2 rounded-full bg-neutral-400" />
+                <span>No Document Uploaded</span>
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Details & Actions Card */}
+      {resumeInfo ? (
+        <div className="space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xs space-y-6">
+            {/* Metadata Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-1">
+                  File Name
+                </span>
+                <p className="text-sm font-semibold text-neutral-900 dark:text-white truncate" title={resumeInfo.filename}>
+                  {resumeInfo.filename || "resume.pdf"}
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-1">
+                  File Size
+                </span>
+                <p className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  {resumeInfo.size ? `${(resumeInfo.size / 1024).toFixed(1)} KB` : "Unknown"}
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-1">
+                  Format
+                </span>
+                <p className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  PDF Document
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block mb-1">
+                  Last Updated
+                </span>
+                <p className="text-sm font-semibold text-neutral-900 dark:text-white">
+                  {resumeInfo.updatedAt
+                    ? new Date(resumeInfo.updatedAt).toLocaleDateString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })
+                    : "Recently"}
+                </p>
+              </div>
+            </div>
+
+            {/* Actions Toolbar */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="/api/resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer"
+              >
+                <ExternalLink size={15} />
+                <span>View in New Tab</span>
+              </a>
+
+              <a
+                href="/api/resume"
+                download={resumeInfo.filename || "Rajiv_Sharma_Resume.pdf"}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-semibold transition cursor-pointer"
+              >
+                <Download size={15} />
+                <span>Download PDF</span>
+              </a>
+
+              <label className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-semibold transition cursor-pointer">
+                <Upload size={15} />
+                <span>{resumeUploading ? "Replacing..." : "Replace PDF"}</span>
+                <input
+                  type="file"
+                  accept="application/pdf,.pdf"
+                  onChange={handleResumeFileSelect}
+                  disabled={resumeUploading}
+                  className="hidden"
+                />
+              </label>
+
+              <button
+                type="button"
+                onClick={handleResumeDelete}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white text-xs sm:text-sm font-semibold transition cursor-pointer ml-auto"
+              >
+                <Trash2 size={15} />
+                <span>Delete</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Live Preview Embed */}
+          <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs">
+            <div className="px-6 py-4 bg-neutral-50 dark:bg-neutral-800/60 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileText size={16} className="text-blue-500" />
+                <span className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200">
+                  Live Document Preview
+                </span>
+              </div>
+              <a
+                href="/api/resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+              >
+                <span>Full Screen</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
+            <iframe
+              src="/api/resume"
+              title="Curriculum Vitae Preview"
+              className="w-full h-[600px] sm:h-[750px] border-0 bg-neutral-100 dark:bg-neutral-950"
+            />
+          </div>
+        </div>
+      ) : (
+        /* Upload Dropzone when no resume exists */
+        <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-neutral-900 border-2 border-dashed border-neutral-200 dark:border-neutral-800 text-center flex flex-col items-center justify-center space-y-4 shadow-xs">
+          <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <Upload size={28} />
+          </div>
+          <div className="space-y-1 max-w-md">
+            <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white">
+              Upload Resume PDF
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+              Select your latest CV / Resume document in PDF format (maximum file size 10MB).
+            </p>
+          </div>
+
+          <label className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-500/20 transition active:scale-95 cursor-pointer">
+            {resumeUploading ? (
+              <>
+                <Loader2 size={16} className="animate-spin" />
+                <span>Uploading...</span>
+              </>
+            ) : (
+              <>
+                <Upload size={16} />
+                <span>Select PDF Document</span>
+              </>
+            )}
+            <input
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={handleResumeFileSelect}
+              disabled={resumeUploading}
+              className="hidden"
+            />
+          </label>
+
+          <span className="text-[11px] text-neutral-600 dark:text-neutral-400">
+            Supported format: .pdf (Adobe Acrobat Document)
+          </span>
+        </div>
+      )}
     </div>
-  );
+  )}
+</div>
+);
 }
