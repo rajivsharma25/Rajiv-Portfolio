@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   ArrowUpRight,
 } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -29,35 +28,31 @@ const cardFadeUp = {
 };
 
 export default function Projects() {
-  const { t } = useLanguage();
-
   const projects = [
     {
       key: "forever",
-      title: t("projects.items.forever.title"),
-      category: t("projects.items.forever.category"),
+      title: "Forever E-Commerce",
+      category: "E-Commerce Platform",
       filterCategory: "ecommerce",
       image: "/assets/images/forever.webp",
-      description: t("projects.items.forever.description"),
+      description: "Full-featured modern e-commerce storefront with real-time product search, dynamic filtering, interactive shopping cart, and streamlined multi-step checkout.",
       technologies: ["React.js", "Redux", "JavaScript", "Tailwind CSS"],
-      features: Array.isArray(t("projects.items.forever.features"))
-        ? t("projects.items.forever.features")
-        : [
-          "Dynamic product catalog with instant search & category filtering",
-          "Persistent shopping cart with state management",
-          "Responsive, mobile-first clean user experience",
-        ],
+      features: [
+        "Dynamic product catalog with instant search & category filtering",
+        "Persistent shopping cart with state management",
+        "Responsive, mobile-first clean user experience",
+      ],
       demoUrl: "https://forever-ecommerce-website-rajiv-sharma.vercel.app/",
       githubUrl: "https://github.com/rajivsharma25/Forever-Ecommerce-Website",
-      status: t("projects.active"),
+      status: "Live Demo",
     },
     {
       key: "wearcraft",
-      title: t("projects.items.wearcraft.title"),
-      category: t("projects.items.wearcraft.category"),
+      title: "WearCraft Clothing",
+      category: "Fashion & Apparel",
       filterCategory: "ecommerce",
       image: "/assets/images/wearcraft.webp",
-      description: t("projects.items.wearcraft.description"),
+      description: "Modern apparel web application with high-performance product sorting, size/color selectors, customer review system, and persistent state management.",
       technologies: [
         "React.js",
         "Vite",
@@ -65,66 +60,60 @@ export default function Projects() {
         "Tailwind CSS",
         "Context API",
       ],
-      features: Array.isArray(t("projects.items.wearcraft.features"))
-        ? t("projects.items.wearcraft.features")
-        : [
-          "Advanced product filtering, sorting, and size selectors",
-          "Complete cart management & order tracking system",
-          "High-performance clean UI with Shadcn components",
-        ],
+      features: [
+        "Advanced product filtering, sorting, and size selectors",
+        "Complete cart management & order tracking system",
+        "High-performance clean UI with Shadcn components",
+      ],
       demoUrl: "https://wearcrafts.vercel.app/",
       githubUrl: "https://github.com/rajivsharma25/wearcraft",
-      status: t("projects.active"),
+      status: "Live Demo",
     },
     {
       key: "cravecart",
-      title: t("projects.items.cravecart.title"),
-      category: t("projects.items.cravecart.category"),
+      title: "CraveCart Food Delivery",
+      category: "Food & Beverage",
       filterCategory: "webapps",
       image: "/assets/images/cravecart.webp",
-      description: t("projects.items.cravecart.description"),
+      description: "Real-time food delivery web platform featuring interactive restaurant discovery, dynamic category filtering, customizable cart, and order tracking.",
       technologies: ["React.js", "Context API", "JavaScript", "Tailwind CSS"],
-      features: Array.isArray(t("projects.items.cravecart.features"))
-        ? t("projects.items.cravecart.features")
-        : [
-          "Restaurant & menu discovery with instant category search",
-          "Real-time order tracking & persistent cart management",
-          "Fast, fluid mobile-optimized responsive layout",
-        ],
+      features: [
+        "Restaurant & menu discovery with instant category search",
+        "Real-time order tracking & persistent cart management",
+        "Fast, fluid mobile-optimized responsive layout",
+      ],
       demoUrl:
         "https://cravecart-food-delivery-website-rajivsharma25s-projects.vercel.app/",
       githubUrl:
         "https://github.com/rajivsharma25/CraveCart-Food-Delivery-Website",
-      status: t("projects.active"),
+      status: "Live Demo",
     },
     {
       key: "prescripto",
-      title: t("projects.items.prescripto.title"),
-      category: t("projects.items.prescripto.category"),
+      title: "Prescripto Doctor Appointment",
+      category: "Healthcare Portal",
       filterCategory: "webapps",
       image: "/assets/images/prescripto.webp",
-      description: t("projects.items.prescripto.description"),
+      description: "Complete medical appointment booking platform connecting patients with specialist doctors, with real-time slot selection and profile management.",
       technologies: ["React.js", "Context API", "JavaScript", "Tailwind CSS"],
-      features: Array.isArray(t("projects.items.prescripto.features"))
-        ? t("projects.items.prescripto.features")
-        : [
-          "Doctor profiles with specialties, availability & ratings",
-          "Interactive appointment booking & schedule management",
-          "Clean, patient-friendly medical portal interface",
-        ],
+      features: [
+        "Doctor profiles with specialties, availability & ratings",
+        "Interactive appointment booking & schedule management",
+        "Clean, patient-friendly medical portal interface",
+      ],
       demoUrl:
         "https://prescripto-online-doctor-appointment-pl-rajivsharma25s-projects.vercel.app/",
       githubUrl:
         "https://github.com/rajivsharma25/Prescripto-Online-Doctor-Appointment-Platform",
-      status: t("projects.active"),
+      status: "Live Demo",
     },
     {
       key: "findmycollege",
-      title: t("projects.items.findmycollege.title"),
-      category: t("projects.items.findmycollege.category"),
+      title: "FindMyCollege Portal",
+      category: "Education Platform",
       filterCategory: "webapps",
       image: "/assets/images/findmycollege.webp",
-      description: t("projects.items.findmycollege.description"),
+      description: "Comprehensive higher-education discovery platform with college search across streams, entrance exam details, cutoffs, and admissions guidance.",
       technologies: [
         "React.js",
         "Vite",
@@ -132,29 +121,27 @@ export default function Projects() {
         "React Router",
         "React Icons",
       ],
-      features: Array.isArray(t("projects.items.findmycollege.features"))
-        ? t("projects.items.findmycollege.features")
-        : [
-          "Comprehensive college search engine across multiple disciplines",
-          "Detailed entrance exam guides, cutoffs & admission criteria",
-          "Optimized responsive interface for students & parents",
-        ],
+      features: [
+        "Comprehensive college search engine across multiple disciplines",
+        "Detailed entrance exam guides, cutoffs & admission criteria",
+        "Optimized responsive interface for students & parents",
+      ],
       demoUrl: "https://findmycolleges.vercel.app/",
       githubUrl: "https://github.com/rajivsharma25/FindMyCollege",
-      status: t("projects.active"),
+      status: "Live Demo",
     },
   ];
 
   const filterTabs = [
-    { id: "all", label: t("projects.tabAll"), count: projects.length },
+    { id: "all", label: "All", count: projects.length },
     {
       id: "ecommerce",
-      label: t("projects.tabEcommerce"),
+      label: "E-Commerce",
       count: projects.filter((p) => p.filterCategory === "ecommerce").length,
     },
     {
       id: "webapps",
-      label: t("projects.tabWebApps"),
+      label: "Web Apps",
       count: projects.filter((p) => p.filterCategory === "webapps").length,
     },
   ];
@@ -188,14 +175,14 @@ export default function Projects() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2.5 sm:mb-4 leading-normal sm:leading-snug py-0.5">
-            {t("projects.heading")}{" "}
+            Featured{" "}
             <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent inline-block py-0.5">
-              {t("projects.headingHighlight")}
+              Projects
             </span>
           </h2>
           <div className="w-16 sm:w-24 h-1 bg-blue-600 mx-auto mb-3.5 sm:mb-6 rounded-full"></div>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-            {t("projects.subheading")}
+            Explore production-grade web applications, responsive platforms, and client solutions
           </p>
         </motion.div>
 
@@ -337,7 +324,7 @@ export default function Projects() {
                       className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
                     >
                       <ExternalLink size={14} />
-                      <span>{t("projects.liveDemo")}</span>
+                      <span>Live Demo</span>
                     </a>
                     <a
                       href={project.githubUrl}
@@ -347,7 +334,7 @@ export default function Projects() {
                       title="View Source Code on GitHub"
                     >
                       <Github size={14} />
-                      <span>{t("projects.code")}</span>
+                      <span>Code</span>
                     </a>
                   </div>
                 </div>
@@ -367,13 +354,13 @@ export default function Projects() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 text-center md:text-start">
             <div>
               <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40 inline-block mb-2 sm:mb-3">
-                {t("projects.githubBannerBadge")}
+                Open Source & Code
               </span>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-1.5 sm:mb-2 leading-normal">
-                {t("projects.githubBannerTitle")}
+                Want to explore more repositories?
               </h3>
               <p className="text-gray-600 dark:text-neutral-400 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed">
-                {t("projects.githubBannerDesc")}
+                Discover additional client deliverables, experimentation sandboxes, and open-source contributions on my GitHub.
               </p>
             </div>
             <Link
@@ -383,7 +370,7 @@ export default function Projects() {
               className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 active:scale-95 flex-shrink-0 shadow-md hover:shadow-lg"
             >
               <Github size={18} />
-              <span>{t("projects.visitGithub")}</span>
+              <span>Visit GitHub Profile</span>
               <ArrowUpRight size={16} className="rtl:-scale-x-100 transition-transform" />
             </Link>
           </div>

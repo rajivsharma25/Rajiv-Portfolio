@@ -26,20 +26,18 @@ import {
   BookOpen,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
-  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: t("nav.about"), href: "/#about", icon: User },
-    { name: t("nav.skills"), href: "/#skills", icon: Terminal },
-    { name: t("nav.experiences"), href: "/#experience", icon: Briefcase },
-    { name: t("nav.projects"), href: "/#projects", icon: FolderGit2 },
-    { name: t("nav.certifications"), href: "/#certifications", icon: Award },
-    { name: t("nav.contact"), href: "/#contact", icon: Send },
-    { name: t("nav.blogs") || "Blogs", href: "/blogs", icon: BookOpen },
+    { name: "About", href: "/#about", icon: User },
+    { name: "Skills", href: "/#skills", icon: Terminal },
+    { name: "Experience", href: "/#experience", icon: Briefcase },
+    { name: "Projects", href: "/#projects", icon: FolderGit2 },
+    { name: "Certifications", href: "/#certifications", icon: Award },
+    { name: "Contact", href: "/#contact", icon: Send },
+    { name: "Blogs", href: "/blogs", icon: BookOpen },
   ];
 
   const socialLinks = [
@@ -92,12 +90,12 @@ export default function Footer() {
                 alt="Rajiv Sharma Logo"
                 width={200}
                 height={60}
-                className="h-auto w-[90px] sm:w-[100px] invert-100 -ml-1.5 rtl:ml-0 rtl:-mr-1.5"
+                className="h-auto w-[90px] sm:w-[100px] invert-100 -ml-1.5"
                 loading="lazy"
               />
             </Link>
             <p className="text-neutral-300 mb-5 sm:mb-6 leading-relaxed text-xs sm:text-sm">
-              {t("footer.bio")}
+              Software Developer dedicated to building high-performance, scalable, and responsive web applications with clean code and robust digital solutions.
             </p>
             <div className="flex items-center gap-2.5 sm:gap-3">
               {socialLinks.map((social, index) => {
@@ -122,7 +120,7 @@ export default function Footer() {
           <div>
             <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-400 flex items-center gap-2">
               <Compass size={18} className="text-blue-400" />
-              {t("footer.quickLinks")}
+              Quick Links
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 sm:gap-2.5">
               {quickLinks.map((link, index) => {
@@ -143,7 +141,7 @@ export default function Footer() {
                     </div>
                     <ArrowRight
                       size={12}
-                      className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 rtl:translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1 rtl:rotate-180"
+                      className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1"
                     />
                   </Link>
                 );
@@ -155,7 +153,7 @@ export default function Footer() {
           <div>
             <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-400 flex items-center gap-2">
               <Sparkles size={18} className="text-blue-400" />
-              {t("footer.services")}
+              Areas of Focus
             </h4>
             <div className="p-3 sm:p-4 rounded-2xl bg-gray-800/60 dark:bg-neutral-800/60 border border-gray-700/60 dark:border-neutral-700/60 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2.5 sm:gap-3">
               {services.map((service, index) => {
@@ -181,7 +179,7 @@ export default function Footer() {
           <div>
             <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-blue-400 flex items-center gap-2">
               <Send size={18} className="text-blue-400" />
-              {t("footer.contactInfo")}
+              Contact Details
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 sm:gap-2.5">
               {/* Email Card */}
@@ -228,7 +226,7 @@ export default function Footer() {
                 </div>
                 <ArrowRight
                   size={12}
-                  className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 rtl:translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1 rtl:rotate-180"
+                  className="text-gray-400 dark:text-neutral-500 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:text-blue-400 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0 mr-1"
                 />
               </a>
 
@@ -256,7 +254,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-center">
             <p className="text-neutral-400 text-xs sm:text-sm text-center">
-              © {currentYear} Rajiv Sharma. {t("footer.allRightsReserved")}
+              © {currentYear} Rajiv Sharma. All rights reserved.
             </p>
           </div>
         </div>

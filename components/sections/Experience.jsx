@@ -1,7 +1,6 @@
 "use client";
 import { Briefcase, Calendar, MapPin, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/context/LanguageContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -24,24 +23,21 @@ const cardFadeUp = {
 };
 
 export default function Experience() {
-  const { t, language } = useLanguage();
   const experiences = [
     {
       key: "aroha",
-      title: t("experience.roles.aroha.title"),
-      company: t("experience.roles.aroha.company"),
-      period: t("experience.roles.aroha.period"),
-      type: t("experience.roles.aroha.type"),
-      location: t("experience.roles.aroha.location"),
-      description: Array.isArray(t("experience.roles.aroha.points"))
-        ? t("experience.roles.aroha.points")
-        : [
-            "Working as a Software Developer at Arohatech IT Services Pvt. Ltd., contributing to software development and project activities.",
-            "Developing and maintaining software solutions based on project requirements.",
-            "Working on assigned technical tasks and delivering project requirements.",
-            "Collaborating with team members to troubleshoot issues and implement solutions.",
-            "Following software development practices, company processes, and project requirements.",
-          ],
+      title: "Software Developer",
+      company: "ArohaTech IT Services",
+      period: "Jun 2026 - Present",
+      type: "Full-time",
+      location: "Greater Noida, Uttar Pradesh",
+      description: [
+        "Working as a Software Developer at Arohatech IT Services Pvt. Ltd., contributing to software development and project activities.",
+        "Developing and maintaining software solutions based on project requirements.",
+        "Working on assigned technical tasks and delivering project requirements.",
+        "Collaborating with team members to troubleshoot issues and implement solutions.",
+        "Following software development practices, company processes, and project requirements.",
+      ],
       technologies: [
         "React.js",
         "Next.js",
@@ -55,36 +51,32 @@ export default function Experience() {
     },
     {
       key: "akvm",
-      title: t("experience.roles.akvm.title"),
-      company: t("experience.roles.akvm.company"),
-      period: t("experience.roles.akvm.period"),
-      type: t("experience.roles.akvm.type"),
-      location: t("experience.roles.akvm.location"),
-      description: Array.isArray(t("experience.roles.akvm.points"))
-        ? t("experience.roles.akvm.points")
-        : [
-            "Developing scalable web solutions using React.js, Next.js, and JavaScript.",
-            "Ensuring high-quality code standards as part of the engineering team.",
-            "Building responsive user interfaces with Tailwind CSS.",
-            "Implementing modern frontend technologies to enhance application performance and user experience.",
-          ],
+      title: "Frontend Developer",
+      company: "AKVM IT Solutions",
+      period: "Jan 2026 - May 2026",
+      type: "Full-time",
+      location: "Noida, Uttar Pradesh",
+      description: [
+        "Developing scalable web solutions using React.js, Next.js, and JavaScript.",
+        "Ensuring high-quality code standards as part of the engineering team.",
+        "Building responsive user interfaces with Tailwind CSS.",
+        "Implementing modern frontend technologies to enhance application performance and user experience.",
+      ],
       technologies: ["React.js", "Next.js", "JavaScript", "Tailwind CSS", "Context API", "AXIOS", "Redux", "MUI"],
     },
     {
       key: "bodmas",
-      title: t("experience.roles.bodmas.title"),
-      company: t("experience.roles.bodmas.company"),
-      period: t("experience.roles.bodmas.period"),
-      type: t("experience.roles.bodmas.type"),
-      location: t("experience.roles.bodmas.location"),
-      description: Array.isArray(t("experience.roles.bodmas.points"))
-        ? t("experience.roles.bodmas.points")
-        : [
-            "Developing and maintaining modern web applications using React.js and Redux",
-            "Building responsive and user-friendly interfaces with Tailwind CSS",
-            "Collaborating with cross-functional teams to deliver high-quality solutions",
-            "Implementing best practices for code quality and performance optimization",
-          ],
+      title: "React.js Developer",
+      company: "Bodmas Education Services",
+      period: "Sep 2025 - Dec 2025",
+      type: "Full-time",
+      location: "Noida, Uttar Pradesh",
+      description: [
+        "Developing and maintaining modern web applications using React.js and Redux",
+        "Building responsive and user-friendly interfaces with Tailwind CSS",
+        "Collaborating with cross-functional teams to deliver high-quality solutions",
+        "Implementing best practices for code quality and performance optimization",
+      ],
       technologies: [
         "React.js",
         "Redux",
@@ -96,19 +88,17 @@ export default function Experience() {
     },
     {
       key: "cognifyz",
-      title: t("experience.roles.cognifyz.title"),
-      company: t("experience.roles.cognifyz.company"),
-      period: t("experience.roles.cognifyz.period"),
-      type: t("experience.roles.cognifyz.type"),
-      location: t("experience.roles.cognifyz.location"),
-      description: Array.isArray(t("experience.roles.cognifyz.points"))
-        ? t("experience.roles.cognifyz.points")
-        : [
-            "Built responsive web applications using modern frameworks",
-            "Collaborated with cross-functional teams to deliver high-quality frontend solutions",
-            "Focused on user interface design and user experience optimization",
-            "Delivered projects with emphasis on clean code and modern development practices",
-          ],
+      title: "Web Developer Intern",
+      company: "Cognifyz Technologies",
+      period: "May 2025 - Jul 2025",
+      type: "Internship",
+      location: "Remote",
+      description: [
+        "Built responsive web applications using modern frameworks",
+        "Collaborated with cross-functional teams to deliver high-quality frontend solutions",
+        "Focused on user interface design and user experience optimization",
+        "Delivered projects with emphasis on clean code and modern development practices",
+      ],
       technologies: [
         "HTML",
         "Responsive CSS",
@@ -120,35 +110,31 @@ export default function Experience() {
     },
     {
       key: "tatastrive",
-      title: t("experience.roles.tatastrive.title"),
-      company: t("experience.roles.tatastrive.company"),
-      period: t("experience.roles.tatastrive.period"),
-      type: t("experience.roles.tatastrive.type"),
-      location: t("experience.roles.tatastrive.location"),
-      description: Array.isArray(t("experience.roles.tatastrive.points"))
-        ? t("experience.roles.tatastrive.points")
-        : [
-            "Comprehensive training on AWS cloud services and architecture",
-            "Hands-on experience with EC2, S3, Lambda, and other core AWS services",
-            "Learning cloud best practices and security implementations",
-          ],
+      title: "AWS Cloud Trainee",
+      company: "Tata STRIVE",
+      period: "Feb 2024 - Apr 2024",
+      type: "Training",
+      location: "Remote",
+      description: [
+        "Comprehensive training on AWS cloud services and architecture",
+        "Hands-on experience with EC2, S3, Lambda, and other core AWS services",
+        "Learning cloud best practices and security implementations",
+      ],
       technologies: ["AWS", "Cloud Architecture", "EC2", "S3", "Lambda"],
     },
     {
       key: "cetpa",
-      title: t("experience.roles.cetpa.title"),
-      company: t("experience.roles.cetpa.company"),
-      period: t("experience.roles.cetpa.period"),
-      type: t("experience.roles.cetpa.type"),
-      location: t("experience.roles.cetpa.location"),
-      description: Array.isArray(t("experience.roles.cetpa.points"))
-        ? t("experience.roles.cetpa.points")
-        : [
-            "Intensive hands-on experience in full-stack web development",
-            "Built multiple projects using React.js and Node.js",
-            "Learned database management and API development",
-            "Gained practical experience in modern development tools and practices",
-          ],
+      title: "Web Development Trainee",
+      company: "CETPA Infotech",
+      period: "Jun 2023 - Aug 2023",
+      type: "Internship",
+      location: "Noida, Uttar Pradesh",
+      description: [
+        "Intensive hands-on experience in full-stack web development",
+        "Built multiple projects using React.js and Node.js",
+        "Learned database management and API development",
+        "Gained practical experience in modern development tools and practices",
+      ],
       technologies: [
         "React.js",
         "Node.js",
@@ -162,50 +148,50 @@ export default function Experience() {
 
   const timelineItems = [
     {
-      year: t("experience.timeline.year2026Present"),
-      title: t("experience.timeline.aroha"),
+      year: "2026 - Present",
+      title: "Software Developer at ArohaTech",
       type: "work",
       icon: Briefcase,
     },
     {
-      year: t("experience.timeline.year2026"),
-      title: t("experience.timeline.akvm"),
+      year: "2026",
+      title: "Frontend Developer at AKVM",
       type: "work",
       icon: Briefcase,
     },
     {
-      year: t("experience.timeline.year2025"),
-      title: t("experience.timeline.bodmas"),
+      year: "2025",
+      title: "React.js Developer at Bodmas",
       type: "work",
       icon: Briefcase,
     },
     {
-      year: t("experience.timeline.year2025"),
-      title: t("experience.timeline.cognifyz"),
+      year: "2025",
+      title: "Web Developer Intern at Cognifyz",
       type: "internship",
       icon: Briefcase,
     },
     {
-      year: t("experience.timeline.year2024"),
-      title: t("experience.timeline.tatastrive"),
+      year: "2024",
+      title: "AWS Cloud Training at Tata STRIVE",
       type: "training",
       icon: GraduationCap,
     },
     {
-      year: t("experience.timeline.year2024"),
-      title: t("experience.timeline.graduate"),
+      year: "2024",
+      title: "Graduated B.Tech in CSE",
       type: "education",
       icon: GraduationCap,
     },
     {
-      year: t("experience.timeline.year2023"),
-      title: t("experience.timeline.cetpa"),
+      year: "2023",
+      title: "Web Development Training at CETPA",
       type: "internship",
       icon: Briefcase,
     },
     {
-      year: t("experience.timeline.year2020"),
-      title: t("experience.timeline.csJourney"),
+      year: "2020",
+      title: "Commenced Computer Science Journey",
       type: "education",
       icon: GraduationCap,
     },
@@ -231,14 +217,14 @@ export default function Experience() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2.5 sm:mb-4 leading-normal sm:leading-snug py-0.5">
-            {t("experience.heading")}{" "}
+            Work{" "}
             <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent inline-block py-0.5">
-              {t("experience.headingHighlight")}
+              Experience
             </span>
           </h2>
           <div className="w-16 sm:w-24 h-1 bg-blue-600 mx-auto mb-3.5 sm:mb-6 rounded-full"></div>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-            {t("experience.subheading")}
+            A timeline of my professional roles, milestones, and technical achievements
           </p>
         </motion.div>
 
@@ -255,10 +241,10 @@ export default function Experience() {
               <div className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-gray-200/80 dark:border-neutral-700/60 shadow-lg shadow-neutral-900/5 transition-all duration-300">
               <div className="pb-4 sm:pb-5 mb-5 sm:mb-6 border-b border-gray-200/70 dark:border-neutral-700/60">
                 <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white leading-normal">
-                  {t("experience.trajectory")}
+                  Career Trajectory
                 </h3>
                 <p className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 sm:mt-1">
-                  {t("experience.trajectorySub")}
+                  Milestones & Experience
                 </p>
               </div>
 
@@ -266,7 +252,7 @@ export default function Experience() {
               <div className="relative pl-7 rtl:pl-0 rtl:pr-7 space-y-4 sm:space-y-5 before:absolute before:left-[11px] rtl:before:left-auto rtl:before:right-[11px] before:top-3 before:bottom-3 before:w-[2px] before:bg-gradient-to-b before:from-blue-600 before:via-sky-400/50 before:to-neutral-200 dark:before:to-neutral-800">
                 {timelineItems.map((item, index) => {
                   const IconComponent = item.icon;
-                  const isCurrent = item.year.includes("Present") || item.year.includes("حتى الآن");
+                  const isCurrent = item.year.includes("Present");
                   const matchedExpIndex = experiences.findIndex((e) =>
                     item.title.toLowerCase().includes(e.company.toLowerCase().split(" ")[0])
                   );

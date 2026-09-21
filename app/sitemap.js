@@ -1,8 +1,8 @@
 import { getAllBlogs } from "@/lib/blogs";
 
-export default function sitemap() {
+export default async function sitemap() {
   const baseUrl = "https://rajivsharma.vercel.app";
-  const blogs = getAllBlogs();
+  const blogs = await getAllBlogs();
 
   const blogUrls = blogs.map((blog) => ({
     url: `${baseUrl}/blogs/${blog.slug}`,

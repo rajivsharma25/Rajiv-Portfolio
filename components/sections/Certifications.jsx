@@ -12,7 +12,6 @@ import {
 import Image from "next/image";
 import { SiMysql, SiCplusplus } from "react-icons/si";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/context/LanguageContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -30,83 +29,81 @@ const cardFadeUp = {
 };
 
 export default function Certifications() {
-  const { t } = useLanguage();
-
   const certifications = [
     {
-      title: t("certifications.aws.title"),
-      issuer: t("certifications.aws.issuer"),
+      title: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services",
       date: "2025",
-      description: t("certifications.aws.description"),
-      skills: Array.isArray(t("certifications.aws.skills"))
-        ? t("certifications.aws.skills")
-        : ["Cloud Computing", "AWS Services", "Cloud Security", "Cost Management"],
+      description:
+        "Comprehensive certification covering AWS cloud architecture, security, compute & storage services, and cloud billing models.",
+      skills: ["Cloud Computing", "AWS Services", "Cloud Security", "Cost Management"],
       badge: "/assets/images/aws-badge.png",
       badgeUrl:
         "https://www.credly.com/badges/be66bf69-1877-4ab3-88e9-aa85f0dd88e7/public_url",
       badgeType: "image",
-      level: t("certifications.aws.level"),
-      status: t("certifications.status"),
+      level: "Foundation",
+      status: "Active",
     },
     {
-      title: t("certifications.sql.title"),
-      issuer: t("certifications.sql.issuer"),
+      title: "Introduction to SQL",
+      issuer: "Simplilearn",
       date: "2023",
-      description: t("certifications.sql.description"),
-      skills: Array.isArray(t("certifications.sql.skills"))
-        ? t("certifications.sql.skills")
-        : ["Basic SQL Queries", "Data Retrieval", "Table Relationships", "RDBMS Fundamentals"],
+      description:
+        "Foundation-level certification covering relational database design, query optimization, joins, indexing, and data retrieval.",
+      skills: ["Basic SQL Queries", "Data Retrieval", "Table Relationships", "RDBMS Fundamentals"],
       badge: SiMysql,
       badgeUrl:
         "https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxODExIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvdGh1bWJfNDU5NTY0NF8xNjk3OTkwMDQ1LnBuZyIsInVzZXJuYW1lIjoiUmFqaXYgU2hhcm1hIn0%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4309%2FIntroduction-to-SQL%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1507310509089914254&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVD04Pz%2FUL9Pc2c0myrytKTUstKsrMS49PKsovL04tsnVNSU8FAOxz5Aw9AAAA",
       badgeType: "icon",
-      level: t("certifications.sql.level"),
-      status: t("certifications.status"),
+      level: "Foundation",
+      status: "Active",
     },
     {
-      title: t("certifications.cpp.title"),
-      issuer: t("certifications.cpp.issuer"),
+      title: "Basics of C++",
+      issuer: "Udemy",
       date: "2023",
-      description: t("certifications.cpp.description"),
-      skills: Array.isArray(t("certifications.cpp.skills"))
-        ? t("certifications.cpp.skills")
-        : ["C++ Syntax", "Functions", "Loops & Conditions", "OOP Basics"],
+      description:
+        "Foundation in modern C++ programming covering memory management, control structures, functions, and object-oriented fundamentals.",
+      skills: ["C++ Syntax", "Functions", "Loops & Conditions", "Object-Oriented Concepts"],
       badge: SiCplusplus,
       badgeUrl:
         "https://www.udemy.com/certificate/UC-cc91b127-a4b8-41e1-be25-d69ceff2ee19/",
       badgeType: "icon",
-      level: t("certifications.cpp.level"),
-      status: t("certifications.status"),
+      level: "Foundation",
+      status: "Active",
     },
   ];
 
   const achievements = [
     {
-      title: t("certifications.education.btech.title"),
-      institution: t("certifications.education.btech.institution"),
-      year: t("certifications.education.btech.year"),
-      degree: t("certifications.education.btech.degree"),
-      description: t("certifications.education.btech.description"),
+      title: "B.Tech in Computer Science and Engineering",
+      institution: "IMS Engineering College, Ghaziabad",
+      year: "2020 - 2024",
+      degree: "Bachelor of Technology",
+      description:
+        "4-Year undergraduate engineering program focused on software engineering, data structures, algorithms, and full-stack development.",
       icon: GraduationCap,
-      status: t("certifications.education.graduated"),
+      status: "Graduated",
     },
     {
-      title: t("certifications.education.class12.title"),
-      institution: t("certifications.education.class12.institution"),
-      year: t("certifications.education.class12.year"),
-      degree: t("certifications.education.class12.degree"),
-      description: t("certifications.education.class12.description"),
+      title: "CBSE Board - Science Stream (PCM)",
+      institution: "Gyan Peethika Senior Secondary School",
+      year: "2019",
+      degree: "Senior Secondary (Class XII)",
+      description:
+        "Completed senior secondary education with specialization in Physics, Chemistry, and Mathematics.",
       icon: BookOpen,
-      status: t("certifications.education.completed"),
+      status: "Completed",
     },
     {
-      title: t("certifications.education.class10.title"),
-      institution: t("certifications.education.class10.institution"),
-      year: t("certifications.education.class10.year"),
-      degree: t("certifications.education.class10.degree"),
-      description: t("certifications.education.class10.description"),
+      title: "CBSE Board - Academic Excellence",
+      institution: "Gyan Kunj Senior Secondary Academy",
+      year: "2017",
+      degree: "Secondary School (Class X)",
+      description:
+        "Completed high school education with strong academic standing in Science, Mathematics, and Computer Applications.",
       icon: Trophy,
-      status: t("certifications.education.completed"),
+      status: "Completed",
     },
   ];
 
@@ -131,14 +128,14 @@ export default function Certifications() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2.5 sm:mb-4 leading-normal sm:leading-snug py-0.5">
-            {t("certifications.heading")}{" "}
+            Licenses &{" "}
             <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent inline-block py-0.5">
-              {t("certifications.headingHighlight")}
+              Certifications
             </span>
           </h2>
           <div className="w-16 sm:w-24 h-1 bg-blue-600 mx-auto mb-3.5 sm:mb-6 rounded-full"></div>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-            {t("certifications.subheading")}
+            Industry-recognized credentials validating cloud architecture and core engineering skills
           </p>
         </motion.div>
 
@@ -262,10 +259,10 @@ export default function Certifications() {
           <div className="flex items-center justify-between pb-3.5 sm:pb-4 mb-5 sm:mb-6 border-b border-gray-100 dark:border-neutral-800">
             <div>
               <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white">
-                {t("certifications.education.heading")}
+                Academic Education
               </h3>
               <p className="text-[11px] sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                {t("certifications.education.subheading")}
+                Formal degree and senior secondary academic background
               </p>
             </div>
           </div>
@@ -322,7 +319,7 @@ export default function Certifications() {
                   {/* Status Indicator */}
                   <div className="pt-3.5 sm:pt-4 mt-4 sm:mt-5 border-t border-gray-200/60 dark:border-neutral-700/60 flex items-center justify-between">
                     <span className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400">
-                      {t("certifications.education.status")}
+                      Status
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>

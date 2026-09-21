@@ -1,5 +1,7 @@
 import { getAllBlogs, getAllCategories } from "@/lib/blogs";
-import BlogListClient from "./BlogListClient";
+import BlogListClient from "@/components/blog/BlogListClient";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Blogs & Insights | Rajiv Sharma",
@@ -26,7 +28,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/profile.webp",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Rajiv Sharma Blogs",
@@ -38,13 +40,13 @@ export const metadata = {
     title: "Blogs & Insights | Rajiv Sharma",
     description:
       "Articles, tutorials, engineering deep dives, and stories on web development, technology, and software development by Rajiv Sharma.",
-    images: ["/profile.webp"],
+    images: ["/og-image.webp"],
   },
 };
 
-export default function BlogsPage() {
-  const blogs = getAllBlogs();
-  const categories = getAllCategories();
+export default async function BlogsPage() {
+  const blogs = await getAllBlogs();
+  const categories = await getAllCategories();
 
   // Schema.org Blog/CollectionPage structured data for Google Rich Results
   const jsonLd = {
@@ -69,9 +71,9 @@ export default function BlogsPage() {
       dateModified: blog.updatedAt,
       author: {
         "@type": "Person",
-        name: blog.author.name,
+        name: blog.author?.name || "Rajiv Sharma",
       },
-      keywords: blog.tags.join(", "),
+      keywords: Array.isArray(blog.tags) ? blog.tags.join(", ") : "",
     })),
   };
 

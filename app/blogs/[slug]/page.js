@@ -1,23 +1,15 @@
 import { notFound } from "next/navigation";
 import { getAllBlogs, getBlogBySlug, getRelatedBlogs } from "@/lib/blogs";
-import ArticleClient from "./ArticleClient";
+import ArticleClient from "@/components/blog/ArticleClient";
 
-/**
- * Generate static params for all blogs to ensure instant static rendering.
- */
-export async function generateStaticParams() {
-  const blogs = getAllBlogs();
-  return blogs.map((blog) => ({
-    slug: blog.slug,
-  }));
-}
+export const dynamic = "force-dynamic";
 
 /**
  * Dynamic SEO metadata generation for each individual blog post.
  */
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const blog = getBlogBySlug(resolvedParams.slug);
+  const blog = await getBlogBySlug(resolvedParams.slug);
 
   if (!blog) {
     return {
@@ -28,15 +20,18 @@ export async function generateMetadata({ params }) {
 
   const siteUrl = "https://rajivsharma.vercel.app";
   const articleUrl = `${siteUrl}/blogs/${blog.slug}`;
+  const keywords = blog.seo?.keywords || blog.tags || [];
+  const authorName = blog.author?.name || "Rajiv Sharma";
+  const ogImage = `${siteUrl}/profile.webp`;
 
   return {
     title: `${blog.title} | Rajiv Sharma`,
     description: blog.description,
-    keywords: blog.seo.keywords,
+    keywords: Array.isArray(keywords) ? keywords : [keywords],
     alternates: {
-      canonical: blog.seo.canonical || articleUrl,
+      canonical: blog.seo?.canonical || articleUrl,
     },
-    authors: [{ name: blog.author.name, url: siteUrl }],
+    authors: [{ name: authorName, url: siteUrl }],
     openGraph: {
       title: blog.title,
       description: blog.description,
@@ -45,11 +40,11 @@ export async function generateMetadata({ params }) {
       type: "article",
       publishedTime: blog.publishedAt,
       modifiedTime: blog.updatedAt || blog.publishedAt,
-      authors: [blog.author.name],
-      tags: blog.tags,
+      authors: [authorName],
+      tags: blog.tags || [],
       images: [
         {
-          url: "/profile.webp",
+          url: ogImage,
           width: 1200,
           height: 630,
           alt: blog.title,
@@ -60,22 +55,24 @@ export async function generateMetadata({ params }) {
       card: "summary_large_image",
       title: blog.title,
       description: blog.description,
-      images: ["/profile.webp"],
+      images: [ogImage],
     },
   };
 }
 
 export default async function BlogPostPage({ params }) {
   const resolvedParams = await params;
-  const blog = getBlogBySlug(resolvedParams.slug);
+  const blog = await getBlogBySlug(resolvedParams.slug);
 
   if (!blog) {
     notFound();
   }
 
-  const relatedBlogs = getRelatedBlogs(blog.slug, 2);
+  const relatedBlogs = await getRelatedBlogs(blog.slug, 2);
   const siteUrl = "https://rajivsharma.vercel.app";
   const articleUrl = `${siteUrl}/blogs/${blog.slug}`;
+  const authorName = blog.author?.name || "Rajiv Sharma";
+  const authorRole = blog.author?.role || "Software Developer";
 
   // Article / BlogPosting Structured Data for Google Rich Snippets
   const articleSchema = {
@@ -88,8 +85,8 @@ export default async function BlogPostPage({ params }) {
     dateModified: blog.updatedAt || blog.publishedAt,
     author: {
       "@type": "Person",
-      name: blog.author.name,
-      jobTitle: blog.author.role,
+      name: authorName,
+      jobTitle: authorRole,
       url: siteUrl,
     },
     publisher: {
@@ -101,7 +98,7 @@ export default async function BlogPostPage({ params }) {
       "@type": "WebPage",
       "@id": articleUrl,
     },
-    keywords: blog.tags.join(", "),
+    keywords: Array.isArray(blog.tags) ? blog.tags.join(", ") : "",
     articleSection: blog.category,
   };
 

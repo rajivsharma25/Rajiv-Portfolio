@@ -1,52 +1,13 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
-
-const localBlogsFilePath = path.join(process.cwd(), "data", "blogs.json");
-const tmpBlogsFilePath = path.join("/tmp", "blogs.json");
+import mongoose from "mongoose";
+import connectToDatabase from "@/lib/mongodb";
+import Blog from "@/models/Blog";
+import { DEFAULT_AUTHOR, buildTableOfContents } from "@/lib/blogs";
 
 function verifyAdmin(request) {
   const adminKey = request.headers.get("x-admin-key");
   const validKey = process.env.ADMIN_SECRET_KEY || "rajiv@1407";
   return adminKey === validKey;
-}
-
-async function readBlogsFile() {
-  // Check /tmp/blogs.json first (for serverless environments like Vercel)
-  try {
-    const tmpData = await fs.readFile(tmpBlogsFilePath, "utf-8");
-    return JSON.parse(tmpData);
-  } catch {
-    // Not in /tmp, read from repository file
-  }
-
-  const rawData = await fs.readFile(localBlogsFilePath, "utf-8");
-  return JSON.parse(rawData);
-}
-
-async function writeBlogsFile(blogs) {
-  const content = JSON.stringify(blogs, null, 2);
-  let written = false;
-
-  // Try writing to repo path first (works in local dev)
-  try {
-    await fs.writeFile(localBlogsFilePath, content, "utf-8");
-    written = true;
-  } catch (err) {
-    console.warn("Could not write to local data directory (serverless read-only filesystem):", err.message);
-  }
-
-  // Always write or fallback to /tmp so serverless lambda instances have the latest data
-  try {
-    await fs.writeFile(tmpBlogsFilePath, content, "utf-8");
-    written = true;
-  } catch (tmpErr) {
-    console.warn("Could not write to /tmp directory:", tmpErr.message);
-  }
-
-  if (!written) {
-    throw new Error("Unable to save blog changes: serverless filesystem is not writable.");
-  }
 }
 
 function generateSlug(title) {
@@ -83,24 +44,34 @@ function calculateReadingTime(content) {
   return `${minutes} min read`;
 }
 
-function buildTableOfContents(content) {
-  if (!Array.isArray(content)) return [];
-  return content
-    .filter((b) => b.type === "heading" && b.text)
-    .map((b) => ({
-      id: b.id || generateSlug(b.text),
-      title: b.text,
-    }));
-}
-
 // GET all blogs
 export async function GET() {
   try {
-    const blogs = await readBlogsFile();
-    return NextResponse.json({ success: true, blogs });
+    if (!process.env.MONGODB_URI) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "MONGODB_URI environment variable is missing. Please configure it in .env or Vercel.",
+          blogs: [],
+        },
+        { status: 500 }
+      );
+    }
+
+    await connectToDatabase();
+    const blogs = await Blog.find({}).sort({ createdAt: -1, publishedAt: -1 }).lean();
+    const formattedBlogs = blogs.map((b) => ({
+      ...b,
+      id: b._id ? b._id.toString() : b.id,
+      author: b.author || DEFAULT_AUTHOR,
+      tableOfContents: buildTableOfContents(b.content),
+    }));
+
+    return NextResponse.json({ success: true, blogs: formattedBlogs });
   } catch (error) {
+    console.error("GET /api/admin/blogs error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to load blogs." },
+      { error: error.message || "Failed to load blogs from database." },
       { status: 500 }
     );
   }
@@ -116,6 +87,13 @@ export async function POST(request) {
       );
     }
 
+    if (!process.env.MONGODB_URI) {
+      return NextResponse.json(
+        { error: "Database not configured. Please set MONGODB_URI." },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
     const {
       title,
@@ -123,12 +101,8 @@ export async function POST(request) {
       description,
       category,
       tags,
-      gradient,
-      coverImage,
       featured,
       content,
-      author,
-      seo,
     } = body;
 
     if (!title || !description || !category || !content || content.length === 0) {
@@ -138,16 +112,7 @@ export async function POST(request) {
       );
     }
 
-    const blogs = await readBlogsFile();
-
-    // Generate unique slug
-    let baseSlug = customSlug ? generateSlug(customSlug) : generateSlug(title);
-    let finalSlug = baseSlug;
-    let counter = 1;
-    while (blogs.some((b) => b.slug === finalSlug)) {
-      counter++;
-      finalSlug = `${baseSlug}-${counter}`;
-    }
+    await connectToDatabase();
 
     const todayStr = new Date().toISOString().split("T")[0];
 
@@ -158,14 +123,6 @@ export async function POST(request) {
           ...block,
           level: block.level || 2,
           id: generateSlug(block.text),
-        };
-      }
-      if (block.type === "image") {
-        return {
-          type: "image",
-          url: block.url ? block.url.trim() : "",
-          alt: block.alt ? block.alt.trim() : "",
-          caption: block.caption ? block.caption.trim() : "",
         };
       }
       if (block.type === "table") {
@@ -187,48 +144,47 @@ export async function POST(request) {
           .filter(Boolean)
       : [category];
 
-    const newBlog = {
-      id: String(Date.now()),
+    const baseSlug = customSlug ? generateSlug(customSlug) : generateSlug(title);
+
+    // Find unique slug
+    let finalSlug = baseSlug;
+    let counter = 1;
+    while (await Blog.exists({ slug: finalSlug })) {
+      counter++;
+      finalSlug = `${baseSlug}-${counter}`;
+    }
+
+    const newBlogDoc = await Blog.create({
       slug: finalSlug,
       title: title.trim(),
       description: description.trim(),
       category: category.trim(),
       tags: parsedTags,
       publishedAt: todayStr,
-      updatedAt: todayStr,
       readingTime: calculateReadingTime(formattedContent),
-      coverImage: coverImage || "",
       featured: Boolean(featured),
-      gradient: gradient || "from-blue-600 via-indigo-600 to-cyan-500",
-      author: author || {
-        name: "Rajiv Sharma",
-        role: "Software Developer",
-        avatar: "/profile.webp",
-      },
-      seo: {
-        keywords: seo?.keywords || parsedTags,
-        canonical: seo?.canonical || `https://rajivsharma.vercel.app/blogs/${finalSlug}`,
-      },
-      tableOfContents: buildTableOfContents(formattedContent),
       content: formattedContent,
-    };
+    });
 
-    // Prepend to list so it is shown first
-    blogs.unshift(newBlog);
-    await writeBlogsFile(blogs);
+    const responseBlog = {
+      ...newBlogDoc.toObject(),
+      id: newBlogDoc._id.toString(),
+      author: DEFAULT_AUTHOR,
+      tableOfContents: buildTableOfContents(formattedContent),
+    };
 
     return NextResponse.json(
       {
         success: true,
         message: "Blog created successfully!",
-        blog: newBlog,
+        blog: responseBlog,
       },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating blog:", error);
+    console.error("POST /api/admin/blogs error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to create blog." },
+      { error: error.message || "Failed to create blog in database." },
       { status: 500 }
     );
   }
@@ -244,26 +200,42 @@ export async function PUT(request) {
       );
     }
 
+    if (!process.env.MONGODB_URI) {
+      return NextResponse.json(
+        { error: "Database not configured. Please set MONGODB_URI." },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
     const { id, ...updates } = body;
 
-    if (!id) {
+    if (!id && !updates.slug) {
       return NextResponse.json(
-        { error: "Blog ID is required for updating." },
+        { error: "Please provide a blog id or slug to update." },
         { status: 400 }
       );
     }
 
-    const blogs = await readBlogsFile();
-    const index = blogs.findIndex((b) => b.id === String(id) || b.slug === updates.slug);
+    await connectToDatabase();
 
-    if (index === -1) {
-      return NextResponse.json({ error: "Blog not found." }, { status: 404 });
+    const query = [];
+    if (id && mongoose.isValidObjectId(id)) {
+      query.push({ _id: id });
+    }
+    if (id) {
+      query.push({ id: String(id) });
+    }
+    if (updates.slug) {
+      query.push({ slug: updates.slug });
     }
 
-    const currentBlog = blogs[index];
+    const existingBlog = await Blog.findOne({ $or: query });
+    if (!existingBlog) {
+      return NextResponse.json({ error: "Blog not found in database." }, { status: 404 });
+    }
 
-    let formattedContent = updates.content || currentBlog.content;
+    let formattedContent = updates.content || existingBlog.content;
     if (Array.isArray(formattedContent)) {
       formattedContent = formattedContent.map((block) => {
         if (block.type === "heading" && !block.id) {
@@ -271,14 +243,6 @@ export async function PUT(request) {
             ...block,
             level: block.level || 2,
             id: generateSlug(block.text),
-          };
-        }
-        if (block.type === "image") {
-          return {
-            type: "image",
-            url: block.url ? block.url.trim() : "",
-            alt: block.alt ? block.alt.trim() : "",
-            caption: block.caption ? block.caption.trim() : "",
           };
         }
         if (block.type === "table") {
@@ -292,28 +256,33 @@ export async function PUT(request) {
       });
     }
 
-    const updatedBlog = {
-      ...currentBlog,
+    const updateData = {
       ...updates,
-      id: currentBlog.id,
-      updatedAt: new Date().toISOString().split("T")[0],
       readingTime: calculateReadingTime(formattedContent),
-      tableOfContents: buildTableOfContents(formattedContent),
       content: formattedContent,
     };
+    delete updateData.author;
+    delete updateData.gradient;
+    delete updateData.seo;
+    delete updateData.tableOfContents;
+    delete updateData.updatedAt;
 
-    blogs[index] = updatedBlog;
-    await writeBlogsFile(blogs);
+    const updatedDoc = await Blog.findByIdAndUpdate(existingBlog._id, updateData, { new: true }).lean();
 
     return NextResponse.json({
       success: true,
       message: "Blog updated successfully!",
-      blog: updatedBlog,
+      blog: {
+        ...updatedDoc,
+        id: updatedDoc._id.toString(),
+        author: DEFAULT_AUTHOR,
+        tableOfContents: buildTableOfContents(formattedContent),
+      },
     });
   } catch (error) {
-    console.error("Error updating blog:", error);
+    console.error("PUT /api/admin/blogs error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to update blog." },
+      { error: error.message || "Failed to update blog in database." },
       { status: 500 }
     );
   }
@@ -329,6 +298,13 @@ export async function DELETE(request) {
       );
     }
 
+    if (!process.env.MONGODB_URI) {
+      return NextResponse.json(
+        { error: "Database not configured. Please set MONGODB_URI." },
+        { status: 500 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     const slug = searchParams.get("slug");
@@ -340,26 +316,30 @@ export async function DELETE(request) {
       );
     }
 
-    const blogs = await readBlogsFile();
-    const initialLength = blogs.length;
-    const filteredBlogs = blogs.filter((b) => {
-      if (id && b.id === String(id)) return false;
-      if (slug && b.slug === slug) return false;
-      return true;
-    });
+    await connectToDatabase();
 
-    if (filteredBlogs.length === initialLength) {
-      return NextResponse.json({ error: "Blog not found." }, { status: 404 });
+    const query = [];
+    if (id && mongoose.isValidObjectId(id)) {
+      query.push({ _id: id });
+    }
+    if (id) {
+      query.push({ id: String(id) });
+    }
+    if (slug) {
+      query.push({ slug });
     }
 
-    await writeBlogsFile(filteredBlogs);
+    const deleted = await Blog.findOneAndDelete({ $or: query });
+    if (!deleted) {
+      return NextResponse.json({ error: "Blog not found in database." }, { status: 404 });
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Blog deleted successfully!",
+      message: "Blog deleted successfully from database!",
     });
   } catch (error) {
-    console.error("Error deleting blog:", error);
+    console.error("DELETE /api/admin/blogs error:", error);
     return NextResponse.json(
       { error: error.message || "Failed to delete blog." },
       { status: 500 }

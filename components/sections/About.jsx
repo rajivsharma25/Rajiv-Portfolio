@@ -9,7 +9,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/context/LanguageContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -27,54 +26,52 @@ const slideRight = {
 };
 
 export default function About() {
-  const { t } = useLanguage();
-
   const infoTiles = [
     {
       icon: MapPin,
-      label: t("about.location"),
-      value: t("about.locationVal"),
+      label: "Location",
+      value: "Greater Noida, UP",
     },
     {
       icon: GraduationCap,
-      label: t("about.education"),
-      value: t("about.educationVal"),
+      label: "Education",
+      value: "B.Tech CSE (2024)",
     },
     {
       icon: Briefcase,
-      label: t("about.experience"),
-      value: t("about.experienceVal"),
+      label: "Experience",
+      value: "1+ Years",
     },
     {
       icon: Code2,
-      label: t("about.specialization"),
-      value: t("about.specializationVal"),
+      label: "Specialization",
+      value: "Software Development",
     },
   ];
 
   const quickFacts = [
     {
       icon: Briefcase,
-      title: t("about.fact1Title"),
-      desc: t("about.fact1Desc"),
+      title: "1+ Years Experience",
+      desc: "Developing scalable, high-performance web applications",
       iconBg: "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-800/40",
     },
     {
       icon: Award,
-      title: t("about.fact2Title"),
-      desc: t("about.fact2Desc"),
+      title: "AWS Certified Cloud Practitioner",
+      desc: "Amazon Web Services cloud architecture & core infrastructure",
       iconBg: "bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-800/40",
     },
     {
       icon: Layers,
-      title: t("about.fact3Title"),
-      desc: t("about.fact3Desc"),
+      title: "6+ Deployed Web Projects",
+      desc: "Production-ready apps spanning e-commerce, healthcare & booking",
       iconBg: "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-800/40",
     },
     {
       icon: GraduationCap,
-      title: t("about.fact4Title"),
-      desc: t("about.fact4Desc"),
+      title: "B.Tech CSE Graduate",
+      desc: "Computer Science & Engineering graduate (CGPA: 7.56/10)",
       iconBg: "bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 border-indigo-100 dark:border-indigo-800/40",
     },
   ];
@@ -100,14 +97,14 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2.5 sm:mb-4 leading-normal sm:leading-snug py-0.5">
-            {t("about.heading")}{" "}
+            About{" "}
             <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent inline-block py-0.5">
-              {t("about.headingHighlight")}
+              Me
             </span>
           </h2>
           <div className="w-16 sm:w-24 h-1 bg-blue-600 mx-auto mb-3.5 sm:mb-6 rounded-full"></div>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-            {t("about.subheading")}
+            Get to know my journey, engineering focus, and core technical background
           </p>
         </motion.div>
 
@@ -124,18 +121,24 @@ export default function About() {
               <div className="flex items-center gap-2 mb-3.5 sm:mb-4">
                 <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/40">
                   <Sparkles size={13} className="text-blue-500" />
-                  {t("about.badge")}
+                  Developer Profile
                 </span>
               </div>
 
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white mb-3 sm:mb-4">
-                {t("about.roleTitle")}
+                Software Developer
               </h3>
 
               <div className="space-y-3 sm:space-y-4 text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm md:text-[15px] leading-relaxed mb-6 sm:mb-8">
-                <p dangerouslySetInnerHTML={{ __html: t("about.p1") }} />
-                <p dangerouslySetInnerHTML={{ __html: t("about.p2") }} />
-                <p dangerouslySetInnerHTML={{ __html: t("about.p3") }} />
+                <p>
+                  As a <strong className="text-neutral-900 dark:text-white font-semibold">Software Developer</strong>, I specialize in building robust, performant web applications leveraging the modern capabilities of <strong className="text-neutral-900 dark:text-white font-semibold">React.js</strong> and <strong className="text-neutral-900 dark:text-white font-semibold">Next.js</strong>.
+                </p>
+                <p>
+                  I focus on developing clean, scalable client-side architectures, integrating complex REST APIs, and maintaining reliable state management systems. My dedication to frontend performance optimization, accessibility standards (a11y), and modular design ensures digital products are technically sound and intuitive.
+                </p>
+                <p>
+                  Driven by curiosity and a problem-solving mindset, I continually explore emerging web technologies and modern architectural patterns to deliver seamless user experiences.
+                </p>
               </div>
 
               {/* Quick Info Tiles */}
@@ -177,7 +180,7 @@ export default function About() {
               {/* Quick Facts Card */}
               <div className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 border border-gray-200/80 dark:border-neutral-700/60 hover:border-gray-300 dark:hover:border-neutral-600 shadow-sm hover:shadow-md transition-all duration-300">
                 <h4 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-4 sm:mb-6">
-                  {t("about.keyHighlights")}
+                  Key Highlights
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-4">

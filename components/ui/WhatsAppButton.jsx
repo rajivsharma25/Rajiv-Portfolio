@@ -4,17 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Send, X, CheckCheck } from "lucide-react";
 import Image from "next/image";
-import { useLanguage } from "@/context/LanguageContext";
 
 export default function WhatsAppButton() {
-  const { language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const defaultPlaceholder = language === "ar"
-    ? "مرحباً راجيف، أود مناقشة مشروع عمل معك."
-    : language === "hi"
-    ? "नमस्ते राजीव, मैं आपके साथ एक प्रोजेक्ट पर चर्चा करना चाहता हूँ।"
-    : "Hi Rajiv, I would like to discuss a project with you.";
+  const defaultPlaceholder = "Hi Rajiv, I would like to discuss a project with you.";
   const modalRef = useRef(null);
 
   // Close modal when clicking outside
@@ -58,10 +52,10 @@ export default function WhatsAppButton() {
   };
 
   return (
-    <div ref={modalRef} className="fixed bottom-4 right-4 rtl:right-auto rtl:left-4 sm:bottom-6 sm:right-6 rtl:sm:right-auto rtl:sm:left-6 lg:bottom-8 lg:right-8 rtl:lg:right-auto rtl:lg:left-8 z-50">
+    <div ref={modalRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-50">
       {/* WhatsApp Chat Modal */}
       {isOpen && (
-        <div className="absolute bottom-14 sm:bottom-16 right-0 rtl:right-auto rtl:left-0 mb-2 w-[calc(100vw-32px)] max-w-[340px] sm:w-88 bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl border border-gray-200/80 dark:border-neutral-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div className="absolute bottom-14 sm:bottom-16 right-0 mb-2 w-[calc(100vw-32px)] max-w-[340px] sm:w-88 bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl border border-gray-200/80 dark:border-neutral-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
           {/* Header */}
           <div className="bg-[#075E54] dark:bg-[#128C7E] text-white p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -76,17 +70,11 @@ export default function WhatsAppButton() {
               </div>
               <div>
                 <h4 className="font-bold text-sm leading-tight text-white">
-                  {language === "ar" ? "راجيف شارما" : language === "hi" ? "राजीव शर्मा" : "Rajiv Sharma"}
+                  Rajiv Sharma
                 </h4>
                 <div className="flex items-center gap-1.5 text-[11px] text-emerald-100/90">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span>
-                  <span>
-                    {language === "ar"
-                      ? "يرد عادةً خلال دقائق"
-                      : language === "hi"
-                      ? "आमतौर पर मिनटों में जवाब देते हैं"
-                      : "Typically replies in minutes"}
-                  </span>
+                  <span>Typically replies in minutes</span>
                 </div>
               </div>
             </div>
@@ -102,16 +90,12 @@ export default function WhatsAppButton() {
 
           {/* Chat Bubble Body */}
           <div className="p-4 bg-gray-50/90 dark:bg-neutral-950/80 min-h-[120px] flex flex-col justify-end space-y-3">
-            <div className="self-start max-w-[85%] bg-white dark:bg-neutral-800 p-3 rounded-2xl rounded-tl-sm rtl:rounded-tl-2xl rtl:rounded-tr-sm shadow-xs border border-gray-100 dark:border-neutral-700/60 text-xs text-neutral-800 dark:text-neutral-200">
+            <div className="self-start max-w-[85%] bg-white dark:bg-neutral-800 p-3 rounded-2xl rounded-tl-sm shadow-xs border border-gray-100 dark:border-neutral-700/60 text-xs text-neutral-800 dark:text-neutral-200">
               <p className="leading-relaxed">
-                {language === "ar"
-                  ? "👋 مرحباً بك! كيف يمكنني مساعدتك؟ اكتب رسالتك بالأسفل لبدء المحادثة معي مباشرة عبر واتساب."
-                  : language === "hi"
-                  ? "👋 नमस्ते! मैं आपकी क्या सहायता कर सकता हूँ? मुझसे सीधे व्हाट्सएप पर बातचीत शुरू करने के लिए नीचे संदेश टाइप करें।"
-                  : "👋 Hi there! How can I help you? Type a message below to start a conversation with me directly on WhatsApp."}
+                👋 Hi there! How can I help you? Type a message below to start a conversation with me directly on WhatsApp.
               </p>
               <div className="flex items-center justify-end gap-1 mt-1 text-[10px] text-neutral-400">
-                <span>{language === "ar" ? "الآن" : language === "hi" ? "अभी" : "Just now"}</span>
+                <span>Just now</span>
                 <CheckCheck size={13} className="text-[#34B7F1]" />
               </div>
             </div>
@@ -126,7 +110,7 @@ export default function WhatsAppButton() {
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder={language === "ar" ? "اكتب رسالتك..." : language === "hi" ? "संदेश लिखें..." : "Type a message..."}
+              placeholder="Type a message..."
               autoFocus
               className="flex-1 h-10 px-4 bg-gray-100 dark:bg-neutral-800/80 border border-gray-200/80 dark:border-neutral-700 rounded-full text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#25D366]/40 focus:border-[#25D366]"
             />
@@ -135,7 +119,7 @@ export default function WhatsAppButton() {
               className="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#20ba5a] active:scale-95 text-white flex items-center justify-center flex-shrink-0 transition-all cursor-pointer"
               aria-label="Send message on WhatsApp"
             >
-              <Send size={16} className="rtl:rotate-180" />
+              <Send size={16} />
             </button>
           </form>
         </div>
@@ -157,12 +141,8 @@ export default function WhatsAppButton() {
 
         {/* Tooltip (when closed) */}
         {!isOpen && (
-          <span className="absolute right-full rtl:right-auto rtl:left-full mr-3 rtl:mr-0 rtl:ml-3 px-3 py-1 bg-neutral-900 text-white text-xs font-semibold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-neutral-700 shadow-md">
-            {language === "ar"
-              ? "محادثة عبر واتساب"
-              : language === "hi"
-              ? "व्हाट्सएप पर चैट करें"
-              : "Chat on WhatsApp"}
+          <span className="absolute right-full mr-3 px-3 py-1 bg-neutral-900 text-white text-xs font-semibold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-neutral-700 shadow-md">
+            Chat on WhatsApp
           </span>
         )}
       </button>

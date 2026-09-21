@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Lock,
   KeyRound,
@@ -26,11 +25,8 @@ import {
   FileText,
   ChevronUp,
   ChevronDown,
-  Image as ImageIcon,
   Table as TableIcon,
-  Upload,
   Loader2,
-  Download,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -44,7 +40,8 @@ export default function AdminClient() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentView, setCurrentView] = useState("list"); // 'list' | 'editor' | 'preview'
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [currentView, setCurrentView] = useState("list"); // 'list' | 'editor'
   const [editingBlogId, setEditingBlogId] = useState(null);
   const [statusMessage, setStatusMessage] = useState(null);
 
@@ -55,7 +52,6 @@ export default function AdminClient() {
     category: "",
     tags: "",
     description: "",
-    coverImage: "",
     featured: false,
     content: [
       {
@@ -69,119 +65,6 @@ export default function AdminClient() {
     const list = blogs.map((b) => b.category).filter(Boolean);
     return Array.from(new Set(list));
   }, [blogs]);
-
-  const [uploadingCover, setUploadingCover] = useState(false);
-  const [uploadingBlockIdx, setUploadingBlockIdx] = useState(null);
-
-  const compressImageFile = (file, maxWidth = 1200, quality = 0.8) => {
-    return new Promise((resolve) => {
-      if (!file || file.type === "image/svg+xml" || file.type === "image/gif") {
-        return resolve(file);
-      }
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        const img = document.createElement("img");
-        img.src = e.target?.result;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          let width = img.width;
-          let height = img.height;
-          if (width > maxWidth) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
-          }
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, width, height);
-          canvas.toBlob(
-            (blob) => {
-              if (!blob) {
-                resolve(file);
-              } else {
-                const cleanName = (file.name || "image").replace(/\.[^/.]+$/, ".webp");
-                const compressedFile = new File([blob], cleanName, {
-                  type: "image/webp",
-                  lastModified: Date.now(),
-                });
-                resolve(compressedFile);
-              }
-            },
-            "image/webp",
-            quality
-          );
-        };
-        img.onerror = () => resolve(file);
-      };
-      reader.onerror = () => resolve(file);
-    });
-  };
-
-  const uploadFile = async (file) => {
-    let compressedFile = file;
-    try {
-      compressedFile = await compressImageFile(file);
-    } catch {
-      compressedFile = file;
-    }
-
-    try {
-      const data = new FormData();
-      data.append("file", compressedFile);
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        headers: {
-          "x-admin-key": adminKey,
-        },
-        body: data,
-      });
-      const json = await res.json();
-      if (res.ok && json.success && json.url) {
-        return json.url;
-      }
-      throw new Error(json.error || "Server upload failed");
-    } catch (apiError) {
-      console.warn("API upload failed, using direct client-side fallback:", apiError);
-      // Fallback: Convert compressed file directly to base64 Data URL
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(compressedFile);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (e) => reject(new Error("Failed to process image file"));
-      });
-    }
-  };
-
-  const handleCoverUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploadingCover(true);
-    try {
-      const url = await uploadFile(file);
-      setFormData((prev) => ({ ...prev, coverImage: url }));
-      toast.success("Cover image uploaded successfully!");
-    } catch (err) {
-      toast.error("Error uploading image: " + err.message);
-    } finally {
-      setUploadingCover(false);
-      e.target.value = "";
-    }
-  };
-
-  const handleBlockImageUpload = async (file, blockIdx) => {
-    if (!file) return;
-    setUploadingBlockIdx(blockIdx);
-    try {
-      const url = await uploadFile(file);
-      updateBlock(blockIdx, { url });
-      toast.success("In-article image uploaded successfully!");
-    } catch (err) {
-      toast.error("Error uploading image: " + err.message);
-    } finally {
-      setUploadingBlockIdx(null);
-    }
-  };
 
   // Check sessionStorage on mount
   useEffect(() => {
@@ -239,20 +122,6 @@ export default function AdminClient() {
     toast.info("Logged out of Admin Console.");
   };
 
-  const handleExportBlogs = () => {
-    try {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(blogs, null, 2));
-      const downloadAnchor = document.createElement("a");
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "blogs.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      toast.success("Downloaded blogs.json successfully!");
-    } catch {
-      toast.error("Failed to export blogs.");
-    }
-  };
 
   const fetchBlogs = async (key) => {
     setLoading(true);
@@ -328,14 +197,6 @@ export default function AdminClient() {
           items: [""],
         };
         break;
-      case "image":
-        newBlock = {
-          type: "image",
-          url: "",
-          alt: "",
-          caption: "",
-        };
-        break;
       case "table":
         newBlock = {
           type: "table",
@@ -390,7 +251,6 @@ export default function AdminClient() {
       category: "",
       tags: "",
       description: "",
-      coverImage: "",
       featured: false,
       content: [{ type: "paragraph", text: "" }],
     });
@@ -410,7 +270,6 @@ export default function AdminClient() {
       category: blog.category || "",
       tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : blog.tags || "",
       description: blog.description || "",
-      coverImage: blog.coverImage || "",
       featured: Boolean(blog.featured),
       content: Array.isArray(blog.content) && blog.content.length > 0 ? blog.content : [{ type: "paragraph", text: "" }],
     });
@@ -569,7 +428,7 @@ export default function AdminClient() {
             <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center">
               <Lock size={24} />
             </div>
-            <h1 className="text-2xl font-bold text-neutral-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white">
               Portfolio Admin Console
             </h1>
             <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
@@ -634,12 +493,12 @@ export default function AdminClient() {
 
   // MAIN ADMIN DASHBOARD
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16 px-3.5 sm:px-6 lg:px-0 max-w-7xl mx-auto">
       {/* Top Admin Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-neutral-200 dark:border-neutral-800">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white">
               Blog Admin Console
             </h1>
             <span className="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-bold">
@@ -682,13 +541,6 @@ export default function AdminClient() {
             <ExternalLink size={16} />
           </Link>
 
-          <button
-            onClick={handleExportBlogs}
-            className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition cursor-pointer"
-            title="Export / Download blogs.json (for Git backup)"
-          >
-            <Download size={16} />
-          </button>
 
           <button
             onClick={handleLogout}
@@ -774,10 +626,10 @@ export default function AdminClient() {
                           {blog.publishedAt} • {blog.readingTime}
                         </span>
                       </div>
-                      <h3 className="text-base font-bold text-neutral-900 dark:text-white truncate">
+                      <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white truncate">
                         {blog.title}
                       </h3>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1">
+                      <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
                         {blog.description}
                       </p>
                     </div>
@@ -928,69 +780,6 @@ export default function AdminClient() {
                     />
                   </div>
 
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="text-xs font-bold text-neutral-700 dark:text-neutral-300 flex items-center justify-between">
-                      <span>Cover Image (Upload from Computer or URL)</span>
-                      {formData.coverImage && (
-                        <button
-                          type="button"
-                          onClick={() => setFormData({ ...formData, coverImage: "" })}
-                          className="text-[11px] text-red-500 hover:underline cursor-pointer"
-                        >
-                          Remove Image
-                        </button>
-                      )}
-                    </label>
-
-                    {/* Upload button & URL input */}
-                    <div className="grid sm:grid-cols-2 gap-3 items-center">
-                      <label className="flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-500 bg-neutral-50 dark:bg-neutral-800/60 cursor-pointer transition group">
-                        {uploadingCover ? (
-                          <>
-                            <Loader2 size={16} className="animate-spin text-blue-600" />
-                            <span className="text-xs font-semibold text-blue-600">Uploading cover...</span>
-                          </>
-                        ) : (
-                          <>
-                            <Upload size={16} className="text-neutral-500 group-hover:text-blue-500 transition-colors" />
-                            <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                              Upload Image File
-                            </span>
-                          </>
-                        )}
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          disabled={uploadingCover}
-                          onChange={handleCoverUpload}
-                        />
-                      </label>
-
-                      <input
-                        type="url"
-                        value={formData.coverImage || ""}
-                        onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-                        placeholder="Or paste image URL (e.g. /profile.webp)..."
-                        className="w-full px-3 py-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    {formData.coverImage && (
-                      <div className="mt-2 relative w-full h-44 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={formData.coverImage}
-                          alt="Cover preview"
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-
                   <div className="flex items-center gap-2 pt-2 md:col-span-2">
                     <input
                       type="checkbox"
@@ -1057,14 +846,6 @@ export default function AdminClient() {
                     >
                       <List size={13} />
                       <span>+ Bullet List</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => addBlock("image")}
-                      className="px-2.5 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
-                    >
-                      <ImageIcon size={13} />
-                      <span>+ Image</span>
                     </button>
                     <button
                       type="button"
@@ -1198,47 +979,50 @@ export default function AdminClient() {
                               value={block.filename || ""}
                               onChange={(e) => updateBlock(idx, { filename: e.target.value })}
                               placeholder="Filename (e.g. app/page.jsx)..."
-                              className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-mono"
+                              className="w-full px-3 py-1.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-mono"
                             />
                             <select
                               value={block.language || "javascript"}
                               onChange={(e) => updateBlock(idx, { language: e.target.value })}
-                              className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-mono"
+                              className="w-full px-3 py-1.5 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-mono"
                             >
                               <option value="javascript">JavaScript</option>
-                              <option value="jsx">JSX</option>
                               <option value="typescript">TypeScript</option>
-                              <option value="tsx">TSX</option>
-                              <option value="css">CSS</option>
-                              <option value="bash">Bash / Terminal</option>
-                              <option value="json">JSON</option>
+                              <option value="html">HTML</option>
+                              <option value="css">CSS / Tailwind</option>
                               <option value="python">Python</option>
+                              <option value="bash">Bash / Shell</option>
+                              <option value="json">JSON</option>
+                              <option value="sql">SQL</option>
                             </select>
                           </div>
                           <textarea
-                            rows={5}
+                            rows={6}
                             value={block.code || ""}
                             onChange={(e) => updateBlock(idx, { code: e.target.value })}
-                            placeholder="// Paste or write source code here..."
-                            className="w-full p-3 rounded-xl bg-neutral-950 text-neutral-200 border border-neutral-800 text-xs font-mono focus:ring-2 focus:ring-blue-500"
+                            placeholder="// Paste your formatted code snippet here..."
+                            className="w-full px-3 py-2 rounded-xl bg-neutral-950 border border-neutral-800 text-neutral-100 font-mono text-xs focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                       )}
 
                       {block.type === "list" && (
                         <div className="space-y-2">
-                          {(block.items || []).map((item, itemIdx) => (
+                          <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
+                            Bullet Points
+                          </label>
+                          {(block.items || [""]).map((item, itemIdx) => (
                             <div key={itemIdx} className="flex items-center gap-2">
-                              <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+                              <span className="text-neutral-400 text-xs">•</span>
                               <input
                                 type="text"
                                 value={item}
                                 onChange={(e) => {
-                                  const nextItems = [...(block.items || [])];
+                                  const nextItems = [...block.items];
                                   nextItems[itemIdx] = e.target.value;
                                   updateBlock(idx, { items: nextItems });
                                 }}
-                                placeholder={`Bullet point item #${itemIdx + 1}...`}
+                                placeholder="Bullet point text..."
                                 className="flex-1 px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
                               />
                               <button
@@ -1260,92 +1044,6 @@ export default function AdminClient() {
                           >
                             + Add Bullet Item
                           </button>
-                        </div>
-                      )}
-
-                      {block.type === "image" && (
-                        <div className="space-y-3">
-                          {/* Upload File or URL */}
-                          <div className="space-y-1.5">
-                            <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
-                              Image File (Upload from Computer or URL) *
-                            </label>
-                            <div className="grid sm:grid-cols-2 gap-3 items-center">
-                              <label className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-blue-500 bg-neutral-50 dark:bg-neutral-800/60 cursor-pointer transition group">
-                                {uploadingBlockIdx === idx ? (
-                                  <>
-                                    <Loader2 size={14} className="animate-spin text-blue-600" />
-                                    <span className="text-xs font-semibold text-blue-600">Uploading...</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <Upload size={14} className="text-neutral-500 group-hover:text-blue-500" />
-                                    <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 group-hover:text-blue-600">
-                                      Upload Image File
-                                    </span>
-                                  </>
-                                )}
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  disabled={uploadingBlockIdx === idx}
-                                  onChange={(e) => {
-                                    const file = e.target.files?.[0];
-                                    if (file) handleBlockImageUpload(file, idx);
-                                    e.target.value = "";
-                                  }}
-                                />
-                              </label>
-
-                              <input
-                                type="url"
-                                value={block.url || ""}
-                                onChange={(e) => updateBlock(idx, { url: e.target.value })}
-                                placeholder="Or paste image URL here..."
-                                className="w-full px-3 py-2 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
-                              />
-                            </div>
-                          </div>
-
-                          <div className="space-y-1">
-                            <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
-                              Alt Text (Accessibility & SEO)
-                            </label>
-                            <input
-                              type="text"
-                              value={block.alt || ""}
-                              onChange={(e) => updateBlock(idx, { alt: e.target.value })}
-                              placeholder="Describe the image..."
-                              className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
-                            />
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-[11px] font-bold text-neutral-600 dark:text-neutral-400">
-                              Caption (Optional)
-                            </label>
-                            <input
-                              type="text"
-                              value={block.caption || ""}
-                              onChange={(e) => updateBlock(idx, { caption: e.target.value })}
-                              placeholder="e.g. Figure 1. System architecture breakdown"
-                              className="w-full px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs"
-                            />
-                          </div>
-
-                          {block.url && (
-                            <div className="relative w-full max-h-56 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={block.url}
-                                alt={block.alt || "Preview"}
-                                className="max-h-56 w-auto object-contain rounded-xl"
-                                onError={(e) => {
-                                  e.currentTarget.style.display = "none";
-                                }}
-                              />
-                            </div>
-                          )}
                         </div>
                       )}
 
@@ -1498,24 +1196,12 @@ export default function AdminClient() {
                 <span className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-xs font-semibold">
                   {formData.category}
                 </span>
-                <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white mt-4 mb-3">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white tracking-tight leading-tight sm:leading-tight mb-4 sm:mb-6">
                   {formData.title || "Untitled Article"}
                 </h1>
-                <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed mb-4">
+                <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6 sm:mb-8">
                   {formData.description || "Article summary description..."}
                 </p>
-                {formData.coverImage && (
-                  <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 mb-6">
-                    <Image
-                      src={formData.coverImage}
-                      alt="Cover Preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 850px"
-                      unoptimized={Boolean(formData.coverImage?.startsWith("data:"))}
-                      className="object-cover"
-                    />
-                  </div>
-                )}
               </div>
 
               <div className="space-y-6 pt-6 border-t border-neutral-200 dark:border-neutral-800">
@@ -1523,42 +1209,22 @@ export default function AdminClient() {
                   switch (block.type) {
                     case "heading":
                       return (
-                        <h2 key={i} className="text-2xl font-bold text-neutral-900 dark:text-white pt-4 border-b pb-2">
+                        <h2 key={i} className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white pt-8 pb-2 tracking-tight border-b border-neutral-200/60 dark:border-neutral-800/80">
                           {block.text || "Heading"}
                         </h2>
                       );
                     case "paragraph":
                       return (
-                        <p key={i} className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                        <p key={i} className="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed">
                           {block.text}
                         </p>
-                      );
-                    case "image":
-                      return (
-                        <figure key={i} className="space-y-2 my-4">
-                          <div className="relative w-full h-64 sm:h-80 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800">
-                            <Image
-                              src={block.url || "/profile.webp"}
-                              alt={block.alt || "Article graphic"}
-                              fill
-                              sizes="(max-width: 768px) 100vw, 850px"
-                              unoptimized={Boolean(block.url?.startsWith("data:"))}
-                              className="object-cover"
-                            />
-                          </div>
-                          {block.caption && (
-                            <figcaption className="text-center text-xs text-neutral-400 italic">
-                              {block.caption}
-                            </figcaption>
-                          )}
-                        </figure>
                       );
                     case "table":
                       return (
                         <div key={i} className="my-6 overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
-                          <table className="w-full text-left text-xs border-collapse">
+                          <table className="w-full text-left text-xs sm:text-sm border-collapse">
                             {Array.isArray(block.headers) && (
-                              <thead className="bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-800 font-bold uppercase text-[11px] text-neutral-800 dark:text-neutral-200">
+                              <thead className="bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-neutral-800 font-bold uppercase text-xs text-neutral-800 dark:text-neutral-200">
                                 <tr>
                                   {block.headers.map((h, hi) => (
                                     <th key={hi} className="p-3">{h}</th>
@@ -1570,7 +1236,7 @@ export default function AdminClient() {
                               {(block.rows || []).map((row, ri) => (
                                 <tr key={ri} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40">
                                   {row.map((cell, ci) => (
-                                    <td key={ci} className="p-3 text-neutral-700 dark:text-neutral-300">{cell}</td>
+                                    <td key={ci} className="p-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">{cell}</td>
                                   ))}
                                 </tr>
                               ))}
@@ -1581,20 +1247,20 @@ export default function AdminClient() {
                     case "callout":
                       return (
                         <div key={i} className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-800 dark:text-blue-200 space-y-1">
-                          <p className="font-bold text-sm">{block.title}</p>
-                          <p className="text-xs">{block.text}</p>
+                          <p className="font-bold text-sm sm:text-base">{block.title}</p>
+                          <p className="text-xs sm:text-sm">{block.text}</p>
                         </div>
                       );
                     case "code":
                       return (
-                        <div key={i} className="rounded-xl overflow-hidden bg-neutral-950 text-neutral-200 p-4 font-mono text-xs">
-                          <p className="text-neutral-500 pb-2 border-b border-neutral-800 mb-2">{block.filename || block.language}</p>
+                        <div key={i} className="rounded-xl overflow-hidden bg-neutral-950 text-neutral-200 p-4 font-mono text-xs sm:text-sm">
+                          <p className="text-neutral-500 pb-2 border-b border-neutral-800 mb-2 text-xs">{block.filename || block.language}</p>
                           <pre>{block.code}</pre>
                         </div>
                       );
                     case "list":
                       return (
-                        <ul key={i} className="space-y-2 list-disc pl-5 text-sm">
+                        <ul key={i} className="space-y-2 list-disc pl-5 text-sm sm:text-base">
                           {(block.items || []).map((item, idx) => (
                             <li key={idx}>{item}</li>
                           ))}

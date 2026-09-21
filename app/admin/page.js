@@ -1,4 +1,4 @@
-import AdminClient from "./AdminClient";
+import AdminClient from "@/components/admin/AdminClient";
 
 export const metadata = {
   title: "Admin Console | Rajiv Sharma",

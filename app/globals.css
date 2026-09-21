@@ -17,88 +17,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.25;
 }
 
-/* Devanagari / Hindi Typography Normalization & Line-Height Fixes */
-html[lang="hi"] {
-  font-family: "Noto Sans Devanagari", var(--font-jakarta), sans-serif;
-}
-
-html[lang="hi"] body {
-  font-family: "Noto Sans Devanagari", var(--font-jakarta), sans-serif;
-  line-height: 1.7;
-}
-
-html[lang="hi"] h1,
-html[lang="hi"] h2,
-html[lang="hi"] h3,
-html[lang="hi"] h4,
-html[lang="hi"] h5,
-html[lang="hi"] h6 {
-  font-family: "Noto Sans Devanagari", var(--font-outfit), sans-serif;
-  letter-spacing: 0;
-  line-height: 1.35;
-}
-
-html[lang="hi"] p,
-html[lang="hi"] li {
-  line-height: 1.75;
-}
-
-html[lang="hi"] .leading-tight {
-  line-height: 1.35 !important;
-}
-
-html[lang="hi"] .leading-snug {
-  line-height: 1.45 !important;
-}
-
-/* Arabic Typography Normalization & Line-Height Fixes */
-html[lang="ar"] {
-  font-family: "Cairo", system-ui, -apple-system, sans-serif;
-}
-
-html[lang="ar"] body {
-  font-family: "Cairo", system-ui, -apple-system, sans-serif;
-  line-height: 1.75;
-}
-
-html[lang="ar"] h1,
-html[lang="ar"] h2,
-html[lang="ar"] h3,
-html[lang="ar"] h4,
-html[lang="ar"] h5,
-html[lang="ar"] h6 {
-  font-family: "Cairo", sans-serif;
-  letter-spacing: 0;
-  line-height: 1.4;
-}
-
-html[lang="ar"] p,
-html[lang="ar"] li {
-  line-height: 1.8;
-}
-
-html[lang="ar"] .leading-tight {
-  line-height: 1.4 !important;
-}
-
-html[lang="ar"] .leading-snug {
-  line-height: 1.5 !important;
-}
-
-/* RTL Layout Helpers */
-html[dir="rtl"] {
-  text-align: right;
-}
-
-/* Prevent gradient text clipping on Devanagari & Arabic vowel marks and tall glyphs */
-.bg-clip-text {
-  padding-top: 0.08em;
-  padding-bottom: 0.12em;
-  margin-top: -0.08em;
-  margin-bottom: -0.12em;
-  display: inline-block;
-}
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -113,48 +31,18 @@ html[dir="rtl"] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(37 99 235) !important;
-  border-radius: 0 !important;
+  background: rgb(37 99 235);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(29 78 216) !important;
+  background: rgb(29 78 216);
 }
 
 /* Text selection styling */
 ::selection {
   background-color: rgb(37 99 235);
   color: white;
-}
-
-::-moz-selection {
-  background-color: rgb(37 99 235);
-  color: white;
-}
-
-/* Custom utility classes only where needed */
-.text-gradient {
-  background: linear-gradient(135deg, rgb(59 130 246), rgb(37 99 235));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.dark .text-gradient {
-  background: linear-gradient(135deg, rgb(96 165 250), rgb(59 130 246));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.blue-gradient,
-.violet-gradient {
-  background: linear-gradient(135deg, rgb(59 130 246), rgb(37 99 235), rgb(29 78 216));
-}
-
-.dark .blue-gradient,
-.dark .violet-gradient {
-  background: linear-gradient(135deg, rgb(96 165 250), rgb(59 130 246), rgb(37 99 235));
 }
 
 /* Hide scrollbar utility */

@@ -1,14 +1,10 @@
-// app/layout.js
-
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import { ThemeProvider } from "@/components/theme-provider";
-import { LanguageProvider } from "@/context/LanguageContext";
-import Toaster from "@/components/Toaster";
-import DynamicFontLoader from "@/components/DynamicFontLoader";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import Toaster from "@/components/ui/Toaster";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -30,44 +26,14 @@ export const metadata = {
   },
   description:
     "Portfolio of Rajiv Sharma, a Software Developer specializing in building robust, performant web applications leveraging React.js and Next.js, scalable client-side architectures, and REST API integration.",
-  keywords: [
-    "Rajiv Sharma",
-    "Software Developer",
-    "Frontend Developer",
-    "React Developer",
-    "Next.js Developer",
-    "JavaScript Developer",
-    "Web Developer India",
-    "React.js Portfolio",
-    "Full Stack Web Developer",
-    "Freelance Web Developer",
-    "Web Performance Optimization",
-    "Core Web Vitals",
-    "Redux Toolkit",
-    "Tailwind CSS",
-    "AI Web Integration",
-    "Next.js 15 App Router",
-  ],
   authors: [{ name: "Rajiv Sharma", url: "https://rajivsharma.vercel.app" }],
-  creator: "Rajiv Sharma",
-  publisher: "Rajiv Sharma",
-  category: "technology",
-  classification: "Software Engineering & Web Development Portfolio",
-
   alternates: {
     canonical: "https://rajivsharma.vercel.app",
-    languages: {
-      "en-US": "https://rajivsharma.vercel.app/?lang=en",
-      "hi-IN": "https://rajivsharma.vercel.app/?lang=hi",
-      "ar": "https://rajivsharma.vercel.app/?lang=ar",
-    },
   },
-
   icons: {
     icon: "/favicon.ico",
-    apple: "/profile.webp",
+    apple: "/apple-touch-icon.png",
   },
-
   openGraph: {
     title: "Rajiv Sharma | Software Developer & Frontend Engineer",
     description:
@@ -75,52 +41,23 @@ export const metadata = {
     url: "https://rajivsharma.vercel.app",
     siteName: "Rajiv Sharma Portfolio",
     locale: "en_US",
-    alternateLocale: ["hi_IN", "ar_AR"],
     type: "website",
     images: [
       {
-        url: "/profile.webp",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Rajiv Sharma Software Developer Portfolio",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: "Rajiv Sharma | Software Developer & Frontend Engineer",
     description:
       "Software Developer specializing in building robust, performant web applications leveraging React.js, Next.js, and modern client-side architectures.",
     creator: "@rajivsharma25",
-    images: ["/profile.webp"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-
-  manifest: "/manifest.webmanifest",
-
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Rajiv Sharma",
-  },
-
-  formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
+    images: ["/og-image.webp"],
   },
 };
 
@@ -129,8 +66,6 @@ export const viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
-  width: "device-width",
-  initialScale: 1,
 };
 
 const jsonLdWebsite = {
@@ -175,24 +110,17 @@ const jsonLdWebsite = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <body className={`${outfit.variable} ${plusJakarta.variable} font-sans antialiased bg-gray-50 dark:bg-neutral-950 dark:text-neutral-100 leading-relaxed transition-colors duration-300`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
         />
-      </head>
-      <body className={`${outfit.variable} ${plusJakarta.variable} font-sans antialiased bg-gray-50 dark:bg-neutral-950 dark:text-neutral-100 leading-relaxed transition-colors duration-300`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <LanguageProvider>
-            <DynamicFontLoader />
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-            <WhatsAppButton />
-            <Toaster />
-          </LanguageProvider>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

@@ -20,7 +20,6 @@ import {
   Globe,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/context/LanguageContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -38,7 +37,6 @@ const slideRight = {
 };
 
 export default function Contact() {
-  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -68,20 +66,20 @@ export default function Contact() {
 
       const data = await response.json();
       if (response.ok && data.success) {
-        toast.success(t("contact.successTitle"), {
-          description: t("contact.successDesc"),
+        toast.success("Message sent successfully!", {
+          description: "Thank you for reaching out. I'll get back to you soon.",
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
         console.error("Error sending message:", data);
-        toast.error(t("contact.errorTitle"), {
-          description: data.error || t("contact.errorDesc"),
+        toast.error("Failed to send message", {
+          description: data.error || "Something went wrong. Please try again.",
         });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error(t("contact.networkError"), {
-        description: t("contact.networkErrorDesc"),
+      toast.error("Network error", {
+        description: "Please check your connection and try again.",
       });
     } finally {
       setIsSubmitting(false);
@@ -91,7 +89,7 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: t("contact.channels.email"),
+      title: "Email",
       value: "rajivsharma93056@gmail.com",
       link: "mailto:rajivsharma93056@gmail.com",
       color: "text-red-500 dark:text-red-400",
@@ -100,7 +98,7 @@ export default function Contact() {
     },
     {
       icon: FaWhatsapp,
-      title: t("contact.channels.whatsapp"),
+      title: "WhatsApp",
       value: "+91 9305635022",
       link: "https://wa.me/919305635022?text=Hi%20Rajiv,%20I%20would%20like%20to%20discuss%20a%20project%20with%20you.",
       color: "text-emerald-600 dark:text-emerald-400",
@@ -109,7 +107,7 @@ export default function Contact() {
     },
     {
       icon: Linkedin,
-      title: t("contact.channels.linkedin"),
+      title: "LinkedIn",
       value: "linkedin.com/in/rajivsharma25",
       link: "https://linkedin.com/in/rajivsharma25",
       color: "text-blue-600 dark:text-blue-400",
@@ -118,8 +116,8 @@ export default function Contact() {
     },
     {
       icon: MapPin,
-      title: t("contact.channels.location"),
-      value: t("contact.channels.locationValue"),
+      title: "Location",
+      value: "Noida, India",
       link: "https://maps.app.goo.gl/h6TbMkZFqFLaYZG88",
       color: "text-sky-600 dark:text-sky-400",
       bgColor: "bg-sky-50 dark:bg-sky-950/40",
@@ -162,26 +160,26 @@ export default function Contact() {
 
   const quickHighlights = [
     {
-      title: t("contact.availability.item1Title"),
-      subtitle: t("contact.availability.item1Sub"),
+      title: "Available for Opportunities",
+      subtitle: "Open for full-time software engineering and freelance projects",
       icon: Sparkles,
-      status: t("contact.availability.item1Status"),
+      status: "Active",
       badgeColor: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/40",
       indicator: true,
     },
     {
-      title: t("contact.availability.item2Title"),
-      subtitle: t("contact.availability.item2Sub"),
+      title: "Swift Turnaround",
+      subtitle: "Prompt response guaranteed within 24 hours",
       icon: Clock,
-      status: t("contact.availability.item2Status"),
+      status: "< 24h",
       badgeColor: "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-800/40",
       indicator: false,
     },
     {
-      title: t("contact.availability.item3Title"),
-      subtitle: t("contact.availability.item3Sub"),
+      title: "Global Collaboration",
+      subtitle: "Based in Noida, India • Comfortable with worldwide remote timezones",
       icon: Globe,
-      status: t("contact.availability.item3Status"),
+      status: "Remote",
       badgeColor: "bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400 border-sky-100 dark:border-sky-800/40",
       indicator: false,
     },
@@ -208,14 +206,14 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2.5 sm:mb-4 leading-normal sm:leading-snug py-0.5">
-            {t("contact.heading")}{" "}
+            Get In{" "}
             <span className="bg-gradient-to-r from-blue-600 to-sky-500 dark:from-blue-400 dark:to-sky-300 bg-clip-text text-transparent inline-block py-0.5">
-              {t("contact.headingHighlight")}
+              Touch
             </span>
           </h2>
           <div className="w-16 sm:w-24 h-1 bg-blue-600 mx-auto mb-3.5 sm:mb-6 rounded-full"></div>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-            {t("contact.subheading")}
+            Have a project in mind or want to collaborate? Feel free to reach out anytime.
           </p>
         </motion.div>
 
@@ -233,10 +231,10 @@ export default function Contact() {
               <div className="pb-3.5 sm:pb-4 mb-4 sm:mb-5 border-b border-gray-100 dark:border-neutral-800/80 flex items-center justify-between">
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
-                    {t("contact.directChannels")}
+                    Direct Channels
                   </h3>
                   <p className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                    {t("contact.directChannelsSub")}
+                    Connect directly via your preferred platform
                   </p>
                 </div>
               </div>
@@ -285,10 +283,10 @@ export default function Contact() {
               <div className="pb-3.5 sm:pb-4 mb-4 sm:mb-5 border-b border-gray-100 dark:border-neutral-800/80 flex items-center justify-between">
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
-                    {t("contact.availability.heading")}
+                    Availability & Terms
                   </h3>
                   <p className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                    {t("contact.availability.subheading")}
+                    Engagement models and working preferences
                   </p>
                 </div>
               </div>
@@ -334,10 +332,10 @@ export default function Contact() {
                 <div>
                   <h4 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white flex items-center gap-2">
                     <MessageCircle size={18} className="text-blue-600 dark:text-blue-400" />
-                    {t("contact.social.heading")}
+                    Connect Socially
                   </h4>
                   <p className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                    {t("contact.social.subheading")}
+                    Follow or send a direct ping on any network
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -375,11 +373,11 @@ export default function Contact() {
                   <div className="flex items-center justify-between mb-1.5 sm:mb-2">
                     <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white flex items-center gap-2 sm:gap-2.5">
                       <Send size={18} className="text-blue-600 dark:text-blue-400" />
-                      {t("contact.sendEmail")}
+                      Send Me An Email
                     </h3>
                   </div>
                   <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
-                    {t("contact.quickResponse")}
+                    Typically responds within 24 business hours
                   </p>
                 </div>
 
@@ -391,7 +389,7 @@ export default function Contact() {
                         className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
                       >
                         <User size={13} className="text-blue-600 dark:text-blue-400" />
-                        {t("contact.nameLabel")} <span className="text-blue-600">*</span>
+                        Your Name <span className="text-blue-600">*</span>
                       </label>
                       <input
                         type="text"
@@ -401,7 +399,7 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                        placeholder={t("contact.namePlaceholder")}
+                        placeholder="Rajiv Sharma"
                       />
                     </div>
 
@@ -411,7 +409,7 @@ export default function Contact() {
                         className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
                       >
                         <AtSign size={13} className="text-blue-600 dark:text-blue-400" />
-                        {t("contact.emailLabel")} <span className="text-blue-600">*</span>
+                        Email Address <span className="text-blue-600">*</span>
                       </label>
                       <input
                         type="email"
@@ -421,7 +419,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                        placeholder={t("contact.emailPlaceholder")}
+                        placeholder="rajiv@example.com"
                       />
                     </div>
                   </div>
@@ -432,7 +430,7 @@ export default function Contact() {
                       className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 mb-1.5 sm:mb-2"
                     >
                       <MessageSquare size={13} className="text-blue-600 dark:text-blue-400" />
-                      {t("contact.messageLabel")} <span className="text-blue-600">*</span>
+                      Your Message <span className="text-blue-600">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -442,7 +440,7 @@ export default function Contact() {
                       onChange={handleChange}
                       rows={5}
                       className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 border border-gray-200 dark:border-neutral-700 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 resize-none bg-gray-50/80 dark:bg-neutral-800/60 focus:bg-white dark:focus:bg-neutral-900 outline-none text-xs sm:text-sm text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500"
-                      placeholder={t("contact.messagePlaceholder")}
+                      placeholder="Tell me about your project, idea, or inquiry..."
                     ></textarea>
                   </div>
 
@@ -454,7 +452,7 @@ export default function Contact() {
                   >
                     <Send size={15} />
                     <span>
-                      {isSubmitting ? t("contact.sending") : t("contact.sendMessage")}
+                      {isSubmitting ? "Sending Message..." : "Send Message"}
                     </span>
                   </button>
                 </form>

@@ -3,11 +3,10 @@
 [![Next.js](https://img.shields.io/badge/Next.js_16.1-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Serwist PWA](https://img.shields.io/badge/PWA-Serwist-FF6B6B?style=for-the-badge&logo=pwa&logoColor=white)](https://serwist.pages.dev/)
-[![i18n](https://img.shields.io/badge/i18n-EN_%7C_HI_%7C_AR-4A90E2?style=for-the-badge)](https://github.com/rajivsharma25/Rajiv-Portfolio)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Resend](https://img.shields.io/badge/Email-Resend-000000?style=for-the-badge&logo=resend&logoColor=white)](https://resend.com/)
 
-A modern, high-performance personal portfolio built for **Rajiv Sharma**, Software Developer. Engineered with cutting-edge web technologies, glassmorphism aesthetics, dynamic internationalization (i18n) supporting **English**, **Hindi**, and **Arabic (RTL)**, installable PWA capabilities, and interactive bento-grid layouts.
+A modern, high-performance personal portfolio built for **Rajiv Sharma**, Software Developer. Engineered with cutting-edge web technologies, glassmorphism aesthetics, full MongoDB-backed Blog CMS, and interactive bento-grid layouts.
 
 🌐 **Live Website**: [rajivsharma.vercel.app](https://rajivsharma.vercel.app)
 
@@ -15,34 +14,22 @@ A modern, high-performance personal portfolio built for **Rajiv Sharma**, Softwa
 
 ## ✨ Key Features
 
-- **🌐 Tri-Lingual Internationalization (i18n)**:
-  - Full support for **English (`en`)**, **Hindi (`hi`)**, and **Arabic (`ar`)**.
-  - Instant zero-flicker client-side switching with persistent `localStorage` preference.
-  - Comprehensive localization covering all section headlines, bio highlights, skill taxonomies, experience timelines, project cards, education, and contact forms.
-
-- **🔄 Native Right-to-Left (RTL) Layout**:
-  - Full bidirectional support for Arabic (`html[dir="rtl"]`).
-  - Intelligently mirrored vertical career timeline, directional navigation chevrons, link arrows, and floating widgets.
-
-- **📱 Progressive Web App (PWA) with Offline Support**:
-  - Built with **Serwist** service workers for robust asset caching.
-  - Dedicated offline fallback screen (`/~offline`) with network retry capabilities.
-  - Installable web app manifest with custom theme colors and icons.
+- **📝 MongoDB-Backed Blog & Content Management System (CMS)**:
+  - Dynamic technical blog engine powered by **MongoDB Atlas** and **Mongoose**.
+  - Secure Admin Console (`/admin`) for publishing, editing, and previewing articles in real time.
+  - Rich content block support (code snippets, syntax highlighting, callouts, tables, and images).
+  - Dynamic SEO metadata generation and Schema.org JSON-LD structured data.
 
 - **🎨 Modern Bento-Grid & Glassmorphism UI**:
   - Contemporary design featuring backdrop blurs, soft ambient lighting gradients, and fluid micro-animations powered by **Framer Motion**.
   - **Dark & Light Mode** with automatic system preference detection and seamless theme toggle via `next-themes`.
-
-- **🔤 Dynamic On-Demand Font Loading**:
-  - Core Latin typography (`Outfit` and `Plus Jakarta Sans`) loaded statically via Next.js Google Fonts.
-  - Script-specific fonts (`Noto Sans Devanagari` and `Cairo`) are fetched on-demand only when Hindi or Arabic is activated, minimizing initial payload.
 
 - **✉️ Serverless Contact API with Resend**:
   - Native Next.js API route (`/api/contact`) sending beautiful, responsive HTML notifications with sender details and timestamps.
   - Theme-synced feedback banners powered by **Sonner** toast notifications.
 
 - **💬 Interactive WhatsApp Floating Widget**:
-  - Floating direct chat button with an expandable modal preview, online status indicators, and multilingual greeting templates.
+  - Floating direct chat button with an expandable modal preview, online status indicators, and direct chat launch.
 
 ---
 
@@ -50,14 +37,14 @@ A modern, high-performance personal portfolio built for **Rajiv Sharma**, Softwa
 
 | Layer | Technologies |
 | :--- | :--- |
-| **Framework & Core** | Next.js 16.1 (App Router, Turbopack, Webpack Production Bundler) |
+| **Framework & Core** | Next.js 16.1 (App Router) |
 | **Library** | React 19, React DOM 19 |
-| **Styling & Design** | Vanilla Tailwind CSS v4, Glassmorphism, CSS Logical Properties |
+| **Database & ODM** | MongoDB Atlas, Mongoose |
+| **Styling & Design** | Vanilla Tailwind CSS v4, Glassmorphism |
 | **Animation & Motion** | Framer Motion |
-| **PWA & Offline** | Serwist (`@serwist/next`, `serwist`) |
 | **Email Delivery** | Resend API |
 | **Notifications** | Sonner (`next-themes` synced) |
-| **Icons & Fonts** | Lucide React, React Icons, Google Fonts (Outfit, Plus Jakarta Sans, Noto Sans Devanagari, Cairo) |
+| **Icons & Fonts** | Lucide React, React Icons, Google Fonts (Outfit, Plus Jakarta Sans) |
 | **Image Optimization** | Sharp, Next.js Image Component (WebP) |
 
 ---
@@ -106,8 +93,8 @@ A modern, high-performance personal portfolio built for **Rajiv Sharma**, Softwa
 
 | Command | Description |
 | :--- | :--- |
-| `npm run dev` | Starts development server with **Turbopack** on port `3000` |
-| `npm run build` | Compiles optimized production build with Webpack and Serwist PWA bundling |
+| `npm run dev` | Starts development server on port `3000` |
+| `npm run build` | Compiles optimized production build |
 | `npm run start` | Runs the compiled production build locally |
 | `npm run lint` | Runs ESLint to identify code quality and style issues |
 
@@ -117,44 +104,59 @@ A modern, high-performance personal portfolio built for **Rajiv Sharma**, Softwa
 
 ```text
 ├── app/
+│   ├── admin/
+│   │   └── page.js             # Admin console entry page
 │   ├── api/
+│   │   ├── admin/
+│   │   │   ├── auth/           # Admin key authentication route
+│   │   │   └── blogs/          # Blog CRUD API routes
 │   │   └── contact/
 │   │       └── route.js        # Serverless Resend email API handler
-│   ├── ~offline/
-│   │   └── page.js             # PWA offline fallback screen
-│   ├── globals.css             # Tailwind v4 theme, fonts & RTL styles
+│   ├── blogs/
+│   │   ├── [slug]/
+│   │   │   └── page.js         # Individual blog post page
+│   │   └── page.js             # Blog hub entry point
+│   ├── globals.css             # Tailwind v4 theme & base styles
 │   ├── layout.js               # Root layout, Google Fonts & Providers
-│   ├── manifest.js             # Web App Manifest generator
 │   ├── page.js                 # Portfolio homepage entry point
-│   └── sw.js                   # Serwist PWA service worker logic
+│   ├── robots.js               # SEO robots.txt generator
+│   └── sitemap.js              # Dynamic XML sitemap generator
 ├── components/
-│   ├── About.jsx               # Bio, career stats & key highlights
-│   ├── Certifications.jsx      # AWS certification & academic timeline
-│   ├── Contact.jsx             # Direct contact channels & email form
-│   ├── DynamicFontLoader.jsx   # On-demand loader for Hindi & Arabic fonts
-│   ├── Experience.jsx          # Interactive career trajectory timeline
-│   ├── Footer.jsx              # Site footer with quick navigation links
-│   ├── Header.jsx              # Responsive navigation & controls
-│   ├── Hero.jsx                # Profile showcase & typewriter banner
-│   ├── LanguageToggle.jsx      # Multilingual dropdown switcher
-│   ├── Projects.jsx            # Filterable project bento cards & live demos
-│   ├── Skills.jsx              # Tech stack grid & core capabilities
-│   ├── Toaster.jsx             # Theme-aware Sonner toast provider
-│   ├── Typewriter.jsx          # Dynamic typewriter role animator
-│   ├── WhatsAppButton.jsx      # Floating interactive chat modal
-│   └── theme-provider.jsx      # next-themes context provider
-├── context/
-│   └── LanguageContext.jsx     # i18n state manager & RTL synchronization
-├── locales/
-│   ├── en.json                 # English translation dictionary
-│   ├── hi.json                 # Hindi (हिन्दी) translation dictionary
-│   └── ar.json                 # Arabic (العربية) translation dictionary
+│   ├── admin/
+│   │   └── AdminClient.jsx     # Full-featured blog CMS admin interface
+│   ├── blog/
+│   │   ├── ArticleClient.jsx   # Interactive individual blog article view
+│   │   └── BlogListClient.jsx  # Filterable blog search & listing interface
+│   ├── layout/
+│   │   ├── Footer.jsx          # Site footer with quick navigation links
+│   │   └── Header.jsx          # Responsive navigation & controls
+│   ├── providers/
+│   │   └── theme-provider.jsx  # next-themes context provider
+│   ├── sections/
+│   │   ├── About.jsx           # Bio, career stats & key highlights
+│   │   ├── Certifications.jsx  # AWS certification & academic timeline
+│   │   ├── Contact.jsx         # Direct contact channels & email form
+│   │   ├── Experience.jsx      # Interactive career trajectory timeline
+│   │   ├── Hero.jsx            # Profile showcase & typewriter banner
+│   │   ├── Projects.jsx        # Filterable project bento cards & live demos
+│   │   └── Skills.jsx          # Tech stack grid & core capabilities
+│   └── ui/
+│       ├── Toaster.jsx         # Theme-aware Sonner toast provider
+│       ├── Typewriter.jsx      # Dynamic typewriter role animator
+│       └── WhatsAppButton.jsx  # Floating interactive chat modal
+├── lib/
+│   ├── blogs.js                # Blog database queries & helpers
+│   └── mongodb.js              # Cached MongoDB Atlas connection singleton
+├── models/
+│   └── Blog.js                 # Mongoose Blog schema & validation
 ├── public/
 │   ├── assets/images/          # Optimized WebP project banners
-│   ├── icons/                  # PWA application icons
 │   ├── logo.webp               # Portfolio brand logo
 │   └── profile.webp            # Optimized developer profile photo
-├── next.config.mjs             # Next.js & Serwist configuration
+├── scripts/
+│   └── test-db.mjs             # Database connectivity & seeding utility
+├── svg/                        # Custom inline SVG icons
+├── next.config.mjs             # Next.js configuration
 └── package.json                # Dependencies and project metadata
 ```
 

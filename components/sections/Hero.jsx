@@ -18,8 +18,7 @@ import {
   SiTypescript,
   SiFramer,
 } from "react-icons/si";
-import Typewriter from "./Typewriter";
-import { useLanguage } from "@/context/LanguageContext";
+import Typewriter from "@/components/ui/Typewriter";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -28,12 +27,9 @@ const fadeUp = (delay = 0) => ({
 });
 
 export default function Hero() {
-  const { t, language } = useLanguage();
-  const typewriterWords = Array.isArray(t("hero.roles"))
-    ? t("hero.roles")
-    : ["Frontend", "Web", "ReactJS", "Software"];
+  const typewriterWords = ["Frontend", "Web", "ReactJS", "Software"];
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 px-3.5 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 px-3.5 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Base Background Gradient */}
@@ -138,9 +134,9 @@ export default function Hero() {
             className="text-lg sm:text-2xl md:text-3xl text-gray-900 dark:text-neutral-100 font-medium mb-2 sm:mb-3.5 leading-normal sm:leading-relaxed py-0.5"
             {...fadeUp(0.1)}
           >
-            {t("hero.greeting")}{" "}
+            Hi, I'm{" "}
             <span className="bg-gradient-to-r from-blue-600 via-sky-500 to-blue-500 dark:from-blue-400 dark:via-sky-300 dark:to-blue-400 bg-clip-text text-transparent font-bold inline-block py-0.5">
-              {t("hero.name")}
+              Rajiv Sharma
             </span>
           </motion.h1>
 
@@ -149,20 +145,19 @@ export default function Hero() {
             {...fadeUp(0.2)}
           >
             <Typewriter
-              key={language}
               words={typewriterWords}
               typingSpeed={90}
               deletingSpeed={50}
               pauseDuration={1600}
             />{" "}
-            {t("hero.developerSuffix")}
+            Developer
           </motion.h2>
 
           <motion.p
             className="mt-4 sm:mt-6 md:mt-7 text-sm sm:text-base md:text-lg text-gray-600 dark:text-neutral-200 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-1 sm:px-0"
             {...fadeUp(0.3)}
           >
-            {t("hero.description")}
+            A software developer dedicated to building high-performance, scalable, and responsive web applications. Specializing in React, Next.js, and modern software development practices to deliver clean, robust digital solutions.
           </motion.p>
 
           <motion.div
@@ -174,14 +169,14 @@ export default function Hero() {
               className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 hover:bg-blue-700 active:scale-95 shadow-md hover:shadow-lg"
             >
               <FolderOpen size={18} />
-              {t("hero.viewProjects")}
+              View My Projects
             </Link>
             <Link
               href="#contact"
               className="w-full sm:w-auto justify-center inline-flex items-center gap-2 border border-blue-600 text-blue-600 dark:text-blue-400 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 hover:bg-blue-600 hover:text-white dark:hover:text-white active:scale-95"
             >
               <MessageCircle size={18} />
-              {t("hero.getInTouch")}
+              Get In Touch
             </Link>
           </motion.div>
         </div>
