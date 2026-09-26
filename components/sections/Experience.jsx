@@ -1,6 +1,7 @@
 "use client";
 import { Briefcase, Calendar, MapPin, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
+import SpotlightCard from "../ui/SpotlightCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -319,60 +320,65 @@ export default function Experience() {
                 id={`exp-${index}`}
                 key={index}
                 variants={cardFadeUp}
-                className="rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl border border-gray-200/80 dark:border-neutral-700/60 hover:border-gray-300 dark:hover:border-neutral-600 shadow-sm hover:shadow-md transition-all duration-300 scroll-mt-28"
+                className="scroll-mt-28"
               >
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
-                  <div>
-                    <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white mb-1 leading-normal">
-                      {exp.title}
-                    </h3>
-                    <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm sm:text-base">
-                      {exp.company}
-                    </p>
+                <SpotlightCard
+                  spotlightColor="rgba(255, 255, 255, 0.25)"
+                  className="rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl border border-gray-200/80 dark:border-neutral-700/60 hover:border-gray-300 dark:hover:border-neutral-600 shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  {/* Header */}
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+                    <div>
+                      <h3 className="text-lg sm:text-2xl font-bold text-neutral-900 dark:text-white mb-1 leading-normal">
+                        {exp.title}
+                      </h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-semibold text-sm sm:text-base">
+                        {exp.company}
+                      </p>
+                    </div>
+
+                    {/* Metadata Badges */}
+                    <div className="flex flex-wrap md:flex-col md:items-end rtl:md:items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400">
+                      <div className="inline-flex items-center gap-1.5 font-medium bg-white dark:bg-neutral-900/80 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-gray-200/70 dark:border-neutral-700/60 shadow-xs">
+                        <Calendar size={13} className="text-blue-600 dark:text-blue-400" />
+                        <span>{exp.period}</span>
+                      </div>
+                      <div className="inline-flex items-center gap-1.5 bg-white/80 dark:bg-neutral-900/60 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-gray-200/60 dark:border-neutral-700/40">
+                        <MapPin size={12} className="text-sky-500" />
+                        <span>{exp.location}</span>
+                        <span className="text-neutral-300 dark:text-neutral-600">•</span>
+                        <span>{exp.type}</span>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Metadata Badges */}
-                  <div className="flex flex-wrap md:flex-col md:items-end rtl:md:items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-400">
-                    <div className="inline-flex items-center gap-1.5 font-medium bg-white dark:bg-neutral-900/80 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-gray-200/70 dark:border-neutral-700/60 shadow-xs">
-                      <Calendar size={13} className="text-blue-600 dark:text-blue-400" />
-                      <span>{exp.period}</span>
-                    </div>
-                    <div className="inline-flex items-center gap-1.5 bg-white/80 dark:bg-neutral-900/60 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-gray-200/60 dark:border-neutral-700/40">
-                      <MapPin size={12} className="text-sky-500" />
-                      <span>{exp.location}</span>
-                      <span className="text-neutral-300 dark:text-neutral-600">•</span>
-                      <span>{exp.type}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bullet points */}
-                <ul className="space-y-2.5 sm:space-y-3 mb-5 sm:mb-6">
-                  {exp.description.map((desc, descIndex) => (
-                    <li
-                      key={descIndex}
-                      className="flex items-start gap-2.5 sm:gap-3 text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm md:text-[15px] leading-relaxed"
-                    >
-                      <span className="mt-1.5 sm:mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 ring-4 ring-blue-500/10 dark:ring-blue-400/20"></span>
-                      <span>{desc}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tech stack tags */}
-                <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70 dark:border-neutral-700/60">
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {exp.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2.5 sm:px-3 py-1 bg-white dark:bg-neutral-900/80 text-neutral-700 dark:text-neutral-200 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium border border-gray-200/70 dark:border-neutral-700/60 transition-all duration-200 hover:border-blue-500/40 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 shadow-2xs"
+                  {/* Bullet points */}
+                  <ul className="space-y-2.5 sm:space-y-3 mb-5 sm:mb-6">
+                    {exp.description.map((desc, descIndex) => (
+                      <li
+                        key={descIndex}
+                        className="flex items-start gap-2.5 sm:gap-3 text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm md:text-[15px] leading-relaxed"
                       >
-                        {tech}
-                      </span>
+                        <span className="mt-1.5 sm:mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 ring-4 ring-blue-500/10 dark:ring-blue-400/20"></span>
+                        <span>{desc}</span>
+                      </li>
                     ))}
+                  </ul>
+
+                  {/* Tech stack tags */}
+                  <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70 dark:border-neutral-700/60">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                      {exp.technologies.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-2.5 sm:px-3 py-1 bg-white dark:bg-neutral-900/80 text-neutral-700 dark:text-neutral-200 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium border border-gray-200/70 dark:border-neutral-700/60 transition-all duration-200 hover:border-blue-500/40 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 shadow-2xs"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </SpotlightCard>
               </motion.div>
             ))}
           </motion.div>

@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
 import { Network, Boxes, MonitorSmartphone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const staggerContainer = {
   hidden: {},
@@ -38,129 +37,40 @@ import { VscVscode } from "react-icons/vsc";
 import SiGsap from "@/svg/SiGsap";
 import SiCursor from "@/svg/SiCursor";
 import SiAntigravity from "@/svg/SiAntigravity";
-const getPopupPlacement = (index) => {
-  // Desktop columns: index % 3: 0 = left, 1 = center, 2 = right
-  // Mobile columns: index % 2: 0 = left, 1 = right
-  const isMobileRight = index % 2 === 1;
-  const isDesktopCenter = index % 3 === 1;
-  const isDesktopRight = index % 3 === 2;
-  const isDesktopLeft = index % 3 === 0;
+import TiltedCard from "../ui/TiltedCard";
+import SpotlightCard from "../ui/SpotlightCard";
 
-  // Container positioning
-  let containerPos = "";
-  let arrowPos = "";
-  let transformOrigin = "bottom center";
-
-  // Mobile base classes (< sm)
-  if (isMobileRight) {
-    containerPos = "right-0";
-    arrowPos = "right-7";
-    transformOrigin = "bottom right";
-  } else {
-    containerPos = "left-0";
-    arrowPos = "left-7";
-    transformOrigin = "bottom 28px";
-  }
-
-  // Desktop responsive override (>= sm)
-  if (isDesktopLeft) {
-    containerPos += " sm:left-0 sm:right-auto sm:translate-x-0";
-    arrowPos += " sm:left-8 sm:right-auto sm:translate-x-0";
-    transformOrigin = "bottom 32px";
-  } else if (isDesktopRight) {
-    containerPos += " sm:right-0 sm:left-auto sm:translate-x-0";
-    arrowPos += " sm:right-8 sm:left-auto sm:translate-x-0";
-    transformOrigin = "bottom right";
-  } else if (isDesktopCenter) {
-    containerPos += " sm:left-1/2 sm:-translate-x-1/2 sm:right-auto";
-    arrowPos += " sm:left-1/2 sm:-translate-x-1/2 sm:right-auto";
-    transformOrigin = "bottom center";
-  }
-
-  const containerClasses = `absolute bottom-full mb-3 z-50 w-56 sm:w-64 p-3.5 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/90 dark:border-neutral-800/90 pointer-events-none text-left ${containerPos}`;
-  const arrowClasses = `absolute top-full w-0 h-0 pointer-events-none ${arrowPos}`;
-
-  return { containerClasses, arrowClasses, transformOrigin };
-};
-
-function SkillCard({ skill, index = 0 }) {
-  const [isHovered, setIsHovered] = useState(false);
+function SkillCard({ skill }) {
   const IconComponent = skill.icon;
-  const { containerClasses, arrowClasses, transformOrigin } = getPopupPlacement(index);
 
   return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative flex flex-col items-center justify-center p-2.5 sm:p-3.5 bg-gray-50/80 dark:bg-neutral-950/60 rounded-xl sm:rounded-2xl border border-gray-200/60 dark:border-neutral-800/60 hover:border-blue-300/80 dark:hover:border-blue-500/40 hover:bg-white dark:hover:bg-neutral-900 hover:shadow-xs transition-all duration-200 group cursor-default hover:z-30"
+    <TiltedCard
+      containerWidth="100%"
+      containerHeight="100%"
+      rotateAmplitude={12}
+      scaleOnHover={1.05}
+      showMobileWarning={false}
+      showTooltip={true}
+      captionText={skill.name}
+      className="w-full h-full hover:z-40"
     >
-      <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2">
-        <IconComponent
-          size={28}
-          className={`${skill.color} group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}
-        />
-      </div>
-      <span className="text-neutral-700 dark:text-neutral-300 text-[11px] sm:text-xs font-semibold text-center leading-normal py-0.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate max-w-full px-0.5">
-        {skill.name}
-      </span>
-
-      {/* Animated Summary Popup with funky left-right shaking open animation */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 14, scale: 0.75, rotate: 0 }}
-            animate={{
-              opacity: 1,
-              y: [14, -3, 1, -0.5, 0],
-              scale: [0.75, 1.08, 0.96, 1.02, 1],
-              rotate: [0, -7, 6, -3.5, 1.5, 0],
-            }}
-            exit={{
-              opacity: 0,
-              y: 8,
-              scale: 0.85,
-              rotate: 4,
-              transition: { duration: 0.15, ease: "easeIn" },
-            }}
-            transition={{
-              duration: 0.42,
-              ease: "easeOut",
-            }}
-            style={{ transformOrigin }}
-            className={containerClasses}
-          >
-            {/* Soft Ambient Inner Glow */}
-            <div className="absolute top-0 right-0 w-28 h-28 bg-blue-500/10 dark:bg-blue-500/15 rounded-full blur-xl pointer-events-none" />
-
-            <div className="relative z-10">
-              {/* Header: Icon + Name + Category Badge */}
-              <div className="flex items-center justify-between gap-2 mb-2 pb-2 border-b border-gray-100 dark:border-neutral-800/80">
-                <div className="flex items-center gap-2 min-w-0">
-                  <div className="w-7 h-7 rounded-lg bg-gray-100 dark:bg-neutral-800/80 border border-gray-200/70 dark:border-neutral-700/70 flex items-center justify-center shrink-0">
-                    <IconComponent size={16} className={skill.color} />
-                  </div>
-                  <span className="font-bold text-xs sm:text-sm text-neutral-900 dark:text-white truncate">
-                    {skill.name}
-                  </span>
-                </div>
-                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40 shrink-0">
-                  Skill
-                </span>
-              </div>
-
-              {/* Summary Description */}
-              <p className="text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed font-normal">
-                {skill.desc}
-              </p>
-            </div>
-
-            {/* Seamless Dual-Theme Bordered Arrow */}
-            <div className={`${arrowClasses} border-[7px] border-transparent border-t-gray-200/90 dark:border-t-neutral-800/90`} />
-            <div className={`${arrowClasses} -mt-[1px] border-[6px] border-transparent border-t-white dark:border-t-neutral-900`} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      <SpotlightCard
+        spotlightColor="rgba(255, 255, 255, 0.25)"
+        className="rounded-xl sm:rounded-2xl border border-gray-200/60 dark:border-neutral-800/60 hover:bg-white dark:hover:bg-neutral-900 hover:shadow-xs transition-all duration-200 group w-full h-full bg-gray-50/80 dark:bg-neutral-950/60"
+      >
+        <div className="flex flex-col items-center justify-center p-2.5 sm:p-3.5 w-full h-full">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center mb-1.5 sm:mb-2">
+            <IconComponent
+              size={28}
+              className={skill.color}
+            />
+          </div>
+          <span className="text-neutral-700 dark:text-neutral-300 text-[11px] sm:text-xs font-semibold text-center leading-normal py-0.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate max-w-full px-0.5">
+            {skill.name}
+          </span>
+        </div>
+      </SpotlightCard>
+    </TiltedCard>
   );
 }
 
@@ -173,37 +83,31 @@ export default function Skills() {
           name: "JavaScript",
           icon: SiJavascript,
           color: "text-yellow-500",
-          desc: "Brings websites to life with interactive features, animations, and live updates.",
         },
         {
           name: "TypeScript",
           icon: SiTypescript,
           color: "text-blue-600",
-          desc: "A smarter version of JavaScript that catches errors early to keep apps bug-free.",
         },
         {
           name: "C++",
           icon: SiCplusplus,
           color: "text-blue-600",
-          desc: "A powerful programming language used for high speed and solving complex logic.",
         },
         {
           name: "HTML5",
           icon: SiHtml5,
           color: "text-orange-600",
-          desc: "The skeleton of every website, organizing content like text, images, and links.",
         },
         {
           name: "CSS3",
           icon: SiCss3,
           color: "text-blue-500",
-          desc: "Styles websites with colors, fonts, and responsive layouts that fit every screen.",
         },
         {
           name: "SQL",
           icon: SiMysql,
           color: "text-blue-700 dark:text-blue-400",
-          desc: "Used to organize, search, and manage information stored in databases.",
         },
       ],
     },
@@ -214,37 +118,31 @@ export default function Skills() {
           name: "React.js",
           icon: SiReact,
           color: "text-cyan-500",
-          desc: "Builds fast, smooth user interfaces using reusable visual building blocks.",
         },
         {
           name: "Next.js",
           icon: SiNextdotjs,
           color: "text-neutral-900 dark:text-white",
-          desc: "A modern framework that makes web apps super fast and easy to find on Google.",
         },
         {
           name: "Tailwind CSS",
           icon: SiTailwindcss,
           color: "text-teal-500",
-          desc: "Quickly creates clean, modern, and beautiful designs for any device.",
         },
         {
           name: "Redux",
           icon: SiRedux,
           color: "text-purple-600",
-          desc: "Keeps all app information (like logins or carts) in sync across every page.",
         },
         {
           name: "GSAP",
           icon: SiGsap,
           color: "text-emerald-500",
-          desc: "Creates cinematic, ultra-smooth web animations and scroll effects that wow users.",
         },
         {
           name: "Framer Motion",
           icon: SiFramer,
           color: "text-pink-500",
-          desc: "Powers playful micro-animations, hover effects, and smooth screen transitions.",
         },
       ],
     },
@@ -255,37 +153,31 @@ export default function Skills() {
           name: "Git",
           icon: SiGit,
           color: "text-orange-600",
-          desc: "Saves project history and lets developers safely collaborate on code together.",
         },
         {
           name: "VSCode",
           icon: VscVscode,
           color: "text-blue-600",
-          desc: "My daily workspace for writing, testing, and organizing clean, efficient code.",
         },
         {
           name: "Cursor",
           icon: SiCursor,
           color: "text-sky-500",
-          desc: "An AI-powered editor that speeds up coding and helps write cleaner code faster.",
         },
         {
           name: "Antigravity",
           icon: SiAntigravity,
           color: "text-fuchsia-500",
-          desc: "An advanced AI coding assistant that automates complex software engineering tasks.",
         },
         {
           name: "Vite",
           icon: SiVite,
           color: "text-purple-500",
-          desc: "A super-fast build tool that shows live code changes in the browser instantly.",
         },
         {
           name: "AWS",
           icon: FaAws,
           color: "text-orange-500",
-          desc: "Amazon's cloud platform to host websites, store files safely, and run apps 24/7.",
         },
       ],
     },
@@ -365,7 +257,7 @@ export default function Skills() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                   {category.skills.map((skill, skillIndex) => (
-                    <SkillCard key={skillIndex} skill={skill} index={skillIndex} />
+                    <SkillCard key={skillIndex} skill={skill} />
                   ))}
                 </div>
               </div>

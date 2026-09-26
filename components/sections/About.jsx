@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import SpotlightCard from "../ui/SpotlightCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -117,7 +118,10 @@ export default function About() {
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
           >
-            <div className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 border border-gray-200/80 dark:border-neutral-700/60 hover:border-gray-300 dark:hover:border-neutral-600 shadow-sm hover:shadow-md transition-all duration-300">
+            <SpotlightCard
+              spotlightColor="rgba(255, 255, 255, 0.25)"
+              className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 border border-gray-200/80 dark:border-neutral-700/60 hover:border-gray-300 dark:hover:border-neutral-600 shadow-sm hover:shadow-md transition-all duration-300"
+            >
               <div className="flex items-center gap-2 mb-3.5 sm:mb-4">
                 <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/40">
                   <Sparkles size={13} className="text-blue-500" />
@@ -165,7 +169,7 @@ export default function About() {
                   );
                 })}
               </div>
-            </div>
+            </SpotlightCard>
           </motion.div>
 
           {/* Right Column: Highlights */}

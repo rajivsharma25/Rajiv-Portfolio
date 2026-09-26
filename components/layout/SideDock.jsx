@@ -138,11 +138,10 @@ export default function SideDock() {
       {/* Dock Container */}
       <div
         ref={dockRef}
-        className={`fixed top-1/2 -translate-y-1/2 z-40 transition-transform duration-300 ease-out ${
-          isOpen
-            ? "translate-x-2 sm:translate-x-4"
-            : "-translate-x-full md:translate-x-0"
-        } left-0 md:left-3 sm:md:left-5`}
+        className={`fixed top-1/2 -translate-y-1/2 z-40 transition-transform duration-300 ease-out ${isOpen
+          ? "translate-x-2 sm:translate-x-4"
+          : "-translate-x-full md:translate-x-0"
+          } left-0 md:left-3 sm:md:left-5`}
       >
         {/* Mobile Right Arrow Tab Attached to Left Side of Screen */}
         <button
@@ -154,9 +153,8 @@ export default function SideDock() {
         >
           <ChevronRight
             size={16}
-            className={`transition-transform duration-300 ${
-              isOpen ? "rotate-180" : "rotate-0"
-            }`}
+            className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"
+              }`}
           />
         </button>
 
@@ -174,25 +172,23 @@ export default function SideDock() {
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 aria-label={`Scroll to ${item.name}`}
-                className={`relative flex items-center h-10 w-full rounded-full transition-colors duration-200 cursor-pointer overflow-hidden z-10 ${
-                  isActive
-                    ? "text-blue-600 dark:text-blue-400 font-semibold"
-                    : "text-gray-600 dark:text-neutral-400 hover:bg-white/70 dark:hover:bg-neutral-800/70 font-medium"
-                }`}
+                className={`relative flex items-center h-10 w-full rounded-full transition-colors duration-200 cursor-pointer overflow-hidden z-10 ${isActive
+                  ? "text-blue-600 dark:text-blue-400 font-semibold"
+                  : "text-gray-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white/40 dark:hover:bg-white/[0.06] font-medium"
+                  }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="activeDockPill"
-                    className="absolute inset-0 bg-white dark:bg-neutral-800 rounded-full shadow-xs -z-10"
+                    className="absolute inset-0 rounded-full -z-10 backdrop-blur-md bg-gradient-to-b from-white/95 via-white/85 to-white/70 dark:from-white/[0.18] dark:via-white/[0.07] dark:to-transparent dark:bg-neutral-800/80 border border-white/80 dark:border-white/20 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-1px_1.5px_rgba(0,0,0,0.08),0_2px_8px_rgba(37,99,235,0.08)] dark:shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.4),0_3px_12px_rgba(0,0,0,0.3)]"
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}
                 <div className="w-10 h-10 flex items-center justify-center shrink-0">
                   <Icon
                     size={18}
-                    className={`transition-transform duration-200 ${
-                      isActive ? "text-blue-600 dark:text-blue-400 scale-105" : "opacity-70"
-                    }`}
+                    className={`transition-transform duration-200 ${isActive ? "text-blue-600 dark:text-blue-400 scale-105" : "opacity-70"
+                      }`}
                   />
                 </div>
                 <span className="text-xs font-semibold whitespace-nowrap overflow-hidden max-w-[120px] opacity-100 md:max-w-0 md:group-hover:max-w-[120px] md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 pr-3">

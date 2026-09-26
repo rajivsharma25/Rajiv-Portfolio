@@ -19,6 +19,12 @@ import {
   SiFramer,
 } from "react-icons/si";
 import Typewriter from "@/components/ui/Typewriter";
+import dynamic from "next/dynamic";
+
+const SideRays = dynamic(
+  () => import("@/components/backgrounds/SideRays"),
+  { ssr: false }
+);
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -32,36 +38,8 @@ export default function Hero() {
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-24 px-3.5 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Base Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/80 via-sky-50/40 to-blue-50/25 dark:from-neutral-950 dark:via-neutral-900/50 dark:to-neutral-950 transition-colors duration-300"></div>
 
-        {/* Ambient Aurora Glow Orbs */}
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[650px] sm:w-[850px] h-[400px] bg-gradient-to-b from-blue-400/20 via-sky-400/15 to-transparent dark:from-blue-600/20 dark:via-sky-500/10 dark:to-transparent rounded-full blur-[90px] pointer-events-none" />
-        <div className="absolute top-1/4 -left-24 w-80 h-80 bg-blue-400/15 dark:bg-blue-600/15 rounded-full blur-[80px] pointer-events-none" />
-        <div className="absolute top-1/3 -right-24 w-80 h-80 bg-sky-400/15 dark:bg-indigo-600/15 rounded-full blur-[80px] pointer-events-none" />
-
-        {/* Modern Precision Technical Grid with Radial Vignette */}
-        <div
-          className="absolute inset-0 opacity-[0.045] dark:opacity-[0.07] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-            backgroundSize: "44px 44px",
-            maskImage: "radial-gradient(ellipse 80% 68% at 50% 42%, black 25%, transparent 88%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 68% at 50% 42%, black 25%, transparent 88%)",
-          }}
-        />
-
-        {/* Concentric Ambient Orbital Rings (Centered on Avatar) */}
-        <div className="absolute top-[28%] sm:top-[26%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-          {/* Inner Ring */}
-          <div className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] rounded-full border border-blue-500/20 dark:border-blue-400/20" />
-
-          {/* Middle Dashed Tech Orbit */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] sm:w-[520px] sm:h-[520px] rounded-full border border-dashed border-sky-500/20 dark:border-sky-400/15" />
-
-          {/* Outer Ambient Perimeter */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] sm:w-[720px] sm:h-[720px] rounded-full border border-blue-500/10 dark:border-blue-400/10 hidden sm:block" />
-        </div>
+        <SideRays />
 
         {/* Floating Technology Icons */}
         <div className="absolute inset-0 pointer-events-none">
@@ -173,7 +151,7 @@ export default function Hero() {
             </Link>
             <Link
               href="#contact"
-              className="w-full sm:w-auto justify-center inline-flex items-center gap-2 border border-blue-600 text-blue-600 dark:text-blue-400 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 hover:bg-blue-600 hover:text-white dark:hover:text-white active:scale-95"
+              className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-blue-600/80 dark:border-blue-500/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
             >
               <MessageCircle size={18} />
               Get In Touch

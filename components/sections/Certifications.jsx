@@ -12,6 +12,8 @@ import {
 import Image from "next/image";
 import { SiMysql, SiCplusplus } from "react-icons/si";
 import { motion } from "framer-motion";
+import SpotlightCard from "../ui/SpotlightCard";
+import FlipCard from "../ui/FlipCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -171,78 +173,111 @@ export default function Certifications() {
                 <motion.div
                   key={index}
                   variants={cardFadeUp}
-                  className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-7 border border-gray-200/80 dark:border-neutral-700/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                  className="w-full h-[360px] sm:h-[380px]"
                 >
-                  <div>
-                    {/* Top Row: Badge/Icon & Status Pills */}
-                    <div className="flex items-start justify-between gap-3 sm:gap-4 mb-4 sm:mb-5">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-white dark:bg-neutral-900 border border-gray-200/70 dark:border-neutral-700/70 flex items-center justify-center p-2 sm:p-2.5 flex-shrink-0 shadow-xs group-hover:scale-105 transition-transform duration-200">
+                  <FlipCard
+                    radius={20}
+                    axis="y"
+                    flipOnClick
+                    draggable
+                    tilt
+                    tiltMax={10}
+                    glare
+                    glareOpacity={0.16}
+                    hoverScale={1.02}
+                    shadow={false}
+                    className="w-full h-full"
+                    front={
+                      <div className="w-full h-full bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-gray-200/80 dark:border-neutral-700/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center p-5">
                         {cert.badgeType === "image" ? (
-                          <div className="relative w-full h-full">
+                          <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 flex items-center justify-center">
                             <Image
                               src={cert.badge}
                               alt={`${cert.title} badge`}
                               fill
-                              className="object-contain"
-                              sizes="64px"
+                              className="object-contain drop-shadow-md"
+                              sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
                             />
                           </div>
                         ) : (
-                          <IconBadge
-                            size={28}
-                            className={
-                              cert.title.includes("SQL")
-                                ? "text-blue-600 dark:text-blue-400"
-                                : "text-sky-600 dark:text-sky-400"
-                            }
-                          />
+                          <div className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 flex items-center justify-center">
+                            <IconBadge
+                              className={`w-full h-full ${
+                                cert.title.includes("SQL")
+                                  ? "text-blue-600 dark:text-blue-400 drop-shadow-md"
+                                  : "text-sky-600 dark:text-sky-400 drop-shadow-md"
+                              }`}
+                            />
+                          </div>
                         )}
                       </div>
+                    }
+                    back={
+                      <div className="w-full h-full bg-white dark:bg-neutral-900/95 rounded-2xl sm:rounded-3xl border border-blue-500/30 dark:border-blue-500/30 shadow-md p-5 sm:p-6 flex flex-col justify-between overflow-hidden">
+                        <div>
+                          {/* Top Row: Issuer & Status / Level */}
+                          <div className="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-gray-100 dark:border-neutral-800/80">
+                            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-600 dark:text-blue-400">
+                              <Building2 size={14} className="flex-shrink-0" />
+                              <span>{cert.issuer}</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                {cert.status}
+                              </span>
+                              <span className="px-2 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40">
+                                {cert.level}
+                              </span>
+                            </div>
+                          </div>
 
-                      <div className="flex flex-col items-end gap-1 sm:gap-1.5">
-                        <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                          {cert.status}
-                        </span>
-                        <span className="px-2 sm:px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40">
-                          {cert.level}
-                        </span>
+                          {/* Title */}
+                          <h4 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-1.5 leading-snug">
+                            {cert.title}
+                          </h4>
+
+                          {/* Date */}
+                          <div className="flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400 mb-2.5">
+                            <Calendar size={13} className="text-blue-500 flex-shrink-0" />
+                            <span>Issued {cert.date}</span>
+                          </div>
+
+                          {/* Description */}
+                          <p className="text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed mb-3">
+                            {cert.description}
+                          </p>
+
+                          {/* Skills / Topics list */}
+                          <div className="flex flex-wrap gap-1.5">
+                            {cert.skills.map((skill, sIndex) => (
+                              <span
+                                key={sIndex}
+                                className="px-2 sm:px-2.5 py-0.5 rounded-md text-[11px] sm:text-xs font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-gray-200/70 dark:border-neutral-700/70"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Verify Credential Button */}
+                        {cert.badgeUrl && (
+                          <div className="pt-3 border-t border-gray-100 dark:border-neutral-800/80">
+                            <a
+                              href={cert.badgeUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer"
+                            >
+                              <ExternalLink size={14} />
+                              <span>Verify Credential</span>
+                            </a>
+                          </div>
+                        )}
                       </div>
-                    </div>
-
-                    {/* Title */}
-                    <h4 className="text-base sm:text-lg md:text-xl font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-normal">
-                      {cert.title}
-                    </h4>
-
-                    {/* Issuer & Date */}
-                    <div className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2.5 sm:mb-3">
-                      <Building2 size={13} className="flex-shrink-0" />
-                      <span>{cert.issuer}</span>
-                      <span className="text-neutral-400">•</span>
-                      <Calendar size={12} className="flex-shrink-0 ml-0.5" />
-                      <span>{cert.date}</span>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5">
-                      {cert.description}
-                    </p>
-                  </div>
-
-                  {/* Skills / Topics list */}
-                  <div className="pt-3.5 sm:pt-4 border-t border-gray-200/70 dark:border-neutral-700/60">
-                    <div className="flex flex-wrap gap-1.5">
-                      {cert.skills.map((skill, sIndex) => (
-                        <span
-                          key={sIndex}
-                          className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-gray-200/70 dark:border-neutral-700/70 shadow-2xs"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                    }
+                  />
                 </motion.div>
               );
             })}
@@ -280,52 +315,59 @@ export default function Certifications() {
                 <motion.div
                   key={index}
                   variants={cardFadeUp}
-                  className="bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-7 border border-gray-200/80 dark:border-neutral-700/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                  className="h-full"
                 >
-                  <div>
-                    {/* Top Row: Icon & Status Badge */}
-                    <div className="flex items-center justify-between mb-4 sm:mb-5">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-                        <IconComponent size={22} />
+                  <SpotlightCard
+                    spotlightColor="rgba(255, 255, 255, 0.25)"
+                    className="w-full h-full bg-gray-50/80 dark:bg-neutral-800/70 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-gray-200/80 dark:border-neutral-700/60 shadow-sm hover:shadow-md transition-all duration-300 group"
+                  >
+                    <div className="p-4 sm:p-6 md:p-7 flex flex-col justify-between h-full">
+                      <div>
+                        {/* Top Row: Icon & Status Badge */}
+                        <div className="flex items-center justify-between mb-4 sm:mb-5">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+                            <IconComponent size={22} />
+                          </div>
+                          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-gray-200 dark:border-neutral-700">
+                            <Calendar size={12} className="text-blue-600 dark:text-blue-400" />
+                            {achievement.year}
+                          </span>
+                        </div>
+
+                        {/* Degree / Level */}
+                        <span className="text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 block mb-1">
+                          {achievement.degree}
+                        </span>
+
+                        {/* Title */}
+                        <h4 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 leading-normal group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                          {achievement.title}
+                        </h4>
+
+                        {/* Institution */}
+                        <div className="flex items-start gap-2 text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mb-2.5 sm:mb-3">
+                          <Building2 size={13} className="flex-shrink-0 mt-0.5 text-neutral-400" />
+                          <span>{achievement.institution}</span>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed">
+                          {achievement.description}
+                        </p>
                       </div>
-                      <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-gray-200 dark:border-neutral-700">
-                        <Calendar size={12} className="text-blue-600 dark:text-blue-400" />
-                        {achievement.year}
-                      </span>
+
+                      {/* Status Indicator */}
+                      <div className="pt-3.5 sm:pt-4 mt-4 sm:mt-5 border-t border-gray-200/60 dark:border-neutral-700/60 flex items-center justify-between">
+                        <span className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400">
+                          Status
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                          {achievement.status}
+                        </span>
+                      </div>
                     </div>
-
-                    {/* Degree / Level */}
-                    <span className="text-[11px] sm:text-xs font-semibold text-blue-600 dark:text-blue-400 block mb-1">
-                      {achievement.degree}
-                    </span>
-
-                    {/* Title */}
-                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 leading-normal group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {achievement.title}
-                    </h4>
-
-                    {/* Institution */}
-                    <div className="flex items-start gap-2 text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400 mb-2.5 sm:mb-3">
-                      <Building2 size={13} className="flex-shrink-0 mt-0.5 text-neutral-400" />
-                      <span>{achievement.institution}</span>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-neutral-600 dark:text-neutral-300 text-xs sm:text-sm leading-relaxed">
-                      {achievement.description}
-                    </p>
-                  </div>
-
-                  {/* Status Indicator */}
-                  <div className="pt-3.5 sm:pt-4 mt-4 sm:mt-5 border-t border-gray-200/60 dark:border-neutral-700/60 flex items-center justify-between">
-                    <span className="text-[11px] sm:text-xs text-neutral-500 dark:text-neutral-400">
-                      Status
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                      {achievement.status}
-                    </span>
-                  </div>
+                  </SpotlightCard>
                 </motion.div>
               );
             })}

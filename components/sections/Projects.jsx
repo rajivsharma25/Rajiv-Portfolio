@@ -9,7 +9,9 @@ import {
   Github,
   CheckCircle2,
   ArrowUpRight,
+  RotateCw,
 } from "lucide-react";
+import FlipCard from "../ui/FlipCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -194,32 +196,34 @@ export default function Projects() {
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-white dark:bg-neutral-900/90 rounded-full border border-gray-200/80 dark:border-neutral-800/80 shadow-xs max-w-full overflow-x-auto no-scrollbar">
+          <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-gray-100/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-full border border-gray-200/70 dark:border-neutral-800/80 shadow-inner max-w-full overflow-x-auto no-scrollbar">
             {filterTabs.map((tab) => {
               const isActive = activeFilter === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`relative px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5 sm:gap-2 cursor-pointer transition-colors duration-150 shrink-0 whitespace-nowrap ${isActive
-                      ? "text-white"
-                      : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
-                    }`}
+                  className={`relative px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-1.5 sm:gap-2 cursor-pointer transition-all duration-200 shrink-0 whitespace-nowrap z-10 ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white/40 dark:hover:bg-white/[0.06]"
+                  }`}
                 >
                   {/* Fluid sliding background */}
                   {isActive && (
                     <motion.span
                       layoutId="activeTabPill"
-                      className="absolute inset-0 rounded-full bg-blue-600"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className="absolute inset-0 rounded-full -z-10 backdrop-blur-md bg-gradient-to-b from-white/95 via-white/85 to-white/70 dark:from-white/[0.18] dark:via-white/[0.07] dark:to-transparent dark:bg-neutral-800/80 border border-white/80 dark:border-white/20 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-1px_1.5px_rgba(0,0,0,0.08),0_2px_8px_rgba(37,99,235,0.08)] dark:shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.4),0_3px_12px_rgba(0,0,0,0.3)]"
+                      transition={{ type: "spring", stiffness: 500, damping: 35 }}
                     />
                   )}
                   <span className="relative z-10">{tab.label}</span>
                   <span
-                    className={`relative z-10 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold ${isActive
-                        ? "bg-white/20 text-white"
-                        : "bg-gray-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
-                      }`}
+                    className={`relative z-10 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold transition-colors ${
+                      isActive
+                        ? "bg-blue-100/90 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 shadow-xs"
+                        : "bg-gray-200/70 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400"
+                    }`}
                   >
                     {tab.count}
                   </span>
@@ -243,101 +247,161 @@ export default function Projects() {
               <motion.div
                 key={index}
                 variants={cardFadeUp}
-                className="project-card group bg-white dark:bg-neutral-900/90 rounded-2xl sm:rounded-3xl border border-gray-200/80 dark:border-neutral-800/80 hover:border-blue-500/40 dark:hover:border-blue-500/40 shadow-sm hover:shadow-xl transition-[border-color,box-shadow] duration-200 flex flex-col overflow-hidden"
+                className="w-full h-[415px] sm:h-[435px]"
               >
-                {/* Project Image Preview */}
-                <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-neutral-100 dark:bg-neutral-900">
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
+                <FlipCard
+                  radius={24}
+                  axis="y"
+                  flipOnClick
+                  draggable
+                  tilt
+                  tiltMax={10}
+                  glare
+                  glareOpacity={0.16}
+                  hoverScale={1.02}
+                  shadow={false}
+                  className="w-full h-full"
+                  front={
+                    <div
+                      className="w-full h-full bg-white dark:bg-neutral-900/90 rounded-2xl sm:rounded-3xl border border-gray-200/80 dark:border-neutral-800/80 hover:border-blue-500/40 dark:hover:border-blue-500/40 shadow-sm hover:shadow-xl transition-[border-color,box-shadow] duration-200 flex flex-col justify-between overflow-hidden"
+                      style={{ clipPath: "inset(0 round 24px)" }}
+                    >
+                      <div>
+                        {/* Project Image Preview */}
+                        <div
+                          className="relative h-44 sm:h-48 w-full overflow-hidden rounded-t-2xl sm:rounded-t-3xl bg-neutral-100 dark:bg-neutral-900"
+                          style={{ clipPath: "inset(0 round 24px 24px 0 0)" }}
+                        >
+                          <Image
+                            src={project.image}
+                            alt={`${project.title} screenshot`}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover object-top rounded-t-2xl sm:rounded-t-3xl grayscale hover:grayscale-0 transition-all duration-500 ease-out"
+                            loading="lazy"
+                          />
 
-                  {/* Bottom gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-black/20 opacity-60 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none" />
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-black/20 opacity-70 pointer-events-none rounded-t-2xl sm:rounded-t-3xl" />
+                        </div>
 
-                  {/* Status Badge */}
-                  <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 z-10">
-                    <span className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      {project.status}
-                    </span>
-                  </div>
+                        {/* Title & Description */}
+                        <div className="p-4 sm:p-5 pb-0">
+                          <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 leading-snug">
+                            {project.title}
+                          </h3>
 
-                  {/* Category Badge */}
-                  <div className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 z-10">
-                    <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md text-blue-600 dark:text-blue-400 border border-blue-500/20 shadow-xs">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Content */}
-                <div className="p-4 sm:p-6 flex flex-col flex-1">
-                  {/* Title */}
-                  <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-1.5 sm:mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-normal">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  {/* Core Feature Highlights */}
-                  <div className="space-y-1 sm:space-y-1.5 mb-3 sm:mb-4 p-2.5 sm:p-3 bg-gray-50/80 dark:bg-neutral-950/60 rounded-xl sm:rounded-2xl border border-gray-100 dark:border-neutral-800/60">
-                    {project.features.map((feature, fIndex) => (
-                      <div
-                        key={fIndex}
-                        className="flex items-start gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-300"
-                      >
-                        <CheckCircle2
-                          size={13}
-                          className="text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0"
-                        />
-                        <span className="line-clamp-1">{feature}</span>
+                          <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                            {project.description}
+                          </p>
+                        </div>
                       </div>
-                    ))}
-                  </div>
 
-                  {/* Tech Stack Pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-6 mt-auto">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2.5 sm:px-3 py-0.5 sm:py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/40 rounded-full text-[11px] sm:text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                      {/* Flip Hint & Quick Live Demo */}
+                      <div className="p-4 sm:p-5 pt-3 border-t border-gray-100 dark:border-neutral-800/80 flex items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-neutral-500 dark:text-neutral-400">
+                          <RotateCw size={13} className="text-blue-500" />
+                          <span>Flip for features</span>
+                        </span>
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer"
+                        >
+                          <ExternalLink size={14} />
+                          <span>Demo</span>
+                        </a>
+                      </div>
+                    </div>
+                  }
+                  back={
+                    <div
+                      className="w-full h-full bg-white dark:bg-neutral-900/95 rounded-2xl sm:rounded-3xl border border-blue-500/30 dark:border-blue-500/30 shadow-lg p-4 sm:p-6 flex flex-col justify-between overflow-hidden"
+                      style={{ clipPath: "inset(0 round 24px)" }}
+                    >
+                      <div>
+                        {/* Header */}
+                        <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-100 dark:border-neutral-800/80">
+                          <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800/40">
+                            {project.category}
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+                            <RotateCw size={12} className="text-blue-500" />
+                            <span>Flip back</span>
+                          </span>
+                        </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-2 sm:gap-2.5 pt-3.5 sm:pt-4 border-t border-gray-100 dark:border-neutral-800/80">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
-                    >
-                      <ExternalLink size={14} />
-                      <span>Live Demo</span>
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-800 dark:text-neutral-200 border border-gray-200/60 dark:border-neutral-700/60 py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200"
-                      title="View Source Code on GitHub"
-                    >
-                      <Github size={14} />
-                      <span>Code</span>
-                    </a>
-                  </div>
-                </div>
+                        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white mb-2 leading-snug">
+                          {project.title}
+                        </h3>
+
+                        {/* Core Features */}
+                        <div className="mb-3 sm:mb-4">
+                          <div className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">
+                            Key Highlights & Features
+                          </div>
+                          <div className="space-y-1.5 sm:space-y-2 p-2.5 sm:p-3 bg-gray-50/80 dark:bg-neutral-950/60 rounded-xl border border-gray-100 dark:border-neutral-800/60">
+                            {project.features.map((feature, fIndex) => (
+                              <div
+                                key={fIndex}
+                                className="flex items-start gap-2 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-300"
+                              >
+                                <CheckCircle2
+                                  size={13}
+                                  className="text-blue-500 dark:text-blue-400 mt-0.5 flex-shrink-0"
+                                />
+                                <span className="line-clamp-2">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* All Technologies */}
+                        <div>
+                          <div className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-1.5">
+                            Tech Stack
+                          </div>
+                          <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                            {project.technologies.map((tech, techIndex) => (
+                              <span
+                                key={techIndex}
+                                className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800/40 rounded-full text-[10px] sm:text-[11px] font-medium"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="pt-3 border-t border-gray-100 dark:border-neutral-800/80">
+                        <div className="flex items-center gap-2">
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white py-2 sm:py-2.5 px-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer"
+                          >
+                            <ExternalLink size={14} />
+                            <span>Live Demo</span>
+                          </a>
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gray-100 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 active:scale-[0.98] text-neutral-800 dark:text-neutral-200 border border-gray-200/60 dark:border-neutral-700/60 py-2 sm:py-2.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer"
+                            title="View Source Code on GitHub"
+                          >
+                            <Github size={14} />
+                            <span>Code</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                />
               </motion.div>
             ))}
           </motion.div>

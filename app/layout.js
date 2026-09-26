@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Toaster from "@/components/ui/Toaster";
+import Cursor from "@/components/ui/Cursor";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -116,6 +117,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
         />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Cursor />
           <Header />
           <main className="min-h-screen">{children}</main>
           <Footer />

@@ -116,16 +116,15 @@ export default function Header() {
                 <Link
                   key={item.key}
                   href={item.href}
-                  className={`relative flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors duration-200 z-10 ${
-                    isActive
-                      ? "text-blue-600 dark:text-blue-400 font-semibold"
-                      : "text-gray-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium"
-                  }`}
+                  className={`relative flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors duration-200 z-10 ${isActive
+                    ? "text-blue-600 dark:text-blue-400 font-semibold"
+                    : "text-gray-600 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium"
+                    }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="activeHeaderPill"
-                      className="absolute inset-0 bg-white dark:bg-neutral-800 rounded-full shadow-xs -z-10"
+                      className="absolute inset-0 rounded-full -z-10 backdrop-blur-md bg-gradient-to-b from-white/95 via-white/85 to-white/70 dark:from-white/[0.18] dark:via-white/[0.07] dark:to-transparent dark:bg-neutral-800/80 border border-white/80 dark:border-white/20 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.95),inset_0_-1px_1.5px_rgba(0,0,0,0.08),0_2px_8px_rgba(37,99,235,0.08)] dark:shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.3),inset_0_-1px_1px_rgba(0,0,0,0.4),0_3px_12px_rgba(0,0,0,0.3)]"
                       transition={{ type: "spring", stiffness: 500, damping: 35 }}
                     />
                   )}
@@ -212,11 +211,10 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-full backdrop-blur-md transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center w-9 h-9 ${
-                isMenuOpen
-                  ? "bg-blue-600 text-white shadow-md"
-                  : "bg-white/70 dark:bg-neutral-900/70 text-gray-700 dark:text-neutral-200 border border-gray-200/70 dark:border-neutral-800/80 hover:bg-white dark:hover:bg-neutral-800 hover:text-blue-600 dark:hover:text-blue-400 shadow-xs"
-              }`}
+              className={`p-2 rounded-full backdrop-blur-md transition-all duration-300 active:scale-95 cursor-pointer flex items-center justify-center w-9 h-9 ${isMenuOpen
+                ? "bg-blue-600 text-white shadow-md"
+                : "bg-white/70 dark:bg-neutral-900/70 text-gray-700 dark:text-neutral-200 border border-gray-200/70 dark:border-neutral-800/80 hover:bg-white dark:hover:bg-neutral-800 hover:text-blue-600 dark:hover:text-blue-400 shadow-xs"
+                }`}
               aria-label="Toggle Navigation Menu"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -237,11 +235,10 @@ export default function Header() {
                     key={item.key}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`group flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] ${
-                      isActive
-                        ? "bg-blue-50/90 dark:bg-neutral-800 text-blue-600 dark:text-blue-400 font-semibold"
-                        : "hover:bg-blue-50/70 dark:hover:bg-neutral-800/70 text-gray-800 dark:text-neutral-200"
-                    }`}
+                    className={`group flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 active:scale-[0.98] ${isActive
+                      ? "bg-blue-50/90 dark:bg-neutral-800 text-blue-600 dark:text-blue-400 font-semibold"
+                      : "hover:bg-blue-50/70 dark:hover:bg-neutral-800/70 text-gray-800 dark:text-neutral-200"
+                      }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200 shrink-0">
