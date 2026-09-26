@@ -139,19 +139,19 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row justify-center items-center gap-2.5 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
+            className="flex flex-col sm:flex-row justify-center items-center gap-2.5 sm:gap-4 w-auto px-4 sm:px-0"
             {...fadeUp(0.4)}
           >
             <Link
               href="#projects"
-              className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 hover:bg-blue-700 active:scale-95 shadow-md hover:shadow-lg"
+              className="w-auto justify-center inline-flex items-center gap-2 bg-blue-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 hover:bg-blue-700 active:scale-95 shadow-md hover:shadow-lg"
             >
               <FolderOpen size={18} />
               View My Projects
             </Link>
             <Link
               href="#contact"
-              className="w-full sm:w-auto justify-center inline-flex items-center gap-2 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-blue-600/80 dark:border-blue-500/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
+              className="w-auto justify-center inline-flex items-center gap-2 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-blue-600/80 dark:border-blue-500/80 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 active:scale-95 shadow-sm hover:shadow-md"
             >
               <MessageCircle size={18} />
               Get In Touch
