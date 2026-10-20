@@ -305,7 +305,7 @@ export default function FlipCard({
               : "[backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
           }`}
           aria-hidden={shown}
-          inert={shown ? "" : undefined}
+          inert={shown ? true : undefined}
           style={{
             borderRadius: dynamicRadius,
             clipPath: `inset(0 round ${dynamicRadius})`,
@@ -336,7 +336,7 @@ export default function FlipCard({
                 }`
           }`}
           aria-hidden={!shown}
-          inert={!shown ? "" : undefined}
+          inert={!shown ? true : undefined}
           style={{
             borderRadius: dynamicRadius,
             clipPath: `inset(0 round ${dynamicRadius})`,

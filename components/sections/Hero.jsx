@@ -21,8 +21,8 @@ import {
 import Typewriter from "@/components/ui/Typewriter";
 import dynamic from "next/dynamic";
 
-const SideRays = dynamic(
-  () => import("@/components/backgrounds/SideRays"),
+const GradientWaves = dynamic(
+  () => import("@/components/backgrounds/GradientWaves"),
   { ssr: false }
 );
 
@@ -39,7 +39,7 @@ export default function Hero() {
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
 
-        <SideRays />
+        <GradientWaves />
 
         {/* Floating Technology Icons */}
         <div className="absolute inset-0 pointer-events-none">

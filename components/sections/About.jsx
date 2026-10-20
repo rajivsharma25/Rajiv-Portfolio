@@ -65,8 +65,8 @@ export default function About() {
     },
     {
       icon: Layers,
-      title: "6+ Deployed Web Projects",
-      desc: "Production-ready apps spanning e-commerce, healthcare & booking",
+      title: "7+ Deployed Web Projects",
+      desc: "Production-ready apps spanning AI, media discovery, e-commerce & healthcare",
       iconBg: "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-800/40",
     },
     {

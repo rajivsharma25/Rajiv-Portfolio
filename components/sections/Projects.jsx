@@ -32,6 +32,42 @@ const cardFadeUp = {
 export default function Projects() {
   const projects = [
     {
+      key: "ad-astra",
+      title: "Ad Astra AI Workspace",
+      category: "AI Productivity Platform",
+      filterCategory: "webapps",
+      image: "/assets/images/ad-astra.webp",
+      description:
+        "Thoughtful all-in-one AI productivity workspace integrating real-time conversations, persistent documents context, customizable prompt library, and work momentum analytics.",
+      technologies: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"],
+      features: [
+        "Context-aware AI conversation threads with persistent memory",
+        "Centralized document repository & customizable prompt library",
+        "Focus analytics dashboard & weekly work momentum tracking",
+      ],
+      demoUrl: "https://ad-astra-rho.vercel.app/",
+      githubUrl: "https://github.com/rajivsharma25/ad-astra",
+      status: "Live Demo",
+    },
+    {
+      key: "cinescope",
+      title: "CineScope Movie Discovery",
+      category: "Cinema & Media Guide",
+      filterCategory: "webapps",
+      image: "/assets/images/cinescope.webp",
+      description:
+        "Editorial film discovery and curation platform featuring curated movie spotlights, mood-based genre explorer, personalized watchlists, and trailer previews.",
+      technologies: ["Next.js", "React.js", "Tailwind CSS", "TMDB API", "GSAP", "TypeScript"],
+      features: [
+        "Curated editorial film spotlight & trending cinema radar",
+        "Mood-based genre explorer with real-time movie search",
+        "Personalized watchlists & persistent favorite collections",
+      ],
+      demoUrl: "https://cinescope-movies-india.vercel.app/",
+      githubUrl: "https://github.com/rajivsharma25/cinescope",
+      status: "Live Demo",
+    },
+    {
       key: "forever",
       title: "Forever E-Commerce",
       category: "E-Commerce Platform",
@@ -243,9 +279,9 @@ export default function Projects() {
             animate="show"
             exit="exit"
           >
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <motion.div
-                key={index}
+                key={project.key}
                 variants={cardFadeUp}
                 className="w-full h-[415px] sm:h-[435px]"
               >
